@@ -6,14 +6,13 @@ import displaySeq from './seq_selection';
 document.addEventListener("DOMContentLoaded", () => {
 
     //select strand (default selected)
-    displaySeq("test");
+    displaySeq();
 
     //display 2d seq layout, selectable regions 
 
     //toggle bases to highlight
     
     //bar graph to right side
-    drawChart(DataSet.testSeq);
 
     //3d model below
 

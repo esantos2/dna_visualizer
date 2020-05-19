@@ -2,9 +2,13 @@ body{
     font-family: "Montserrat";
 }
 
-body > h1{
+header{
     margin: 30px;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .main-seq{
@@ -25,4 +29,49 @@ body > h1{
 canvas{
     border: 2px solid black;
     
+}
+
+.dropdown-container{
+    position: relative;
+}
+
+#dropdown{
+    position: relative;
+    padding: 10px;
+    width: 350px;
+    border: 1px solid lightgray;
+    box-sizing: border-box;
+}
+
+#dropdown:hover{
+    cursor: pointer;
+}
+
+#seq-selection{
+    position: absolute;
+    width: 350px;
+    margin: 0;
+    padding: 0;
+    right: 50%;
+    transform: translateX(50%);
+    background-color: white;
+    border: 1px solid lightgray;
+}
+
+#seq-selection li{
+    list-style: none;
+    margin: 10px;
+}
+
+#seq-selection li:hover{
+    cursor: pointer;
+    background-color: rgb(193, 243, 255);
+}
+
+.dropdown-list{
+    display: none;
+}
+
+.show-list{
+    display: block;
 }

@@ -28,7 +28,13 @@ const drawChart = (fileName) => {
     ]
     
     //display graph
-    const svg = d3.select("svg");
+    d3.selectAll("svg > *").remove();
+    d3.select("body").append("svg");
+    
+    const svg = d3.select("svg")
+        .attr("width", 500)
+        .attr("height", 500);
+    
     const margin = 200;
     const width = svg.attr("width") - margin;
     const height = svg.attr("height") - margin;
@@ -117,6 +123,7 @@ const drawChart = (fileName) => {
         .ease(d3.easeLinear)
         .duration(400)
         .delay((d, i) => { return i * 50; });
+
 }
 
 export default drawChart;
