@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/Arctive/dna_visualizer#readme",
   "dependencies": {
+    "d3": "^5.16.0",
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.11"
   }
