@@ -1,5 +1,5 @@
 import * as d3 from "d3";
-import {testSeq} from '../datasets/test';
+import {testSeq} from '../datasets/sequences';
 
 document.addEventListener("DOMContentLoaded", () => {
 
@@ -25,14 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
         {"base": "G", "count": baseCounts["G"]},
     ]
 
-    console.log(data.slice(0, 100));
-    console.log("A", baseCounts["A"]);
-    console.log("T", baseCounts["T"]);
-    console.log("C", baseCounts["C"]);
-    console.log("G", baseCounts["G"]);
-
     //display graph
-    
     //get svg element dimensions
     const svg = d3.select("svg");
     const margin = 200;
@@ -49,11 +42,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     //set axes
     const xScale = d3.scaleBand()
-        .domain(Object.keys(baseCounts).map(function (k) { return k; }))
+        .domain(Object.keys(baseCounts).map((k) => { return k; }))
         .range([0, width])
         .padding(0.4);
     const yScale = d3.scaleLinear()
-        .domain([0, d3.max(Object.values(baseCounts), function (v) { return v; })])    
+        .domain([0, d3.max(Object.values(baseCounts), (v) => { return v; })])    
         .range([height, 0]);
 
     const g = svg.append("g")
@@ -70,9 +63,7 @@ document.addEventListener("DOMContentLoaded", () => {
         .text("Nucleotide Base");
 
     g.append("g")
-        .call(d3.axisLeft(yScale).tickFormat(function (d) {
-            return d;
-        })
+        .call(d3.axisLeft(yScale).tickFormat( (d) => { return d; })
         .ticks(12))
         .append("text")
         .attr("transform", "rotate(-90)")
@@ -82,13 +73,48 @@ document.addEventListener("DOMContentLoaded", () => {
         .attr("stroke", "black")
         .text("Frequency");
 
+    function handleMouseOver(d, i){
+        d3.select(this).attr('class', 'highlight');
+        d3.select(this)
+            .transition()
+            .duration(200)
+            .attr('width', xScale.bandwidth() + 5)
+            .attr("y", (d) => { return yScale(d.count) - 10; })
+            .attr("height", (d) => { return height - yScale(d.count) + 10; });
+
+        g.append("text")
+            .attr('class', 'mouse')
+            .attr('x', () => { return xScale(d.base) + Math.floor(xScale.bandwidth()/2);})
+            .attr('y', () => { return yScale(d.count) - 15;})
+            .text(() => { return [d.count];})
+            .attr("text-anchor", "middle");
+    }
+
+    function handleMouseOut(d, i){
+        d3.select(this).attr('class', 'bar');
+        d3.select(this)
+            .transition()
+            .duration(200)
+            .attr('width', xScale.bandwidth())
+            .attr("y", (d) => { return yScale(d.count); })
+            .attr("height", (d) => { return height - yScale(d.count); });
+        d3.selectAll('.mouse')
+            .remove()
+    }
 
     g.selectAll(".bar")
         .data(baseArr)
         .enter().append("rect")
         .attr("class", "bar")
-        .attr("x", function (d) { return xScale(d.base); })
-        .attr("y", function (d) { return yScale(d.count); })
+        .attr("x", (d) => { return xScale(d.base); })
+        .attr("y", (d) => { return yScale(d.count); })
         .attr("width", xScale.bandwidth())
-        .attr("height", function (d) { return height - yScale(d.count); });
+        .attr("height", (d) => { return height - yScale(d.count); })
+        .on("mouseover", handleMouseOver)
+        .on("mouseout", handleMouseOut)
+        .transition()
+        .ease(d3.easeLinear)
+        .duration(400)
+        .delay((d, i) => {return i * 50; });
+
 })
