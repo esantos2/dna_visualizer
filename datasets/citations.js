@@ -1,11 +1,11 @@
 export const cannabisCite = {
-    title: ">MT435086.1 Severe acute respiratory syndrome coronavirus 2 isolate SARS-CoV-2/human/IND/GBRC9/2020, complete genome",
-    source: "https://www.ncbi.nlm.nih.gov/nuccore/MT435086.1"
+    title: ">JAATIQ010000127.1 Cannabis sativa cultivar Jamaican Lion ^4 isolate Father 142F_arrow, whole genome shotgun sequence",
+    source: "https://www.ncbi.nlm.nih.gov/nuccore/JAATIQ010000127.1?report=fasta"
 }
 
 export const covidCite = {
-    title: ">JAATIQ010000127.1 Cannabis sativa cultivar Jamaican Lion ^4 isolate Father 142F_arrow, whole genome shotgun sequence",
-    source: "https://www.ncbi.nlm.nih.gov/nuccore/JAATIQ010000127.1?report=fasta"
+    title: ">MT435086.1 Severe acute respiratory syndrome coronavirus 2 isolate SARS-CoV-2/human/IND/GBRC9/2020, complete genome",
+    source: "https://www.ncbi.nlm.nih.gov/nuccore/MT435086.1"
 }
 
 export const drosophilaCite = {

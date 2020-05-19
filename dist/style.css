@@ -1,7 +1,28 @@
+body{
+    font-family: "Montserrat";
+}
+
+body > h1{
+    margin: 30px;
+    text-align: center;
+}
+
+.main-seq{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 .bar{
-    fill: steelblue;
+    fill: rgb(125, 196, 255);
 }
 
 .highlight{
-    fill: orange;
+    fill: rgb(252, 196, 93);
+}
+
+canvas{
+    border: 2px solid black;
+    
 }
