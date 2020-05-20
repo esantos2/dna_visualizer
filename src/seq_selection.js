@@ -1,59 +1,25 @@
 import * as DataSet from '../datasets/sequences';
+import * as SeqUtil from './seq_selection/util';
+import * as ToolBox from './seq_selection/toolbox';
 import drawChart from './draw_chart';
 import displayCitation from './citation_box';
 
-const selectSeq = (selected) => {
+export const selectSeq = (selected) => {
     return (e) => {
         e.preventDefault();
-
-        //update seqSelection
         let dropdown = document.getElementById("dropdown");
-        dropdown.innerHTML = selected.name;
-        toggleDropdown(e);
-        
-        //update citation
-        displayCitation(selected.cite);
-        //draw seq
-        drawSeq(selected.seq);
+        dropdown.innerHTML = selected.name; //update text
+        SeqUtil.toggleDropdown(e);
+        displaySeq(selected); //update citation, draw seq
     }
 }
 
-const toggleDropdown = (e) =>{
-    e.preventDefault();
-    document.getElementById("seq-selection").classList.toggle("show-list");
-}
-
-const displaySeq = () => {
-    
-    let seqList = [
-        DataSet.cannabis,
-        DataSet.covid,
-        DataSet.drosophila,
-        DataSet.saccharomyces,
-        DataSet.salmonella,
-        DataSet.zika
-    ]
-
-    //setup dropdown
-    let dropdown = document.getElementById("dropdown");
-    dropdown.textContent = "-- Choose a sequence to analyze --";
-    dropdown.addEventListener("click", toggleDropdown);
-    
-    //build list
-    let seqSelection = document.getElementById("seq-selection");
-    for (let i = 0; i < seqList.length; i++){
-        let listItem = document.createElement("li");
-        listItem.innerHTML = seqList[i].name;
-        listItem.addEventListener("click", selectSeq(seqList[i]));
-        seqSelection.appendChild(listItem);
-    }
-    //draw default
-    displayCitation(DataSet.zika.cite);
-    drawSeq(DataSet.zika.seq); //default seq
+export const displaySeq = (selected = DataSet.zika) => {
+    displayCitation(selected.cite);
+    drawSeq(selected.seq);
 }
 
 const drawSeq = (chosenSeq) => {
-    
     let baseColor = {
         "A": "#FFC6CE", //red
         "T": "#95E0FF", //blue
@@ -62,7 +28,7 @@ const drawSeq = (chosenSeq) => {
     }
 
     //clear overlay
-    clearCanvas(document.getElementById("overlay"));
+    SeqUtil.clearCanvas(document.getElementById("overlay"));
 
     //draw seq to canvas
     let canvas = document.getElementById("canvas");
@@ -82,16 +48,6 @@ const drawSeq = (chosenSeq) => {
     drawChart(chosenSeq);
 }
 
-const clearCanvas = (canvas) => {
-    let ctx = canvas.getContext('2d');
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-}
-
-const getMouseCoord = (event) => {
-    let seqBox = document.getElementById("main-seq");
-    return event.clientX - seqBox.offsetLeft;
-}
-
 const selectRegion = () => {
     let overlay = document.getElementById("overlay");
     let ctx = overlay.getContext('2d');
@@ -100,9 +56,9 @@ const selectRegion = () => {
     let xCoord = 0;
     
     const startSelection = (event) => {
-        clearCanvas(overlay);
+        SeqUtil.clearCanvas(overlay);
         selection = true;
-        start = xCoord = getMouseCoord(event);
+        start = xCoord = SeqUtil.getMouseCoord(event);
         ctx.fillRect(xCoord - 5, 0, 5, overlay.height);
     }
 
@@ -115,7 +71,7 @@ const selectRegion = () => {
 
     const drawRect = (event) => {
         if (!selection) return;
-        clearCanvas(overlay);
+        SeqUtil.clearCanvas(overlay);
         ctx.fillStyle = "#757575";
         if (start < xCoord){ //draw rect left to right
             ctx.fillRect(start - 5, 0, 5, overlay.height); //start bar
@@ -123,7 +79,7 @@ const selectRegion = () => {
             ctx.fillRect(start, 0, xCoord - start, overlay.height);
             ctx.globalAlpha = 1;
         }
-        xCoord = getMouseCoord(event);
+        xCoord = SeqUtil.getMouseCoord(event);
     }
 
     //add overlay listeners
@@ -133,23 +89,9 @@ const selectRegion = () => {
 
     //add tooltip listeners
     let tooltip = document.getElementById("tooltip");
-    overlay.addEventListener('mouseout', () => clearCanvas(tooltip));
-    overlay.addEventListener('mousemove', showBaseInfo);
+    overlay.addEventListener('mouseout', () => SeqUtil.clearCanvas(tooltip));
+    overlay.addEventListener('mousemove', ToolBox.showBaseInfo);
 }
 
-const showBaseInfo = (event) => {
-    let tooltip = document.getElementById("tooltip");
-    let ctx = tooltip.getContext('2d');
-
-    //draw rect
-    clearCanvas(tooltip);
-    let xCoord = getMouseCoord(event);
-    let width = 10;
-    ctx.fillStyle = "#757575";
-    ctx.fillRect(xCoord - width, 0, width, tooltip.height);
-
-    //display tool tip info
-
-}
 
 export default displaySeq;
