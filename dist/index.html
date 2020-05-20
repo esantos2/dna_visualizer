@@ -3,6 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
         <title>DNA Visualizer</title>
         <link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png">
         <link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png">
@@ -13,6 +14,7 @@
         <link href="style.css" type="text/css" rel="stylesheet">
         <script type="text/javascript" src="main.js" defer></script>
         <script src="https://d3js.org/d3.v5.js"></script>
+        <script src="https://threejs.org/build/three.js"></script>
     </head>
 
     <body>
@@ -32,6 +34,8 @@
             <div class="base-info btm"></div>
         </div>
         <div id="cite-details"></div>
-        <div class="bar-chart-box"></div>
+        <div id="seq-data">
+            <div class="bar-chart-box"></div>
+        </div>
     </body>
 </html>

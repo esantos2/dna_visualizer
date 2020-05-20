@@ -96,3 +96,9 @@ header{
     width: 800px;
     height: 40px;
 }
+
+#seq-data{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
