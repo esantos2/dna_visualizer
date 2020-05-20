@@ -15,11 +15,12 @@ header{
     align-items: center;
 }
 
-.main-seq{
+#main-seq{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    position: relative;
 }
 
 .bar{
@@ -30,9 +31,12 @@ header{
     fill: rgb(252, 196, 93);
 }
 
-canvas{
+#canvas{
     border: 2px solid black;
-    
+}
+
+#overlay{
+    position: absolute;
 }
 
 .dropdown-container{
@@ -74,6 +78,7 @@ canvas{
 
 .dropdown-list{
     display: none;
+    z-index: 10;
 }
 
 .show-list{

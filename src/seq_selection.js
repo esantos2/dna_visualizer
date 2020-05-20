@@ -67,13 +67,73 @@ const drawSeq = (chosenSeq) => {
     // let cWidth = canvas.getAttribute("width");
     // let rectWidth = Math.floor(cWidth / chosenSeq.length);
     let rectWidth = 5;
-    for(let i = 0; i < chosenSeq.length; i++){
+    for(let i = 0; i < 1000; i++){
         ctx.fillStyle = baseColor[chosenSeq[i]];
         ctx.fillRect(rectWidth*(i), 0, rectWidth, 100);
     }
 
+    //add listeners for region selection
+    selectRegion();
+
     //draw bar graph
     drawChart(chosenSeq);
 }
+
+const selectRegion = () => {
+    let overlay = document.getElementById("overlay");
+    let seqBox = document.getElementById("main-seq");
+    let ctx = overlay.getContext('2d');
+    let coord = { x: 0, y: 0 };
+    let selection = false;
+    let start = 0;
+    let lastRect = 0;
+    
+    const getMouseCoord = (event) => {
+        coord.x = event.clientX - seqBox.offsetLeft;
+    }
+
+    const startSelection = (event) => {
+        selection = true;
+        getMouseCoord(event);
+        start = coord.x;
+    }
+
+    const stopSelection = () => {
+        selection = false;
+    }
+
+    const drawRect = (event) => {
+        if (!selection) return;
+        ctx.beginPath();
+
+        //rectangle selection properties
+        ctx.fillStyle = "#757575";
+        // ctx.lineWidth = 5;
+        // ctx.lineCap = 'round';
+        // ctx.strokeStyle = 'green';
+        
+        //create rect
+        // ctx.moveTo(coord.x, coord.y);   //selection start
+        // ctx.strokeRect(coord.x, 0, 5, overlay.height);                   //draw rect
+        
+        
+        if ((start < coord.x) && (coord.x % 10 === 0)){
+            ctx.globalAlpha = 0.5;
+            ctx.fillRect(coord.x, 0, 10, overlay.height);
+            ctx.globalAlpha = 1;
+        } 
+
+        getMouseCoord(event);           //mouse coord
+        // ctx.lineTo(coord.x, coord.y);   //selection end
+        // ctx.stroke();                   //draw rect
+
+    } 
+
+    //add overlay mouse listeners
+    overlay.addEventListener('mousedown', startSelection);
+    overlay.addEventListener('mouseup', stopSelection);
+    overlay.addEventListener('mousemove', drawRect);
+}
+
 
 export default displaySeq;
