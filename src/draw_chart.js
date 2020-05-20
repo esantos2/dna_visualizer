@@ -28,8 +28,9 @@ const drawChart = (fileName) => {
     ]
     
     //display graph
-    d3.selectAll("svg > *").remove();
-    d3.select("body").append("svg");
+    let barChartBox = d3.select(".bar-chart-box");
+    barChartBox.selectAll("*").remove();
+    barChartBox.append("svg");
     
     const svg = d3.select("svg")
         .attr("width", 500)

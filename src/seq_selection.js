@@ -1,5 +1,6 @@
 import * as DataSet from '../datasets/sequences';
 import drawChart from './draw_chart';
+import displayCitation from './citation_box';
 
 const selectSeq = (selected) => {
     return (e) => {
@@ -11,7 +12,7 @@ const selectSeq = (selected) => {
         toggleDropdown(e);
         
         //update citation
-
+        displayCitation(selected.cite);
         //draw seq
         drawSeq(selected.seq);
     }
@@ -47,6 +48,7 @@ const displaySeq = () => {
         seqSelection.appendChild(listItem);
     }
     //draw default
+    displayCitation(DataSet.zika.cite);
     drawSeq(DataSet.zika.seq); //default seq
 }
 

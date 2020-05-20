@@ -1,6 +1,6 @@
 export const cannabisCite = {
     title: ">JAATIQ010000127.1 Cannabis sativa cultivar Jamaican Lion ^4 isolate Father 142F_arrow, whole genome shotgun sequence",
-    source: "https://www.ncbi.nlm.nih.gov/nuccore/JAATIQ010000127.1?report=fasta"
+    source: "https://www.ncbi.nlm.nih.gov/nuccore/JAATIQ010000127.1"
 }
 
 export const covidCite = {
@@ -10,7 +10,7 @@ export const covidCite = {
 
 export const drosophilaCite = {
     title: ">CM016482.2 Drosophila melanogaster strain DGRP-732 chromosome 4, whole genome shotgun sequence",
-    source: "https://www.ncbi.nlm.nih.gov/nuccore/CM016482.2?report=fasta"
+    source: "https://www.ncbi.nlm.nih.gov/nuccore/CM016482.2"
 }
 
 export const saccharomycesCite = {
