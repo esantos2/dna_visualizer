@@ -61,6 +61,9 @@ const drawSeq = (chosenSeq) => {
         "G": "#ECC6FA" //purple
     }
 
+    //clear overlay
+    clearCanvas(document.getElementById("overlay"));
+
     //draw seq to canvas
     let canvas = document.getElementById("canvas");
     let ctx = canvas.getContext('2d');
@@ -79,61 +82,74 @@ const drawSeq = (chosenSeq) => {
     drawChart(chosenSeq);
 }
 
+const clearCanvas = (canvas) => {
+    let ctx = canvas.getContext('2d');
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+}
+
+const getMouseCoord = (event) => {
+    let seqBox = document.getElementById("main-seq");
+    return event.clientX - seqBox.offsetLeft;
+}
+
 const selectRegion = () => {
     let overlay = document.getElementById("overlay");
-    let seqBox = document.getElementById("main-seq");
     let ctx = overlay.getContext('2d');
-    let coord = { x: 0, y: 0 };
-    let selection = false;
+    let selection = false; //flag start of selection
     let start = 0;
-    let lastRect = 0;
+    let xCoord = 0;
     
-    const getMouseCoord = (event) => {
-        coord.x = event.clientX - seqBox.offsetLeft;
-    }
-
     const startSelection = (event) => {
+        clearCanvas(overlay);
         selection = true;
-        getMouseCoord(event);
-        start = coord.x;
+        start = xCoord = getMouseCoord(event);
+        ctx.fillRect(xCoord - 5, 0, 5, overlay.height);
     }
 
     const stopSelection = () => {
         selection = false;
+        if (start < xCoord){
+            ctx.fillRect(xCoord - 5, 0, 5, overlay.height);
+        }
     }
 
     const drawRect = (event) => {
         if (!selection) return;
-        ctx.beginPath();
-
-        //rectangle selection properties
+        clearCanvas(overlay);
         ctx.fillStyle = "#757575";
-        // ctx.lineWidth = 5;
-        // ctx.lineCap = 'round';
-        // ctx.strokeStyle = 'green';
-        
-        //create rect
-        // ctx.moveTo(coord.x, coord.y);   //selection start
-        // ctx.strokeRect(coord.x, 0, 5, overlay.height);                   //draw rect
-        
-        
-        if ((start < coord.x) && (coord.x % 10 === 0)){
-            ctx.globalAlpha = 0.5;
-            ctx.fillRect(coord.x, 0, 10, overlay.height);
+        if (start < xCoord){ //draw rect left to right
+            ctx.fillRect(start - 5, 0, 5, overlay.height); //start bar
+            ctx.globalAlpha = 0.3;
+            ctx.fillRect(start, 0, xCoord - start, overlay.height);
             ctx.globalAlpha = 1;
-        } 
+        }
+        xCoord = getMouseCoord(event);
+    }
 
-        getMouseCoord(event);           //mouse coord
-        // ctx.lineTo(coord.x, coord.y);   //selection end
-        // ctx.stroke();                   //draw rect
-
-    } 
-
-    //add overlay mouse listeners
+    //add overlay listeners
     overlay.addEventListener('mousedown', startSelection);
     overlay.addEventListener('mouseup', stopSelection);
     overlay.addEventListener('mousemove', drawRect);
+
+    //add tooltip listeners
+    let tooltip = document.getElementById("tooltip");
+    overlay.addEventListener('mouseout', () => clearCanvas(tooltip));
+    overlay.addEventListener('mousemove', showBaseInfo);
 }
 
+const showBaseInfo = (event) => {
+    let tooltip = document.getElementById("tooltip");
+    let ctx = tooltip.getContext('2d');
+
+    //draw rect
+    clearCanvas(tooltip);
+    let xCoord = getMouseCoord(event);
+    let width = 10;
+    ctx.fillStyle = "#757575";
+    ctx.fillRect(xCoord - width, 0, width, tooltip.height);
+
+    //display tool tip info
+
+}
 
 export default displaySeq;

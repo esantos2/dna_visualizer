@@ -33,10 +33,17 @@ header{
 
 #canvas{
     border: 2px solid black;
+    z-index: 1;
+}
+
+#tooltip{
+    position: absolute;
+    z-index: 2;
 }
 
 #overlay{
     position: absolute;
+    z-index: 2;
 }
 
 .dropdown-container{
@@ -83,4 +90,9 @@ header{
 
 .show-list{
     display: block;
+}
+
+.base-info{
+    width: 800px;
+    height: 40px;
 }
