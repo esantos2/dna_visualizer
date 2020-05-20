@@ -1,6 +1,6 @@
 import * as DataSet from '../../datasets/sequences';
 import * as SeqUtil from './util';
-import {selectSeq} from '../seq_selection';
+import {selectSeq} from '../display_seq';
 
 const drawDropdown = () => {
     let seqList = [
