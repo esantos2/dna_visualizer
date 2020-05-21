@@ -4,6 +4,7 @@ import * as ToolBox from './seq_selection/toolbox';
 import drawChart from './draw_chart';
 import displayCitation from './citation_box';
 import Sequence from './region_selection';
+import immersion from './immersion';
 
 export const selectSeq = (selected) => {
     return (e) => {
@@ -18,9 +19,10 @@ export const selectSeq = (selected) => {
 export const displaySeq = (selected = DataSet.zika) => {
 
     displayCitation(selected.cite);
-    // let seq = new Sequence(selected);
-    // seq.drawSeq();
-    drawSeq(selected.seq);
+    let seq = new Sequence(selected);
+    seq.drawSeq();
+    // drawSeq(selected.seq);
+    // immersion(selected.seq);
 }
 
 const drawSeq = (chosenSeq) => {

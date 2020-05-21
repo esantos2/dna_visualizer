@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 import * as DataSet from '../datasets/sequences';
 
-const immersion = () => {
+const immersion = (chosenSeq = DataSet.zika.seq) => {
     //initialize scene
     let scene = new THREE.Scene();
     scene.background = new THREE.Color(0xffffff);
@@ -9,7 +9,9 @@ const immersion = () => {
     let renderer = new THREE.WebGLRenderer();
     renderer.setSize(window.innerWidth/2, window.innerHeight/2);
     
-    document.getElementById("seq-data").appendChild(renderer.domElement);
+    let container = document.getElementById("seq-data");
+    container.innerHTML = "";
+    container.appendChild(renderer.domElement);
 
     //colors
     const aColor = "#FFC6CE";   //red
@@ -41,8 +43,6 @@ const immersion = () => {
     let holder = new THREE.Object3D();
     
     //build rows
-    const testSeq = DataSet.zika.seq;
-
     for (let i = 0; i <= 40; i++) {
         let row = new THREE.Object3D();
 
@@ -51,10 +51,10 @@ const immersion = () => {
         let ballLeft = new THREE.Mesh(ballGeometry, bbMaterial);
         ballLeft.position.x = -6;
     
-        let newRod = new THREE.Mesh(tubeGeometry, rodMaterial[testSeq[i]].mat);
+        let newRod = new THREE.Mesh(tubeGeometry, rodMaterial[chosenSeq[i]].mat);
         newRod.rotation.z = 90 * Math.PI / 180;
         newRod.position.x = 3;
-        let oppRod = new THREE.Mesh(tubeGeometry, rodMaterial[rodMaterial[testSeq[i]].pair].mat);
+        let oppRod = new THREE.Mesh(tubeGeometry, rodMaterial[rodMaterial[chosenSeq[i]].pair].mat);
         oppRod.rotation.z = 90 * Math.PI / 180;
         oppRod.position.x = -3;
         

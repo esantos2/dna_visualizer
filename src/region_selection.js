@@ -16,18 +16,33 @@ class Sequence{
             "C": "#95FFC0", //green
             "G": "#ECC6FA" //purple
         }
-        SeqUtil.clearCanvas(document.getElementById("overlay")); //clear overlay
-        SeqUtil.clearCanvas(document.getElementById("canvas")); //clear seq
+
         let canvas = document.getElementById("canvas");
         let ctx = canvas.getContext('2d');
+
+        console.log("start index: ", startIdx + this.prevStartIdx)
+        console.log("end index: ", Math.floor(endIdx + this.prevStartIdx))
+
         startIdx += this.prevStartIdx; //adjust new range
         endIdx += this.prevStartIdx;
-        if (startIdx >= endIdx) return;
+        if (startIdx >= endIdx || (endIdx - startIdx < 10)) return;
         if (endIdx - startIdx < 160){ //use dynamic widths
             this.rectWidth = Math.floor(canvas.width / (endIdx - startIdx));
-        } else{
-            endIdx = Math.floor(canvas.width / this.rectWidth);
+        } else {
+            this.rectWidth = 5;
         }
+
+        //reset overlay
+        SeqUtil.clearCanvas(document.getElementById("canvas")); //clear seq
+        let overlay = document.getElementById("overlay");
+        let mainSeq = document.getElementById("main-seq");
+        mainSeq.removeChild(overlay);
+        overlay = document.createElement("canvas");
+        overlay.setAttribute("width", "800");
+        overlay.setAttribute("height", "100");
+        overlay.setAttribute("id", "overlay");
+        mainSeq.appendChild(overlay);
+
         for (let i = startIdx; i < endIdx; i++) {
             ctx.fillStyle = baseColor[this.mainSeq[i]];
             ctx.fillRect(this.rectWidth * (i - startIdx), 0, this.rectWidth, canvas.height);
@@ -47,7 +62,6 @@ class Sequence{
         let newEndIdx = 0;
 
         const getSeqIdx = () => {
-            console.log("coord: ", Math.floor(xCoord / this.rectWidth))
             return Math.floor(xCoord / this.rectWidth);
         }
 
@@ -56,6 +70,7 @@ class Sequence{
             selection = true;
             start = xCoord = SeqUtil.getMouseCoord(event);
             newStartIdx = getSeqIdx();
+            console.log("start coord: ", Math.floor(xCoord / this.rectWidth))
             ctx.fillRect(xCoord - 5, 0, 5, overlay.height);
         }
 
@@ -66,6 +81,7 @@ class Sequence{
             }
             //update bar graph
             newEndIdx = getSeqIdx();
+            console.log("end coord: ", Math.floor(xCoord / this.rectWidth))
             this.drawSeq(newStartIdx, newEndIdx);
         }
 
@@ -83,23 +99,12 @@ class Sequence{
         }
 
         let tooltip = document.getElementById("tooltip");
-
-        //remove existing listeners
-        overlay.removeEventListener('mousedown', startSelection);
-        overlay.removeEventListener('mouseup', stopSelection);
-        overlay.removeEventListener('mousemove', drawRect);
-        overlay.removeEventListener('mousemove', ToolBox.showBaseInfo);
-        overlay.removeEventListener('mouseout', () => SeqUtil.clearCanvas(tooltip));
-
-        //add overlay listeners
         overlay.addEventListener('mousedown', startSelection);
         overlay.addEventListener('mouseup', stopSelection);
         overlay.addEventListener('mousemove', drawRect);
-        //add tooltip listeners
         overlay.addEventListener('mouseout', () => SeqUtil.clearCanvas(tooltip));
         overlay.addEventListener('mousemove', ToolBox.showBaseInfo);
     }
-
 }
 
 export default Sequence;
