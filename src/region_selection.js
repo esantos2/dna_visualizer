@@ -1,6 +1,7 @@
 import drawChart from './draw_chart';
 import * as SeqUtil from './seq_selection/util';
 import * as ToolBox from './seq_selection/toolbox';
+import immersion from './immersion';
 
 class Sequence{
     constructor(selectedSeq){
@@ -20,14 +21,12 @@ class Sequence{
         let canvas = document.getElementById("canvas");
         let ctx = canvas.getContext('2d');
 
-        console.log("start index: ", startIdx + this.prevStartIdx)
-        console.log("end index: ", Math.floor(endIdx + this.prevStartIdx))
-
         startIdx += this.prevStartIdx; //adjust new range
         endIdx += this.prevStartIdx;
-        if (startIdx >= endIdx || (endIdx - startIdx < 10)) return;
+
+        if (startIdx >= endIdx || (endIdx - startIdx < 5)) return;
         if (endIdx - startIdx < 160){ //use dynamic widths
-            this.rectWidth = Math.floor(canvas.width / (endIdx - startIdx));
+            this.rectWidth = canvas.width / (endIdx - startIdx);
         } else {
             this.rectWidth = 5;
         }
@@ -49,7 +48,11 @@ class Sequence{
         }
         this.prevStartIdx = startIdx;
         this.selectRegion(); //add listeners for region selection
-        drawChart(this.mainSeq.slice(startIdx, endIdx)); //draw bar graph
+
+        //update bar graph and immersion
+        let newSeq = this.mainSeq.slice(startIdx, endIdx);
+        drawChart(newSeq);
+        immersion(newSeq);
     }
 
     selectRegion(){
@@ -70,7 +73,7 @@ class Sequence{
             selection = true;
             start = xCoord = SeqUtil.getMouseCoord(event);
             newStartIdx = getSeqIdx();
-            console.log("start coord: ", Math.floor(xCoord / this.rectWidth))
+            // console.log("start coord: ", Math.floor(xCoord / this.rectWidth))
             ctx.fillRect(xCoord - 5, 0, 5, overlay.height);
         }
 
@@ -81,7 +84,7 @@ class Sequence{
             }
             //update bar graph
             newEndIdx = getSeqIdx();
-            console.log("end coord: ", Math.floor(xCoord / this.rectWidth))
+            // console.log("end coord: ", Math.floor(xCoord / this.rectWidth))
             this.drawSeq(newStartIdx, newEndIdx);
         }
 

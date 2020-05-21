@@ -40,9 +40,6 @@ header{
     fill: rgb(252, 196, 93);
 }
 
-.bar-chart-box{
-}
-
 #canvas{
     border: 2px solid black;
     position: absolute;

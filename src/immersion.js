@@ -43,7 +43,9 @@ const immersion = (chosenSeq = DataSet.zika.seq) => {
     let holder = new THREE.Object3D();
     
     //build rows
-    for (let i = 0; i <= 40; i++) {
+    let maxRows = chosenSeq.length;
+    if (maxRows > 50) maxRows = 50;
+    for (let i = 0; i < maxRows; i++) {
         let row = new THREE.Object3D();
 
         let ballRight = new THREE.Mesh(ballGeometry, bbMaterial);
@@ -74,7 +76,7 @@ const immersion = (chosenSeq = DataSet.zika.seq) => {
     holder.add(dna)
     scene.add(holder);
 
-    camera.position.z = 30;
+    camera.position.z = 60;
 
     const render = function () {
         requestAnimationFrame(render);
