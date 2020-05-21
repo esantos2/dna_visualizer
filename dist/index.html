@@ -25,17 +25,24 @@
                 <ul id="seq-selection" class="dropdown-list"></ul>
             </div>
         </header>
-        <div id="toolbox"></div>
-        <div id="main-seq">
-            <div class="base-info top"></div>
-            <canvas id="canvas" width="800" height="100"></canvas>
-            <canvas id="tooltip" width="800" height="100"></canvas>
-            <canvas id="overlay" width="800" height="100"></canvas>
-            <div class="base-info btm"></div>
-        </div>
-        <div id="cite-details"></div>
-        <div id="seq-data">
-            <div class="bar-chart-box"></div>
+        <div class="data-container">
+            <div class="seq-container">
+                <div id="toolbox"></div>
+                <div class="base-info top"></div>
+                <div id="main-seq">
+                    <canvas id="canvas" width="800" height="100"></canvas>
+                    <canvas id="tooltip" width="800" height="100"></canvas>
+                    <canvas id="overlay" width="800" height="100"></canvas>
+                </div>
+                <div class="base-info btm"></div>
+            </div>
+            <div class="graphics-container">
+                <div id="seq-data"></div>
+                <div class="chart-container">
+                    <div class="bar-chart-box"></div>
+                    <div id="cite-details"></div>
+                </div>
+            </div>
         </div>
     </body>
 </html>

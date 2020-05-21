@@ -1,11 +1,14 @@
 import * as THREE from 'three';
+import * as DataSet from '../datasets/sequences';
 
 const immersion = () => {
     //initialize scene
     let scene = new THREE.Scene();
+    scene.background = new THREE.Color(0xffffff);
     let camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
     let renderer = new THREE.WebGLRenderer();
     renderer.setSize(window.innerWidth/2, window.innerHeight/2);
+    
     document.getElementById("seq-data").appendChild(renderer.domElement);
 
     //colors
@@ -13,7 +16,7 @@ const immersion = () => {
     const tColor = "#95E0FF";   //blue
     const cColor = "#95FFC0";   //green
     const gColor = "#ECC6FA";   //purple
-    const bbColor = "#27007B";
+    const bbColor = "#27007B";  //darker purple
 
     //shapes
     let tubeGeometry = new THREE.CylinderGeometry(0.3, 0.3, 6, 32);
@@ -26,37 +29,41 @@ const immersion = () => {
     let gMaterial = new THREE.MeshBasicMaterial({ color: gColor });
     let bbMaterial = new THREE.MeshBasicMaterial({ color: bbColor });
 
+    let rodMaterial = {
+        "A": { "mat": aMaterial, "pair": "T"},
+        "T": { "mat": tMaterial, "pair": "A"},
+        "C": { "mat": cMaterial, "pair": "G"},
+        "G": { "mat": gMaterial, "pair": "C"}
+    }
+
     //main graphics
     let dna = new THREE.Object3D();
     let holder = new THREE.Object3D();
     
     //build rows
+    const testSeq = DataSet.zika.seq;
+
     for (let i = 0; i <= 40; i++) {
         let row = new THREE.Object3D();
 
-        let tRod = new THREE.Mesh(tubeGeometry, tMaterial);
-        tRod.rotation.z = 90 * Math.PI / 180; //orient horizontal
-        tRod.position.x = -3;
-        let aRod = new THREE.Mesh(tubeGeometry, aMaterial);
-        aRod.rotation.z = 90 * Math.PI / 180;
-        aRod.position.x = 3;
-        let cRod = new THREE.Mesh(tubeGeometry, cMaterial);
-        cRod.rotation.z = 90 * Math.PI / 180;
-        cRod.position.x = -3;
-        let gRod = new THREE.Mesh(tubeGeometry, gMaterial);
-        gRod.rotation.z = 90 * Math.PI / 180;
-        gRod.position.x = 3;
         let ballRight = new THREE.Mesh(ballGeometry, bbMaterial);
         ballRight.position.x = 6;
         let ballLeft = new THREE.Mesh(ballGeometry, bbMaterial);
         ballLeft.position.x = -6;
+    
+        let newRod = new THREE.Mesh(tubeGeometry, rodMaterial[testSeq[i]].mat);
+        newRod.rotation.z = 90 * Math.PI / 180;
+        newRod.position.x = 3;
+        let oppRod = new THREE.Mesh(tubeGeometry, rodMaterial[rodMaterial[testSeq[i]].pair].mat);
+        oppRod.rotation.z = 90 * Math.PI / 180;
+        oppRod.position.x = -3;
         
-        row.add(tRod);
-        row.add(aRod);
+        row.add(newRod);
+        row.add(oppRod);
         row.add(ballRight);
         row.add(ballLeft);
         row.position.y = i*2;
-        row.rotation.y = 30*i * Math.PI/180;
+        row.rotation.y = 30*i * Math.PI/180; //angle for spiral
         dna.add(row);
     };
 
@@ -71,7 +78,7 @@ const immersion = () => {
 
     const render = function () {
         requestAnimationFrame(render);
-        // holder.rotation.x += 0.01;
+        // holder.rotation.z += 0.01;
         holder.rotation.y += 0.01;
         renderer.render(scene, camera);
     }

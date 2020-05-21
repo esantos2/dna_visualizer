@@ -15,12 +15,21 @@ header{
     align-items: center;
 }
 
+.data-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 #main-seq{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     position: relative;
+    width: 800px;
+    height: 100px;
 }
 
 .bar{
@@ -31,23 +40,51 @@ header{
     fill: rgb(252, 196, 93);
 }
 
+.bar-chart-box{
+}
+
 #canvas{
     border: 2px solid black;
+    position: absolute;
     z-index: 1;
+    width: auto;
 }
 
 #tooltip{
     position: absolute;
     z-index: 2;
+    width: auto;
 }
 
 #overlay{
     position: absolute;
     z-index: 2;
+    width: auto;
 }
 
 .dropdown-container{
     position: relative;
+}
+
+.seq-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.chart-container{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.graphics-container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 #dropdown{
@@ -92,13 +129,6 @@ header{
     display: block;
 }
 
-.base-info{
-    width: 800px;
-    height: 40px;
-}
-
-#seq-data{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+#cite-details{
+    max-width: 700px;
 }
