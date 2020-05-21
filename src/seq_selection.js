@@ -1,6 +1,6 @@
 import drawChart from './draw_chart';
-import * as SeqUtil from './seq_selection/util';
-import * as ToolBox from './seq_selection/toolbox';
+import * as SeqUtil from './util';
+import * as ToolBox from './toolbox';
 import immersion from './immersion';
 
 class Sequence{

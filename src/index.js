@@ -1,11 +1,9 @@
-import {drawToolBox} from './seq_selection/toolbox';
-import drawDropdown from './seq_selection/dropdown';
+import {drawToolBox} from './toolbox';
+import drawDropdown from './dropdown';
 import {displaySeq} from './display_seq';
-import immersion from './immersion';
 
 document.addEventListener("DOMContentLoaded", () => {
     drawDropdown();
     drawToolBox();
     displaySeq();
-    // immersion();
 })
