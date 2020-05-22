@@ -33,7 +33,10 @@ class Sequence{
         startIdx += this.prevStartIdx; //adjust new range
         endIdx += this.prevStartIdx;
 
-        if (startIdx >= endIdx || (endIdx - startIdx < 5)) return;
+        if (startIdx >= endIdx || (endIdx - startIdx < 4)){
+            //show error, must have at least 5 bases selected
+            return;
+        }
         if (endIdx - startIdx < 160){ //use dynamic widths
             this.rectWidth = canvas.width / (endIdx - startIdx);
         } else {
@@ -87,7 +90,7 @@ class Sequence{
     getNewSelection(e) {
         e.preventDefault();
         let submitButton = document.getElementById("new-seq-btn");
-        document.getElementById("tool-btm-container").innerHTML = ""; //clear bottom tooltips
+        SeqUtil.clearBottomToolTips();
         submitButton.setAttribute("disabled", true);
         this.drawSeq(this.newStartIdx, this.newEndIdx);
     }
@@ -108,6 +111,7 @@ class Sequence{
             selection = true;
             start = xCoord = SeqUtil.getMouseCoord(event);
             this.newStartIdx = getSeqIdx();
+            SeqUtil.clearBottomToolTips();
             this.toolbox.selectionEndpoint(this.prevStartIdx, this.rectWidth)(event);
             ctx.fillRect(xCoord - 5, 0, 5, overlay.height);
         }

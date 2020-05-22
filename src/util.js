@@ -16,3 +16,7 @@ export const toggleDropdown = (e) => {
 export const toggleToolTip = () => {
     document.getElementById("tool-top").classList.toggle("show-tip");
 }
+
+export const clearBottomToolTips = () => {
+    document.getElementById("tool-btm-container").innerHTML = "";
+}

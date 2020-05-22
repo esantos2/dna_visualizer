@@ -16,7 +16,7 @@ class ToolBox{
         clearBtn.addEventListener("click", (e) => {
             e.preventDefault();
             Util.clearCanvas(document.getElementById("overlay")); //clear overlay
-            document.getElementById("tool-btm-container").innerHTML = ""; //clear bottom tooltips
+            Util.clearBottomToolTips();
             document.getElementById("new-seq-btn").setAttribute("disabled", true); //disable selection button
         });
         toolbox.appendChild(clearBtn);
@@ -26,6 +26,7 @@ class ToolBox{
         reset.innerHTML = "Reset";
         reset.addEventListener("click", (e) => {
             e.preventDefault();
+            Util.clearBottomToolTips();
             displaySeq(this.selected);
         })
         toolbox.appendChild(reset);
