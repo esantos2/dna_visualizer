@@ -122,18 +122,31 @@ header{
     z-index: 10;
 }
 
-.show-list{
-    display: block;
-}
-
 #cite-details{
     max-width: 700px;
 }
 
-.new-seq-btn{
-    /* display: none; */
+.base-info{
+    width: auto;
+    height: 20px;
+    padding: 5px 10px;
+    background-color: rgb(250, 250, 250);
+    box-shadow: 0px 5px 10px 0px rgba(141, 140, 140, 0.75);
+    font-family: inherit;
+    font-size: 14px;
+    display: none;
+    z-index: 5;
+    position: absolute;
+    width: max-content;
 }
 
-.enable-btn{
-    display: inline-block;
+.show-list,
+.show-tip{
+    display: block;
+}
+
+.tool-top-container{
+    padding-top: 10px;
+    height: 32px;
+    position: relative;
 }

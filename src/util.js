@@ -13,6 +13,6 @@ export const toggleDropdown = (e) => {
     document.getElementById("seq-selection").classList.toggle("show-list");
 }
 
-export const toggleNewSeqButton = () => {
-    document.getElementById("new-seq-btn").classList.toggle("enable-btn");
+export const toggleToolTip = () => {
+    document.getElementById("tool-top").classList.toggle("show-tip");
 }

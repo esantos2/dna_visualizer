@@ -38,20 +38,23 @@ class ToolBox{
         toolbox.appendChild(handleSelection);
     }
 
-    showBaseInfo(event){
-        let tooltip = document.getElementById("tooltip");
-        let ctx = tooltip.getContext('2d');
-    
-        //draw rect
-        Util.clearCanvas(tooltip);
-        let xCoord = Util.getMouseCoord(event);
-        let width = 10;
-        ctx.fillStyle = "#757575";
-        ctx.fillRect(xCoord - width, 0, width, tooltip.height);
-    
-        //display tool tip info
-    
+    showBaseInfo(startIdx, rectWidth){
+        return (e) => {
+            let tooltip = document.getElementById("tooltip");
+            let ctx = tooltip.getContext('2d');
+            //draw rect
+            Util.clearCanvas(tooltip);
+            let xCoord = Util.getMouseCoord(event);
+            let width = 5;
+            ctx.fillStyle = "#757575";
+            ctx.fillRect(xCoord - width, 0, width, tooltip.height);
+            //display tool tip info
+            let infoBox = document.getElementById("tool-top");
+            infoBox.style.left = `${xCoord-2}px`;
+            infoBox.innerHTML = `base#: ${startIdx + Math.floor(xCoord / rectWidth) + 1}`;
+        }
     }
+
 }
 
 

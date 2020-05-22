@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import * as DataSet from '../datasets/sequences';
+// import { GUI } from './jsm/libs/dat.gui.module.js';
 
 const immersion = (chosenSeq = DataSet.zika.seq) => {
     //initialize scene

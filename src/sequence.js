@@ -82,7 +82,6 @@ class Sequence{
         submitButton.removeEventListener("click", this.getNewSelection);
         submitButton.addEventListener("click", this.getNewSelection);
         submitButton.removeAttribute("disabled");
-        // SeqUtil.toggleNewSeqButton();
     }
 
     getNewSelection(e) {
@@ -90,7 +89,6 @@ class Sequence{
         let submitButton = document.getElementById("new-seq-btn");
         submitButton.setAttribute("disabled", true);
         this.drawSeq(this.newStartIdx, this.newEndIdx);
-        // SeqUtil.toggleNewSeqButton();
     }
 
     selectRegion(){
@@ -136,9 +134,17 @@ class Sequence{
         let tooltip = document.getElementById("tooltip");
         overlay.addEventListener('mousedown', startSelection);
         overlay.addEventListener('mouseup', stopSelection);
-        overlay.addEventListener('mousemove', drawRect);
-        overlay.addEventListener('mouseout', () => SeqUtil.clearCanvas(tooltip));
-        overlay.addEventListener('mousemove', this.toolbox.showBaseInfo);
+        overlay.addEventListener('mousemove', (e) => {
+            drawRect(e);
+            this.toolbox.showBaseInfo(this.prevStartIdx, this.rectWidth)(e);
+        });
+        overlay.addEventListener('mouseover', () => {
+            SeqUtil.toggleToolTip();
+        })
+        overlay.addEventListener('mouseout', () => {
+            SeqUtil.clearCanvas(tooltip);
+            SeqUtil.toggleToolTip();
+        });
     }
 
 }
