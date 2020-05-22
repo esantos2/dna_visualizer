@@ -129,3 +129,11 @@ header{
 #cite-details{
     max-width: 700px;
 }
+
+.new-seq-btn{
+    /* display: none; */
+}
+
+.enable-btn{
+    display: inline-block;
+}

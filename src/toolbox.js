@@ -16,6 +16,7 @@ class ToolBox{
         clearBtn.addEventListener("click", (e) => {
             e.preventDefault();
             Util.clearCanvas(document.getElementById("overlay"));
+            document.getElementById("new-seq-btn").setAttribute("disabled", true);
         });
         toolbox.appendChild(clearBtn);
     
@@ -27,14 +28,14 @@ class ToolBox{
             displaySeq(this.selected);
         })
         toolbox.appendChild(reset);
-    
+
         //submit selection
         let handleSelection = document.createElement("button");
         handleSelection.innerHTML = "Select Region";
-        handleSelection.addEventListener("click", (e) => {
-            e.preventDefault();
-            
-        })
+        handleSelection.setAttribute("id", "new-seq-btn");
+        handleSelection.setAttribute("class", "new-seq-btn");
+        handleSelection.setAttribute("disabled", true);
+        toolbox.appendChild(handleSelection);
     }
 
     showBaseInfo(event){

@@ -12,3 +12,7 @@ export const toggleDropdown = (e) => {
     e.preventDefault();
     document.getElementById("seq-selection").classList.toggle("show-list");
 }
+
+export const toggleNewSeqButton = () => {
+    document.getElementById("new-seq-btn").classList.toggle("enable-btn");
+}

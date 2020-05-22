@@ -84,7 +84,6 @@ const immersion = (chosenSeq = DataSet.zika.seq) => {
         holder.rotation.y += 0.01;
         renderer.render(scene, camera);
     }
-
     render();
 }
 
