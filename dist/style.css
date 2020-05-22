@@ -1,7 +1,7 @@
 body{
+    margin: 0;
     font-family: "Montserrat";
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
@@ -20,6 +20,7 @@ header{
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin: 20px;
 }
 
 #main-seq{
@@ -71,7 +72,6 @@ header{
 }
 
 .chart-container{
-    width: 50%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -124,6 +124,7 @@ header{
 
 #cite-details{
     max-width: 700px;
+    font-size: 12px;
 }
 
 .base-info{
@@ -150,8 +151,4 @@ header{
     padding-top: 10px;
     height: 32px;
     position: relative;
-}
-
-#tool-btm-container{
-    
 }

@@ -6,13 +6,23 @@ const immersion = (chosenSeq = DataSet.zika.seq) => {
     //initialize scene
     let scene = new THREE.Scene();
     scene.background = new THREE.Color(0xffffff);
-    let camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    let camera = new THREE.PerspectiveCamera(75, (window.innerWidth/2) / window.innerHeight, 0.1, 1000);
     let renderer = new THREE.WebGLRenderer();
-    renderer.setSize(window.innerWidth/2, window.innerHeight/2);
-    
-    let container = document.getElementById("seq-data");
+    renderer.setSize(window.innerWidth/2, window.innerHeight);
+
+    //setup canvas
+    const onWindowResize = () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        renderer.setSize(window.innerWidth/2, window.innerHeight/2);
+        camera.updateProjectionMatrix();
+    };
+    window.addEventListener('resize', onWindowResize, false);
+    let container = document.getElementById("immersion");
     container.innerHTML = "";
     container.appendChild(renderer.domElement);
+
+    //move molecule
+    moveMolecule(scene, container);
 
     //colors
     const aColor = "#FFC6CE";   //red
@@ -86,6 +96,49 @@ const immersion = (chosenSeq = DataSet.zika.seq) => {
         renderer.render(scene, camera);
     }
     render();
+}
+
+const moveMolecule = (scene, container) => { //rotates scene based on change in mouse coordinates
+    let mouseDown = false;
+    let mouseX = 0;
+    let mouseY = 0;
+
+    const onMouseMove = (e) => {
+        if (!mouseDown) {
+            return;
+        }
+        e.preventDefault();
+        let deltaX = e.clientX - mouseX;
+        let deltaY = e.clientY - mouseY;
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        rotateScene(deltaX, deltaY);
+    }
+
+    const onMouseDown = (e) => {
+        e.preventDefault();
+        mouseDown = true;
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+    }
+
+    const onMouseUp = (e) => {
+        e.preventDefault();
+        mouseDown = false;
+    }
+
+    const addMouseHandler = (canvas) => {
+        canvas.addEventListener('mousemove', onMouseMove, false);
+        canvas.addEventListener('mousedown', onMouseDown, false);
+        canvas.addEventListener('mouseup', onMouseUp, false);
+    }
+
+    const rotateScene = (deltaX, deltaY) => {
+        scene.rotation.y += deltaX / 100;
+        scene.rotation.x += deltaY / 100;
+    }
+
+    addMouseHandler(container);
 }
 
 export default immersion;
