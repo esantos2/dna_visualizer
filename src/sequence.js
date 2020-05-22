@@ -87,6 +87,7 @@ class Sequence{
     getNewSelection(e) {
         e.preventDefault();
         let submitButton = document.getElementById("new-seq-btn");
+        document.getElementById("tool-btm-container").innerHTML = ""; //clear bottom tooltips
         submitButton.setAttribute("disabled", true);
         this.drawSeq(this.newStartIdx, this.newEndIdx);
     }
@@ -107,14 +108,19 @@ class Sequence{
             selection = true;
             start = xCoord = SeqUtil.getMouseCoord(event);
             this.newStartIdx = getSeqIdx();
+            this.toolbox.selectionEndpoint(this.prevStartIdx, this.rectWidth)(event);
             ctx.fillRect(xCoord - 5, 0, 5, overlay.height);
         }
 
         const stopSelection = () => {
             selection = false;
-            if (start >= xCoord) return;
-            ctx.fillRect(xCoord - 5, 0, 5, overlay.height);
+            if (start >= xCoord){
+                SeqUtil.clearCanvas(document.getElementById("tooltip"));
+                return;
+            }
             this.newEndIdx = getSeqIdx();
+            this.toolbox.selectionEndpoint(this.prevStartIdx, this.rectWidth)(event);
+            ctx.fillRect(xCoord - 5, 0, 5, overlay.height);
             this.handleNewSelection();
         }
 

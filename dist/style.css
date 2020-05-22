@@ -145,8 +145,13 @@ header{
     display: block;
 }
 
-.tool-top-container{
+.tool-top-container,
+#tool-btm-container{
     padding-top: 10px;
     height: 32px;
     position: relative;
+}
+
+#tool-btm-container{
+    
 }

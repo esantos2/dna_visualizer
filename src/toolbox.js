@@ -15,8 +15,9 @@ class ToolBox{
         clearBtn.innerHTML = "Clear";
         clearBtn.addEventListener("click", (e) => {
             e.preventDefault();
-            Util.clearCanvas(document.getElementById("overlay"));
-            document.getElementById("new-seq-btn").setAttribute("disabled", true);
+            Util.clearCanvas(document.getElementById("overlay")); //clear overlay
+            document.getElementById("tool-btm-container").innerHTML = ""; //clear bottom tooltips
+            document.getElementById("new-seq-btn").setAttribute("disabled", true); //disable selection button
         });
         toolbox.appendChild(clearBtn);
     
@@ -44,16 +45,30 @@ class ToolBox{
             let ctx = tooltip.getContext('2d');
             //draw rect
             Util.clearCanvas(tooltip);
-            let xCoord = Util.getMouseCoord(event);
+            let xCoord = Util.getMouseCoord(e);
             let width = 5;
             ctx.fillStyle = "#757575";
             ctx.fillRect(xCoord - width, 0, width, tooltip.height);
             //display tool tip info
             let infoBox = document.getElementById("tool-top");
-            infoBox.style.left = `${xCoord-2}px`;
+            infoBox.style.left = `${xCoord - 2}px`;
             infoBox.innerHTML = `base#: ${startIdx + Math.floor(xCoord / rectWidth) + 1}`;
         }
     }
+
+    selectionEndpoint(startIdx, rectWidth){
+        return (e) => {
+            let toolBoxBtm = document.getElementById("tool-btm-container");
+            let endInfoBox = document.createElement("div");
+            endInfoBox.setAttribute("class", "base-info");
+            let xCoord = Util.getMouseCoord(e);
+            endInfoBox.style.display = "block";
+            endInfoBox.style.left = `${xCoord - 2}px`;
+            endInfoBox.innerHTML = `base#: ${startIdx + Math.floor(xCoord / rectWidth) + 1}`;
+            toolBoxBtm.appendChild(endInfoBox);
+        }
+    }
+
 
 }
 
