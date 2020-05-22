@@ -1,9 +1,7 @@
 import * as DataSet from '../datasets/sequences';
 import * as SeqUtil from './util';
-import * as ToolBox from './toolbox';
-import drawChart from './draw_chart';
 import displayCitation from './citation_box';
-import Sequence from './seq_selection';
+import Sequence from './sequence';
 
 export const selectSeq = (selected) => {
     return (e) => {
@@ -18,5 +16,5 @@ export const selectSeq = (selected) => {
 export const displaySeq = (selected = DataSet.zika) => {
     displayCitation(selected.cite);
     let seq = new Sequence(selected);
-    seq.drawSeq();
+    seq.newSeq();
 }

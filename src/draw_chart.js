@@ -1,24 +1,7 @@
 import * as d3 from "d3";
 
-const drawChart = (fileName) => {
+const drawChart = (baseCounts) => {
 
-    //read file
-    let data = [];
-    let baseCounts = {
-        "A": 0,
-        "T": 0,
-        "C": 0,
-        "G": 0
-    }
-    const bases = ["A", "T", "C", "G"];
-    //build array
-    let str = fileName;
-    for (let i = 0; i < str.length; i++) {
-        if (bases.includes(str[i])){ //filter extra chars
-            baseCounts[str[i]]++;
-            data.push(str[i]);
-        }
-    }
     //setup chart data
     let baseArr = [
         { "base": "A", "count": baseCounts["A"] },

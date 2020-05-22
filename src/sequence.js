@@ -1,6 +1,6 @@
 import drawChart from './draw_chart';
 import * as SeqUtil from './util';
-import * as ToolBox from './toolbox';
+import ToolBox from './toolbox';
 import immersion from './immersion';
 
 class Sequence{
@@ -8,6 +8,12 @@ class Sequence{
         this.mainSeq = selectedSeq.seq;
         this.rectWidth = 5;
         this.prevStartIdx = 0;
+        this.toolbox = new ToolBox(selectedSeq);
+    }
+
+    newSeq(){//draws initial seq
+        this.toolbox.drawToolBox();
+        this.drawSeq();
     }
 
     drawSeq(startIdx = this.prevStartIdx, endIdx = this.mainSeq.length){ //draws seq in specified range
@@ -42,16 +48,28 @@ class Sequence{
         overlay.setAttribute("id", "overlay");
         mainSeq.appendChild(overlay);
 
+        //count bases
+        let baseCounts = {
+            "A": 0,
+            "T": 0,
+            "C": 0,
+            "G": 0
+        }
+        const bases = ["A", "T", "C", "G"];
+
         for (let i = startIdx; i < endIdx; i++) {
-            ctx.fillStyle = baseColor[this.mainSeq[i]];
-            ctx.fillRect(this.rectWidth * (i - startIdx), 0, this.rectWidth, canvas.height);
+            if (bases.includes(this.mainSeq[i])){
+                baseCounts[this.mainSeq[i]]++;
+                ctx.fillStyle = baseColor[this.mainSeq[i]];
+                ctx.fillRect(this.rectWidth * (i - startIdx), 0, this.rectWidth, canvas.height);
+            }
         }
         this.prevStartIdx = startIdx;
         this.selectRegion(); //add listeners for region selection
 
         //update bar graph and immersion
         let newSeq = this.mainSeq.slice(startIdx, endIdx);
-        drawChart(newSeq);
+        drawChart(baseCounts);
         immersion(newSeq);
     }
 
@@ -106,7 +124,7 @@ class Sequence{
         overlay.addEventListener('mouseup', stopSelection);
         overlay.addEventListener('mousemove', drawRect);
         overlay.addEventListener('mouseout', () => SeqUtil.clearCanvas(tooltip));
-        overlay.addEventListener('mousemove', ToolBox.showBaseInfo);
+        overlay.addEventListener('mousemove', this.toolbox.showBaseInfo);
     }
 }
 
