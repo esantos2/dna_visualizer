@@ -12,10 +12,12 @@ class Sequence{
         this.toolbox = new ToolBox(selectedSeq);
         this.newStartIdx = 0;
         this.newEndIdx = 0;
+        this.inSelection = false;
         this.getNewSelection = this.getNewSelection.bind(this);
     }
 
     newSeq(){//draws initial seq
+        this.inSelection = false;
         this.toolbox.drawToolBox();
         this.drawSeq();
         drawChart(this.baseTotals, ".total-seq-box");
@@ -25,12 +27,13 @@ class Sequence{
         let canvas = document.getElementById("canvas");
         let ctx = canvas.getContext('2d');
         if (!endIdx) endIdx = Math.floor(canvas.width / this.rectWidth) + this.prevStartIdx;
+        if (this.inSelection) this.toolbox.allowReset();
 
         let baseColor = {
-            "A": "#FFC6CE", //red
-            "T": "#95E0FF", //blue
-            "C": "#95FFC0", //green
-            "G": "#ECC6FA" //purple
+            "A": "#FF6358", //red
+            "T": "#FFD246", //blue
+            "C": "#78D237", //green
+            "G": "#28B4C8" //purple
         }
 
         startIdx += this.prevStartIdx; //adjust new range
@@ -97,6 +100,7 @@ class Sequence{
         let submitButton = document.getElementById("new-seq-btn");
         SeqUtil.clearBottomToolTips();
         submitButton.setAttribute("disabled", true);
+        this.inSelection = true;
         this.drawSeq(this.newStartIdx, this.newEndIdx);
     }
 

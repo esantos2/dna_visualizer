@@ -24,11 +24,23 @@ const immersion = (chosenSeq = DataSet.zika.seq) => {
     moveMolecule(scene, container);
 
     //colors
-    const aColor = "#FFC6CE";   //red
-    const tColor = "#95E0FF";   //blue
-    const cColor = "#95FFC0";   //green
-    const gColor = "#ECC6FA";   //purple
-    const bbColor = "#27007B";  //darker purple
+    const aColor = "#FF6358";   //red
+    const tColor = "#FFD246";   //blue
+    const cColor = "#78D237";   //green
+    const gColor = "#28B4C8";   //purple
+    const bbColor = "#160036";  //darker purple
+    // const aColor = "#FFC6CE";   //red
+    // const tColor = "#95E0FF";   //blue
+    // const cColor = "#95FFC0";   //green
+    // const gColor = "#ECC6FA";   //purple
+    // const bbColor = "#27007B";  //darker purple
+
+    // let baseColor = {
+    //     "A": "#FF6358", //red
+    //     "T": "#FFD246", //blue
+    //     "C": "#78D237", //green
+    //     "G": "#28B4C8" //purple
+    // }
 
     //shapes
     let tubeGeometry = new THREE.CylinderGeometry(0.3, 0.3, 6, 32);

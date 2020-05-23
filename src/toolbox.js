@@ -24,9 +24,12 @@ class ToolBox{
         //reset seq
         let reset = document.createElement("button");
         reset.innerHTML = "Reset";
+        reset.setAttribute("id", "reset");
+        reset.setAttribute("disabled", true); //disabled by default
         reset.addEventListener("click", (e) => {
             e.preventDefault();
             Util.clearBottomToolTips();
+            reset.setAttribute("disabled", true);
             displaySeq(this.selected);
         })
         toolbox.appendChild(reset);
@@ -68,6 +71,10 @@ class ToolBox{
             endInfoBox.innerHTML = `base#: ${startIdx + Math.floor(xCoord / rectWidth) + 1}`;
             toolBoxBtm.appendChild(endInfoBox);
         }
+    }
+
+    allowReset(){
+        document.getElementById("reset").removeAttribute("disabled");
     }
 
 
