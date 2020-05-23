@@ -1,7 +1,7 @@
 body{
     margin: 0;
     font-family: "Montserrat";
-    display: flex;
+    display: none;
     justify-content: center;
     align-items: center;
 }
@@ -27,6 +27,7 @@ header{
 
 #immersion{
     width: 50%;
+    z-index: 5;
 }
 
 #main-seq{
@@ -80,9 +81,15 @@ header{
 
 .chart-container{
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin-top: 20px;
+}
+
+.current-seq-box,
+.total-seq-box{
+    height: 400px;
+    width: 400px;
 }
 
 #dropdown{
@@ -152,4 +159,5 @@ header{
     padding-top: 10px;
     height: 32px;
     position: relative;
+    z-index: 10;
 }

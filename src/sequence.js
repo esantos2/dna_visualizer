@@ -6,6 +6,7 @@ import immersion from './immersion';
 class Sequence{
     constructor(selectedSeq){
         this.mainSeq = selectedSeq.seq;
+        this.baseTotals = selectedSeq.baseTotals;
         this.rectWidth = 5;
         this.prevStartIdx = 0;
         this.toolbox = new ToolBox(selectedSeq);
@@ -17,9 +18,14 @@ class Sequence{
     newSeq(){//draws initial seq
         this.toolbox.drawToolBox();
         this.drawSeq();
+        drawChart(this.baseTotals, ".total-seq-box");
     }
 
-    drawSeq(startIdx = this.prevStartIdx, endIdx = this.mainSeq.length){ //draws seq in specified range
+    drawSeq(startIdx = this.prevStartIdx, endIdx = null){ //draws seq in specified range
+        let canvas = document.getElementById("canvas");
+        let ctx = canvas.getContext('2d');
+        if (!endIdx) endIdx = Math.floor(canvas.width / this.rectWidth) + this.prevStartIdx;
+
         let baseColor = {
             "A": "#FFC6CE", //red
             "T": "#95E0FF", //blue
@@ -27,18 +33,15 @@ class Sequence{
             "G": "#ECC6FA" //purple
         }
 
-        let canvas = document.getElementById("canvas");
-        let ctx = canvas.getContext('2d');
-
         startIdx += this.prevStartIdx; //adjust new range
         endIdx += this.prevStartIdx;
 
-        if (startIdx >= endIdx || (endIdx - startIdx < 4)){
+        if (startIdx >= endIdx){
             //show error, must have at least 5 bases selected
             return;
         }
         if (endIdx - startIdx < 160){ //use dynamic widths
-            this.rectWidth = canvas.width / (endIdx - startIdx);
+            this.rectWidth = canvas.width / (endIdx - startIdx + 1);
         } else {
             this.rectWidth = 5;
         }
@@ -63,19 +66,21 @@ class Sequence{
         }
         const bases = ["A", "T", "C", "G"];
 
-        for (let i = startIdx; i < endIdx; i++) {
-            if (bases.includes(this.mainSeq[i])){
+        for (let i = startIdx; i <= endIdx; i++) {
+            if (bases.includes(this.mainSeq[i])){ //filter missing data points
                 baseCounts[this.mainSeq[i]]++;
                 ctx.fillStyle = baseColor[this.mainSeq[i]];
-                ctx.fillRect(this.rectWidth * (i - startIdx), 0, this.rectWidth, canvas.height);
+            } else {
+                ctx.fillStyle = "#757575";
             }
+            ctx.fillRect(this.rectWidth * (i - startIdx), 0, this.rectWidth, canvas.height);
         }
         this.prevStartIdx = startIdx;
         this.selectRegion(); //add listeners for region selection
 
         //update bar graph and immersion
-        let newSeq = this.mainSeq.slice(startIdx, endIdx);
-        drawChart(baseCounts);
+        let newSeq = this.mainSeq.slice(startIdx, endIdx + 1);
+        drawChart(baseCounts, ".current-seq-box");
         immersion(newSeq);
     }
 

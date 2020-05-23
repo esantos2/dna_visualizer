@@ -1,6 +1,6 @@
 import * as d3 from "d3";
 
-const drawChart = (baseCounts) => {
+const drawChart = (baseCounts, box) => {
 
     //setup chart data
     let baseArr = [
@@ -11,27 +11,32 @@ const drawChart = (baseCounts) => {
     ]
     
     //display graph
-    let barChartBox = d3.select(".bar-chart-box");
+    let barChartBox = d3.select(box);
     barChartBox.selectAll("*").remove();
     barChartBox.append("svg");
     
-    const svg = d3.select("svg")
-        .attr("width", 500)
-        .attr("height", 500);
+    const svg = d3.select(`${box} > svg`)
+        .attr("width", 400)
+        .attr("height", 400);
     
-    const margin = 200;
+    const margin = 100;
     const width = svg.attr("width") - margin;
     const height = svg.attr("height") - margin;
     
+    const chartName = (box === ".current-seq-box") ? "Current Frequencies" : "Total Frequencies"
     //title
     svg.append("text")
-        .attr("transform", "translate(100,0)")
+        .attr("transform", "translate(50,0)")
         .attr("x", 50)
-        .attr("y", 50)
-        .attr("font-size", "24px")
-        .text("Nucleotide Frequencies")
+        .attr("y", 15)
+        .attr("font-size", "20px")
+        .text(chartName)
     
-    //set axes
+    //set graph location
+    const g = svg.append("g")
+        .attr("transform", "translate(" + 50 + "," + 50 + ")");
+
+    //setup axes
     const xScale = d3.scaleBand()
         .domain(Object.keys(baseCounts).map((k) => { return k; }))
         .range([0, width])
@@ -39,14 +44,12 @@ const drawChart = (baseCounts) => {
     const yScale = d3.scaleLinear()
         .domain([0, d3.max(Object.values(baseCounts), (v) => { return v; })])
         .range([height, 0]);
-    const g = svg.append("g")
-        .attr("transform", "translate(" + 100 + "," + 100 + ")");
     //draw x-axis
     g.append("g")
         .attr("transform", "translate(0," + height + ")")
         .call(d3.axisBottom(xScale))
         .append("text")
-        .attr("y", height - 250)
+        .attr("y", height - 265)
         .attr("x", width - 100)
         .attr("text-anchor", "end")
         .attr("stroke", "black")
@@ -57,7 +60,7 @@ const drawChart = (baseCounts) => {
             .ticks(12))
         .append("text")
         .attr("transform", "rotate(-90)")
-        .attr("y", 6)
+        .attr("y", 12)
         .attr("dy", "-5.1em")
         .attr("text-anchor", "end")
         .attr("stroke", "black")
