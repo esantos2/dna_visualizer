@@ -20,7 +20,13 @@ header{
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin: 20px;
+    padding: 0px 60px;
+    width: 50%;
+    box-sizing: border-box;
+}
+
+#immersion{
+    width: 50%;
 }
 
 #main-seq{
@@ -45,19 +51,19 @@ header{
     border: 2px solid black;
     position: absolute;
     z-index: 1;
-    width: auto;
+    width: 100%;
 }
 
 #tooltip{
     position: absolute;
     z-index: 2;
-    width: auto;
+    width: 100%;
 }
 
 #overlay{
     position: absolute;
     z-index: 2;
-    width: auto;
+    width: 100%;
 }
 
 .dropdown-container{
@@ -69,18 +75,13 @@ header{
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
+    width: 100%;
 }
 
 .chart-container{
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
-}
-
-.graphics-container{
-    display: flex;
-    justify-content: space-between;
     align-items: center;
 }
 
