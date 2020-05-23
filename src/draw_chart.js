@@ -17,7 +17,7 @@ const drawChart = (baseCounts, box) => {
     
     const svg = d3.select(`${box} > svg`)
         .attr("width", 400)
-        .attr("height", 400);
+        .attr("height", 400)
     
     const margin = 100;
     const width = svg.attr("width") - margin;
@@ -56,15 +56,15 @@ const drawChart = (baseCounts, box) => {
         .text("Nucleotide Base");
     //draw y-axis
     g.append("g")
-        .call(d3.axisLeft(yScale).tickFormat((d) => { return d; })
-            .ticks(12))
+        .call(d3.axisLeft(yScale).tickFormat((d) => {return d;})
+            .ticks(10))
         .append("text")
-        .attr("transform", "rotate(-90)")
-        .attr("y", 12)
+        // .attr("transform", "rotate(-90)")
+        .attr("y", 40)
         .attr("dy", "-5.1em")
         .attr("text-anchor", "end")
         .attr("stroke", "black")
-        .text("Frequency");
+        .text("Count");
     
     function handleMouseOver(d, i) {
         d3.select(this).attr('class', 'highlight');
