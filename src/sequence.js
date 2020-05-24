@@ -157,6 +157,7 @@ class Sequence{
         let submitButton = document.getElementById("new-seq-btn");
         this.deactivateButton(submitButton);
         SeqUtil.clearBottomToolTips();
+        this.enableToggleButtons();
         this.inSelection = true;
         this.toggled = false;
         this.drawSeq(this.newStartIdx, this.newEndIdx);

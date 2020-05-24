@@ -7,11 +7,44 @@ body{
     position: relative;
 }
 
-header{
-    margin: 30px;
-    text-align: center;
+nav{
+    position: fixed;
+    top: 0;
+    z-index: 300;
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    color: white;
+    background-color: rgb(51, 51, 51);
+}
+
+nav > div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+nav h1, nav > .dropdown-container{
+    padding: 15px 30px;
+}
+
+nav h1{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    margin: 0;
+}
+
+nav h1 i{
+    padding: 2px 7px;
+    font-size: 15px;
+}
+
+.logo{
+    display: flex;
     justify-content: center;
     align-items: center;
 }
@@ -39,19 +72,21 @@ header{
 
 .toolbox-container button{
     display: inline;
-    border-style: none;
-    background-color: rgb(153, 153, 153);
-    transition: background-color 100ms ease-out;
+    background-color: rgb(51, 51, 51);
+    transition: 100ms ease-out;
     padding: 7px 15px;
     color: white;
     font-family: inherit;
     font-size: 14px;
     margin: 5px;
+    border: 1px solid black;
 }
 
-.toolbox-container button:hover{
+.toolbox-container button:hover,
+#dropdown:hover{
     cursor: pointer;
-    background-color: rgb(46, 46, 46);
+    background-color: rgb(255, 255, 255);
+    color: black;
 }
 
 .toolbox-container button:focus{
@@ -60,55 +95,65 @@ header{
 
 .toolbox-container .disabled-btn{
     background-color: rgb(221, 221, 221);
+    border: 1px solid white;
 }
 
 .toolbox-container .disabled-btn:hover{
     cursor: initial;
     background-color: rgb(221, 221, 221);
+    color: white;
 }
 
 .bar:nth-of-type(1){
-    fill: rgb(223, 211, 210);
+    fill: rgb(210, 223, 223);
 }
 
 .bar:nth-of-type(2){
-    fill: rgb(209, 198, 197);
+    fill: rgb(197, 209, 209);
 }
 
 .bar:nth-of-type(3){
-    fill: rgb(182, 165, 164);
+    fill: rgb(164, 182, 180);
 }
 
 .bar:nth-of-type(4){
-    fill: rgb(160, 146, 145);
+    fill: rgb(145, 160, 158);
 }
 
 .highlight{
-    fill: rgb(252, 196, 93);
+    fill: rgb(143, 235, 238);
 }
 
 #base-toggle > .AAA:hover,
 #base-toggle > .disabled-btn:nth-of-type(1),
 #base-toggle > .disabled-btn:nth-of-type(1):hover{
     background-color: #FF6358;
+    border: 1px solid #FF6358;
+    color: white;
 }
 
 #base-toggle > .TTT:hover,
 #base-toggle > .disabled-btn:nth-of-type(2),
 #base-toggle > .disabled-btn:nth-of-type(2):hover{
     background-color: #FFD246;
+    border: 1px solid #FFD246;
+    color: white;
 }
 
 #base-toggle > .CCC:hover,
 #base-toggle > .disabled-btn:nth-of-type(3),
 #base-toggle > .disabled-btn:nth-of-type(3):hover{
     background-color: #78D237;
+    border: 1px solid #78D237;
+    color: white;
 }
 
 #base-toggle > .GGG:hover,
 #base-toggle > .disabled-btn:nth-of-type(4),
 #base-toggle > .disabled-btn:nth-of-type(4):hover{
     background-color: #28B4C8;
+    border: 1px solid #28B4C8;
+    color: white;
 }
 
 #immersion{
@@ -172,14 +217,12 @@ header{
 
 #dropdown{
     position: relative;
-    padding: 10px;
+    padding: 16px;
     width: 350px;
-    border: 1px solid lightgray;
+    height: 100%;
+    border-left: 1px solid lightgray;
+    border-right: 1px solid lightgray;
     box-sizing: border-box;
-}
-
-#dropdown:hover{
-    cursor: pointer;
 }
 
 #seq-selection{
@@ -196,6 +239,7 @@ header{
 #seq-selection li{
     list-style: none;
     padding: 10px;
+    color: black;
 }
 
 #seq-selection li:hover{
@@ -211,6 +255,15 @@ header{
 #cite-details{
     max-width: 700px;
     font-size: 12px;
+}
+
+#cite-details a{
+    color: rgb(58, 129, 129);
+    text-decoration: none;
+}
+
+#cite-details a:visited{
+    color: rgb(58, 129, 129);
 }
 
 .base-info{
@@ -241,31 +294,29 @@ header{
 }
 
 .icons{
-    position: fixed;
-    z-index: 1000;
-    bottom: 20px;
-    right: 35px;
     display: flex;
     justify-content: flex-end;
     align-items: center;
+    margin-right: 20px;
 }
 
 .icons > a{
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 10px;
-    width: 50px;
-    height: 50px;
+    margin: 0px 10px;
+    width: 30px;
+    height: 30px;
     text-decoration: none;
-    font-size: 30px;
-    color: rgb(80, 80, 80);
+    font-size: 25px;
+    color: rgb(255, 255, 255);
     transition: color 100ms ease-in-out;
     transition: font-size 100ms ease-out;
 }
     
 .icons > a:hover{
     cursor: pointer;
-    font-size: 35px;
-    color: rgb(255, 202, 104);
+    font-size: 30px;
+    color: rgb(114, 229, 233);
+
 }
