@@ -16,8 +16,10 @@ class ToolBox{
         clearBtn.addEventListener("click", (e) => {
             e.preventDefault();
             Util.clearCanvas(document.getElementById("overlay")); //clear overlay
-            Util.clearBottomToolTips();
-            document.getElementById("new-seq-btn").setAttribute("disabled", true); //disable selection button
+            Util.clearBottomToolTips(); //clear tooltips
+            let submitButton = document.getElementById("new-seq-btn");
+            submitButton.setAttribute("disabled", true); //disable selection button
+            submitButton.classList.add("disabled-btn");
         });
         toolbox.appendChild(clearBtn);
     
@@ -26,6 +28,7 @@ class ToolBox{
         reset.innerHTML = "Reset";
         reset.setAttribute("id", "reset");
         reset.setAttribute("disabled", true); //disabled by default
+        reset.setAttribute("class", "disabled-btn");
         reset.addEventListener("click", (e) => {
             e.preventDefault();
             Util.clearBottomToolTips();
@@ -38,7 +41,7 @@ class ToolBox{
         let handleSelection = document.createElement("button");
         handleSelection.innerHTML = "Select Region";
         handleSelection.setAttribute("id", "new-seq-btn");
-        handleSelection.setAttribute("class", "new-seq-btn");
+        handleSelection.setAttribute("class", "new-seq-btn disabled-btn"); //disabled by default
         handleSelection.setAttribute("disabled", true);
         toolbox.appendChild(handleSelection);
     }
@@ -68,13 +71,16 @@ class ToolBox{
             let xCoord = Util.getMouseCoord(e);
             endInfoBox.style.display = "block";
             endInfoBox.style.left = `${xCoord - 2}px`;
+            endInfoBox.style.top = "3px";
             endInfoBox.innerHTML = `base#: ${startIdx + Math.floor(xCoord / rectWidth) + 1}`;
             toolBoxBtm.appendChild(endInfoBox);
         }
     }
 
     allowReset(){
-        document.getElementById("reset").removeAttribute("disabled");
+        let reset = document.getElementById("reset");
+        reset.removeAttribute("disabled");
+        reset.classList.remove("disabled-btn");
     }
 
 

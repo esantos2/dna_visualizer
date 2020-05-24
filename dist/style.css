@@ -25,6 +25,49 @@ header{
     box-sizing: border-box;
 }
 
+.tool-box-container{
+    width: 100%;
+}
+
+#toolbox{
+    width: 50%;
+}
+
+#toolbox button{
+    display: inline;
+    border-style: none;
+    background-color: rgb(70, 166, 255);
+    transition: background-color 100ms ease-out;
+    padding: 7px 15px;
+    color: white;
+    font-family: inherit;
+    font-size: 14px;
+    margin: 5px;
+}
+
+#toolbox button:hover{
+    cursor: pointer;
+    background-color: rgb(0, 0, 165);
+}
+
+#toolbox button:focus{
+    outline: none;
+}
+
+#toolbox .disabled-btn{
+    background-color: lightblue;
+}
+
+#toolbox .disabled-btn:hover{
+    cursor: initial;
+    background-color: lightblue;
+}
+
+.base-toggle{
+    width: 50%;
+}
+
+
 #immersion{
     width: 50%;
     z-index: 5;

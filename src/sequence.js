@@ -20,6 +20,7 @@ class Sequence{
         this.inSelection = false;
         this.toolbox.drawToolBox();
         this.drawSeq();
+        SeqUtil.clearBottomToolTips();
         drawChart(this.baseTotals, ".total-seq-box");
     }
 
@@ -92,14 +93,16 @@ class Sequence{
         let submitButton = document.getElementById("new-seq-btn");
         submitButton.removeEventListener("click", this.getNewSelection);
         submitButton.addEventListener("click", this.getNewSelection);
-        submitButton.removeAttribute("disabled");
+        submitButton.removeAttribute("disabled"); //enable button
+        submitButton.classList.remove("disabled-btn");
     }
 
     getNewSelection(e) {
         e.preventDefault();
         let submitButton = document.getElementById("new-seq-btn");
         SeqUtil.clearBottomToolTips();
-        submitButton.setAttribute("disabled", true);
+        submitButton.setAttribute("disabled", true); //disable button
+        submitButton.classList.add("disabled-btn");
         this.inSelection = true;
         this.drawSeq(this.newStartIdx, this.newEndIdx);
     }
