@@ -16,7 +16,7 @@ const drawDropdown = () => {
     let dropdown = document.getElementById("dropdown");
     dropdown.textContent = "-- Choose a sequence to analyze --";
     dropdown.addEventListener("click", SeqUtil.toggleDropdown);
-
+    
     //build list
     let seqSelection = document.getElementById("seq-selection");
     for (let i = 0; i < seqList.length; i++) {
@@ -25,6 +25,7 @@ const drawDropdown = () => {
         listItem.addEventListener("click", selectSeq(seqList[i]));
         seqSelection.appendChild(listItem);
     }
+    seqSelection.addEventListener("mouseleave", SeqUtil.toggleDropdown);
 }
 
 export default drawDropdown;
