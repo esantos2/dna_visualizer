@@ -135,7 +135,7 @@ class Sequence{
         //clear toggles
         let clearBases = document.createElement("button");
         clearBases.setAttribute("class", "base");
-        clearBases.innerHTML = "Clear";
+        clearBases.innerHTML = "Clear filters";
         clearBases.addEventListener("click", (e) => {
             e.preventDefault();
             SeqUtil.clearBottomToolTips();
