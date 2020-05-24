@@ -106,8 +106,8 @@ class Sequence{
                 SeqUtil.clearBottomToolTips();
                 this.toggled = true;
                 this.enableToggleButtons();
-                baseButton.setAttribute("disabled", true);
-                baseButton.classList.add("disabled-btn");
+                this.deactivateButton(document.getElementById("new-seq-btn"));
+                this.deactivateButton(baseButton);
                 this.drawSeq(this.prevStartIdx, this.prevEndIdx, `${base}`);
             })
             baseToggle.appendChild(baseButton);
@@ -122,18 +122,26 @@ class Sequence{
             SeqUtil.clearBottomToolTips();
             this.toggled = true;
             this.enableToggleButtons();
+            this.deactivateButton(document.getElementById("new-seq-btn"));
             this.drawSeq(this.prevStartIdx, this.prevEndIdx, bases);
         })
         baseToggle.appendChild(clearBases);
 
     }
 
+    activateButton(button){
+        button.removeAttribute("disabled");
+        button.classList.remove("disabled-btn");
+    }
+
+    deactivateButton(button){
+        button.setAttribute("disabled", true);
+        button.classList.add("disabled-btn");
+    }
+
     enableToggleButtons(){
         let baseButtons = document.querySelectorAll("#base-toggle .disabled-btn");
-        baseButtons.forEach((base) => {
-            base.classList.remove("disabled-btn");
-            base.removeAttribute("disabled");
-        })
+        baseButtons.forEach((base) => this.activateButton(base));
     }
 
     handleNewSelection() {
@@ -141,16 +149,14 @@ class Sequence{
         let submitButton = document.getElementById("new-seq-btn");
         submitButton.removeEventListener("click", this.getNewSelection);
         submitButton.addEventListener("click", this.getNewSelection);
-        submitButton.removeAttribute("disabled"); //enable button
-        submitButton.classList.remove("disabled-btn");
+        this.activateButton(submitButton);
     }
 
     getNewSelection(e) {
         e.preventDefault();
         let submitButton = document.getElementById("new-seq-btn");
+        this.deactivateButton(submitButton);
         SeqUtil.clearBottomToolTips();
-        submitButton.setAttribute("disabled", true); //disable button
-        submitButton.classList.add("disabled-btn");
         this.inSelection = true;
         this.toggled = false;
         this.drawSeq(this.newStartIdx, this.newEndIdx);
