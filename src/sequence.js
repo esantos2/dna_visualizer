@@ -14,6 +14,7 @@ class Sequence{
         this.newStartIdx = 0;
         this.newEndIdx = 0;
         this.inSelection = false;
+        this.toggled = false;
         this.getNewSelection = this.getNewSelection.bind(this);
     }
 
@@ -87,7 +88,7 @@ class Sequence{
         //update bar graph and immersion
         let newSeq = this.mainSeq.slice(startIdx, endIdx + 1);
         drawChart(baseCounts, ".current-seq-box");
-        immersion(newSeq);
+        if (!this.toggled) immersion(newSeq);
     }
 
     createToggleButtons() {
@@ -103,6 +104,10 @@ class Sequence{
             baseButton.addEventListener("click", (e) => {
                 e.preventDefault();
                 SeqUtil.clearBottomToolTips();
+                this.toggled = true;
+                this.enableToggleButtons();
+                baseButton.setAttribute("disabled", true);
+                baseButton.classList.add("disabled-btn");
                 this.drawSeq(this.prevStartIdx, this.prevEndIdx, `${base}`);
             })
             baseToggle.appendChild(baseButton);
@@ -115,10 +120,20 @@ class Sequence{
         clearBases.addEventListener("click", (e) => {
             e.preventDefault();
             SeqUtil.clearBottomToolTips();
+            this.toggled = true;
+            this.enableToggleButtons();
             this.drawSeq(this.prevStartIdx, this.prevEndIdx, bases);
         })
         baseToggle.appendChild(clearBases);
 
+    }
+
+    enableToggleButtons(){
+        let baseButtons = document.querySelectorAll("#base-toggle .disabled-btn");
+        baseButtons.forEach((base) => {
+            base.classList.remove("disabled-btn");
+            base.removeAttribute("disabled");
+        })
     }
 
     handleNewSelection() {
@@ -137,6 +152,7 @@ class Sequence{
         submitButton.setAttribute("disabled", true); //disable button
         submitButton.classList.add("disabled-btn");
         this.inSelection = true;
+        this.toggled = false;
         this.drawSeq(this.newStartIdx, this.newEndIdx);
     }
 

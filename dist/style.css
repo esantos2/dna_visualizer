@@ -36,10 +36,10 @@ header{
     width: 50%;
 }
 
-#toolbox button{
+.toolbox-container button{
     display: inline;
     border-style: none;
-    background-color: rgb(70, 166, 255);
+    background-color: rgb(153, 153, 153);
     transition: background-color 100ms ease-out;
     padding: 7px 15px;
     color: white;
@@ -48,28 +48,67 @@ header{
     margin: 5px;
 }
 
-#toolbox button:hover{
+.toolbox-container button:hover{
     cursor: pointer;
-    background-color: rgb(0, 0, 165);
+    background-color: rgb(46, 46, 46);
 }
 
-#toolbox button:focus{
+.toolbox-container button:focus{
     outline: none;
 }
 
-#toolbox .disabled-btn{
-    background-color: lightblue;
+.toolbox-container .disabled-btn{
+    background-color: rgb(221, 221, 221);
 }
 
-#toolbox .disabled-btn:hover{
+.toolbox-container .disabled-btn:hover{
     cursor: initial;
-    background-color: lightblue;
+    background-color: rgb(221, 221, 221);
 }
 
-.base-toggle{
-    width: 50%;
+.bar:nth-of-type(1){
+    fill: rgb(223, 211, 210);
 }
 
+.bar:nth-of-type(2){
+    fill: rgb(209, 198, 197);
+}
+
+.bar:nth-of-type(3){
+    fill: rgb(182, 165, 164);
+}
+
+.bar:nth-of-type(4){
+    fill: rgb(160, 146, 145);
+}
+
+.highlight{
+    fill: rgb(252, 196, 93);
+}
+
+#base-toggle > .AAA:hover,
+#base-toggle > .disabled-btn:nth-of-type(1),
+#base-toggle > .disabled-btn:nth-of-type(1):hover{
+    background-color: #FF6358;
+}
+
+#base-toggle > .TTT:hover,
+#base-toggle > .disabled-btn:nth-of-type(2),
+#base-toggle > .disabled-btn:nth-of-type(2):hover{
+    background-color: #FFD246;
+}
+
+#base-toggle > .CCC:hover,
+#base-toggle > .disabled-btn:nth-of-type(3),
+#base-toggle > .disabled-btn:nth-of-type(3):hover{
+    background-color: #78D237;
+}
+
+#base-toggle > .GGG:hover,
+#base-toggle > .disabled-btn:nth-of-type(4),
+#base-toggle > .disabled-btn:nth-of-type(4):hover{
+    background-color: #28B4C8;
+}
 
 #immersion{
     width: 50%;
@@ -84,14 +123,6 @@ header{
     position: relative;
     width: 800px;
     height: 100px;
-}
-
-.bar{
-    fill: rgb(125, 196, 255);
-}
-
-.highlight{
-    fill: rgb(252, 196, 93);
 }
 
 #canvas{
@@ -163,12 +194,12 @@ header{
 
 #seq-selection li{
     list-style: none;
-    margin: 10px;
+    padding: 10px;
 }
 
 #seq-selection li:hover{
     cursor: pointer;
-    background-color: rgb(193, 243, 255);
+    background-color: rgb(223, 223, 223);
 }
 
 .dropdown-list{
