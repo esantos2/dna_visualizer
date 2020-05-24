@@ -4,12 +4,15 @@ import { displaySeq } from './display_seq';
 class ToolBox{
     constructor(selected){
         this.selected = selected;
+        this.toolbox = document.getElementById("toolbox");
     }
 
     drawToolBox(){
-        let toolbox = document.getElementById("toolbox");
-        toolbox.innerHTML = "";
-    
+        this.toolbox.innerHTML = "";
+        this.createSelectionButtons();
+    }
+
+    createSelectionButtons(){
         //clear overlay
         let clearBtn = document.createElement("button");
         clearBtn.innerHTML = "Clear";
@@ -21,8 +24,8 @@ class ToolBox{
             submitButton.setAttribute("disabled", true); //disable selection button
             submitButton.classList.add("disabled-btn");
         });
-        toolbox.appendChild(clearBtn);
-    
+        this.toolbox.appendChild(clearBtn);
+
         //reset seq
         let reset = document.createElement("button");
         reset.innerHTML = "Reset";
@@ -35,7 +38,7 @@ class ToolBox{
             reset.setAttribute("disabled", true);
             displaySeq(this.selected);
         })
-        toolbox.appendChild(reset);
+        this.toolbox.appendChild(reset);
 
         //submit selection
         let handleSelection = document.createElement("button");
@@ -43,7 +46,7 @@ class ToolBox{
         handleSelection.setAttribute("id", "new-seq-btn");
         handleSelection.setAttribute("class", "new-seq-btn disabled-btn"); //disabled by default
         handleSelection.setAttribute("disabled", true);
-        toolbox.appendChild(handleSelection);
+        this.toolbox.appendChild(handleSelection);
     }
 
     showBaseInfo(startIdx, rectWidth){

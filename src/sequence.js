@@ -9,6 +9,7 @@ class Sequence{
         this.baseTotals = selectedSeq.baseTotals;
         this.rectWidth = 5;
         this.prevStartIdx = 0;
+        this.prevEndIdx = 0;
         this.toolbox = new ToolBox(selectedSeq);
         this.newStartIdx = 0;
         this.newEndIdx = 0;
@@ -20,11 +21,12 @@ class Sequence{
         this.inSelection = false;
         this.toolbox.drawToolBox();
         this.drawSeq();
+        this.createToggleButtons();
         SeqUtil.clearBottomToolTips();
         drawChart(this.baseTotals, ".total-seq-box");
     }
 
-    drawSeq(startIdx = this.prevStartIdx, endIdx = null){ //draws seq in specified range
+    drawSeq(startIdx = this.prevStartIdx, endIdx = null, bases = "ATCG"){ //draws seq in specified range
         let canvas = document.getElementById("canvas");
         let ctx = canvas.getContext('2d');
         if (!endIdx) endIdx = Math.floor(canvas.width / this.rectWidth) + this.prevStartIdx;
@@ -32,19 +34,21 @@ class Sequence{
 
         let baseColor = {
             "A": "#FF6358", //red
-            "T": "#FFD246", //blue
+            "T": "#FFD246", //yellow
             "C": "#78D237", //green
-            "G": "#28B4C8" //purple
+            "G": "#28B4C8"  //blue
         }
 
-        startIdx += this.prevStartIdx; //adjust new range
-        endIdx += this.prevStartIdx;
+        if (startIdx !== this.prevStartIdx){ //check if selecting new seq or toggling bases
+            startIdx += this.prevStartIdx; //adjust new range
+            endIdx += this.prevStartIdx;
+        }
+        this.prevStartIdx = startIdx;
+        this.prevEndIdx = endIdx;
 
         if (startIdx >= endIdx){
-            //show error, must have at least 5 bases selected
             return;
-        }
-        if (endIdx - startIdx < 160){ //use dynamic widths
+        } else if (endIdx - startIdx < 160){ //use dynamic widths
             this.rectWidth = canvas.width / (endIdx - startIdx + 1);
         } else {
             this.rectWidth = 5;
@@ -68,18 +72,16 @@ class Sequence{
             "C": 0,
             "G": 0
         }
-        const bases = ["A", "T", "C", "G"];
 
         for (let i = startIdx; i <= endIdx; i++) {
             if (bases.includes(this.mainSeq[i])){ //filter missing data points
                 baseCounts[this.mainSeq[i]]++;
                 ctx.fillStyle = baseColor[this.mainSeq[i]];
             } else {
-                ctx.fillStyle = "#757575";
+                ctx.fillStyle = "#171717";
             }
             ctx.fillRect(this.rectWidth * (i - startIdx), 0, this.rectWidth, canvas.height);
         }
-        this.prevStartIdx = startIdx;
         this.selectRegion(); //add listeners for region selection
 
         //update bar graph and immersion
@@ -88,8 +90,39 @@ class Sequence{
         immersion(newSeq);
     }
 
+    createToggleButtons() {
+        let baseToggle = document.getElementById("base-toggle");
+        baseToggle.innerHTML = "";
+
+        //toggle specific base
+        let bases = "ATCG"
+        for (let base of bases){
+            let baseButton = document.createElement("button");
+            baseButton.setAttribute("class", `base ${base}${base}${base}`);
+            baseButton.innerHTML = `${base}`;
+            baseButton.addEventListener("click", (e) => {
+                e.preventDefault();
+                SeqUtil.clearBottomToolTips();
+                this.drawSeq(this.prevStartIdx, this.prevEndIdx, `${base}`);
+            })
+            baseToggle.appendChild(baseButton);
+        }
+
+        //clear toggles
+        let clearBases = document.createElement("button");
+        clearBases.setAttribute("class", "base");
+        clearBases.innerHTML = "Clear";
+        clearBases.addEventListener("click", (e) => {
+            e.preventDefault();
+            SeqUtil.clearBottomToolTips();
+            this.drawSeq(this.prevStartIdx, this.prevEndIdx, bases);
+        })
+        baseToggle.appendChild(clearBases);
+
+    }
+
     handleNewSelection() {
-        if (this.newStartIdx >= this.newEndIdx || (this.newEndIdx - this.newStartIdx < 5)) return;
+        if (this.newStartIdx >= this.newEndIdx) return;
         let submitButton = document.getElementById("new-seq-btn");
         submitButton.removeEventListener("click", this.getNewSelection);
         submitButton.addEventListener("click", this.getNewSelection);
