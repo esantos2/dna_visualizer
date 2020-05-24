@@ -4,6 +4,7 @@ body{
     display: none;
     justify-content: center;
     align-items: center;
+    position: relative;
 }
 
 header{
@@ -237,4 +238,30 @@ header{
     height: 32px;
     position: relative;
     z-index: 10;
+}
+
+.icons{
+    position: fixed;
+    z-index: 1000;
+    bottom: 20px;
+    right: 35px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.icons > a{
+    margin: 10px;
+    width: 50px;
+    height: 50px;
+    font-size: 30px;
+    color: rgb(80, 80, 80);
+    transition: color 100ms ease-in-out;
+    transition: font-size 100ms ease-out;
+}
+    
+.icons > a:hover{
+    cursor: pointer;
+    font-size: 35px;
+    color: rgb(255, 202, 104);
 }
