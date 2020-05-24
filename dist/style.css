@@ -69,7 +69,7 @@ nav h1 i{
 }
 
 #toolbox{
-    width: 50%;
+    width: 400px;
     z-index: 20;
     background-color: white;
 }
@@ -129,7 +129,7 @@ nav h1 i{
 }
 
 #base-toggle{
-    width: 50%;
+    width: 400px;
     position: absolute;
     z-index: 10;
     left: 0;
