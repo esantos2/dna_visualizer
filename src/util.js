@@ -13,6 +13,11 @@ export const toggleDropdown = (e) => {
     document.getElementById("seq-selection").classList.toggle("show-list");
 }
 
+export const toggleFilters = (e) => {
+    e.preventDefault();
+    document.getElementById("base-toggle").classList.toggle("show-filters");
+}
+
 export const toggleToolTip = () => {
     document.getElementById("tool-top").classList.toggle("show-tip");
 }

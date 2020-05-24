@@ -47,6 +47,15 @@ class ToolBox{
         handleSelection.setAttribute("class", "new-seq-btn disabled-btn"); //disabled by default
         handleSelection.setAttribute("disabled", true);
         this.toolbox.appendChild(handleSelection);
+
+        //filters
+        let filters = document.createElement("button");
+        filters.innerHTML = "Filters";
+        filters.addEventListener("click", (e) => {
+            e.preventDefault();
+            Util.toggleFilters(e);
+        });
+        this.toolbox.appendChild(filters);
     }
 
     showBaseInfo(startIdx, rectWidth){

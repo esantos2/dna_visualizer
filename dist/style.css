@@ -65,10 +65,13 @@ nav h1 i{
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: relative;
 }
 
 #toolbox{
     width: 50%;
+    z-index: 20;
+    background-color: white;
 }
 
 .toolbox-container button{
@@ -123,6 +126,18 @@ nav h1 i{
 
 .highlight{
     fill: rgb(143, 235, 238);
+}
+
+#base-toggle{
+    width: 50%;
+    position: absolute;
+    z-index: 10;
+    left: 0;
+    transition: 300ms ease-in-out;
+}
+
+#tools .show-filters{
+    left: 400px;
 }
 
 #base-toggle > .AAA:hover,
@@ -207,7 +222,7 @@ nav h1 i{
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 20px;
+    margin-top: 40px;
 }
 
 .current-seq-box,
