@@ -23,11 +23,11 @@ const drawChart = (baseCounts, box) => {
     const width = svg.attr("width") - margin;
     const height = svg.attr("height") - margin;
     
-    const chartName = (box === ".current-seq-box") ? "Current Frequencies" : "Total Frequencies"
+    const chartName = (box === ".current-seq-box") ? "Current Selection Frequencies" : "Total Strand Frequencies"
     //title
     svg.append("text")
         .attr("transform", "translate(50,0)")
-        .attr("x", 50)
+        .attr("x", 10)
         .attr("y", 15)
         .attr("font-size", "20px")
         .text(chartName)

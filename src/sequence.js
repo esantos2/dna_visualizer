@@ -6,6 +6,7 @@ import immersion from './immersion';
 class Sequence{
     constructor(selectedSeq){
         this.mainSeq = selectedSeq.seq;
+        this.name = selectedSeq.name;
         this.baseTotals = selectedSeq.baseTotals;
         this.rectWidth = 5;
         this.prevStartIdx = 0;
@@ -22,7 +23,7 @@ class Sequence{
         this.inSelection = false;
         this.toolbox.drawToolBox();
         this.drawSeq();
-        this.createToggleButtons();
+        this.createFilters();
         SeqUtil.clearBottomToolTips();
         drawChart(this.baseTotals, ".total-seq-box");
     }
@@ -85,13 +86,31 @@ class Sequence{
         }
         this.selectRegion(); //add listeners for region selection
 
-        //update bar graph and immersion
+        //update details, bar graph, immersion
+        this.strandDetails();
         let newSeq = this.mainSeq.slice(startIdx, endIdx + 1);
         drawChart(baseCounts, ".current-seq-box");
         if (!this.toggled) immersion(newSeq);
     }
 
-    createToggleButtons() {
+    strandDetails(){
+        let detailBox = document.getElementById("strand-details");
+        detailBox.innerHTML = "";
+        let name = document.createElement("h3");
+        name.innerHTML = this.name;
+        let baseRange = document.createElement("h5");
+        baseRange.innerHTML = `Viewing ${this.prevStartIdx + 1} - ${this.prevEndIdx + 1} of ${this.baseTotalSum()} base pairs`
+        detailBox.appendChild(name);
+        detailBox.appendChild(baseRange);
+    }
+
+    baseTotalSum(){
+        let sum = 0;
+        Object.values(this.baseTotals).forEach(num => sum += num)
+        return sum;
+    }
+
+    createFilters() {
         let baseToggle = document.getElementById("base-toggle");
         baseToggle.innerHTML = "";
 

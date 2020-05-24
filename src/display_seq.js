@@ -6,9 +6,8 @@ import Sequence from './sequence';
 export const selectSeq = (selected) => {
     return (e) => {
         e.preventDefault();
-        let dropdown = document.getElementById("dropdown");
-        dropdown.innerHTML = selected.name; //update text
-        SeqUtil.toggleDropdown(e);
+        document.getElementById("dropdown").innerHTML = selected.name; //update text
+        document.getElementById("seq-selection").classList.remove("show-list"); //close dropdown
         displaySeq(selected); //update citation, draw seq
     }
 }

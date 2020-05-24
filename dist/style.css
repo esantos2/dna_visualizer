@@ -60,6 +60,7 @@ nav h1 i{
 }
 
 .toolbox-container{
+    margin-top: 52px;
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -218,7 +219,7 @@ nav h1 i{
 #dropdown{
     position: relative;
     padding: 15px;
-    width: 350px;
+    min-width: 350px;
     height: 100%;
     border-left: 1px solid lightgray;
     border-right: 1px solid lightgray;
@@ -227,7 +228,7 @@ nav h1 i{
 
 #seq-selection{
     position: absolute;
-    width: 350px;
+    min-width: 350px;
     margin: 0;
     padding: 0;
     right: 50%;
@@ -264,6 +265,14 @@ nav h1 i{
 
 #cite-details a:visited{
     color: rgb(58, 129, 129);
+}
+
+#strand-details h5{
+    margin: 12px 0px 0px 0px;
+}
+
+#strand-details h3{
+    margin: 0px
 }
 
 .base-info{
