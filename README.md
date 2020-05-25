@@ -1,33 +1,34 @@
 # DNA Visualizer
 
-This app creates dynamic charts and 3D renderings of DNA sequences based on user selection.
+This app allows users to closely examine the DNA sequence of various species and diseases through dynamic charts and 3D renderings.
 
 [Visit the site](https://arctive.github.io/dna_visualizer/)
 
-## Technologies
-* HTML/CSS/JS
-* D3.js for bar charts
-* Three.js for base 3D modelling
-
 ## Features
-* Users can select specific regions of the sequence and zoom in.
+* Select specific regions of a sequence to examine in more detail.
 <p align="center">
   <img max-width="600px" height="auto" src="dist/gifs/selected_seq4.gif">
 </p>
 
-* Users can filter the current sequence for specific nucleotide bases.
+* Filter the current selection by nucleotide bases.
 <p align="center">
   <img max-width="600px" height="auto" src="dist/gifs/filter3.gif">
 </p>
 
-* Bar graphs show the base composition of the currently selected region and of the total strand.
-* Users can interact with a 3D model that is rendered based on the currently selected strand.
-* The 3D model and bar graphs update in real time upon new user selections.
+* Dynamic charts and models
+  * Bar graphs show the base composition of the current selection and of the total strand.
+  * Users can interact with a 3D model that is rendered based on the currently selected strand.
+  * The 3D model and bar graphs update in real time upon new user selections.
 
 <p align="center">
   <img max-width="600px" height="auto" src="dist/gifs/charts1.gif">
   <img max-width="600px" height="auto" src="dist/gifs/strand2.gif">
 </p>
+
+## Technologies
+* HTML/CSS/JS
+* D3.js for bar charts
+* Three.js for base 3D modelling
 
 ## Challenges
 
@@ -59,7 +60,7 @@ This app creates dynamic charts and 3D renderings of DNA sequences based on user
     row.rotation.y = 30*i * Math.PI/180; //angle for spiral
 ```
 
-* In order to synchronize the sequence selection to the bar graphs and the 3D model, I organized the sequence into an object, where the main string processing
+* In order to synchronize the sequence selection to the bar graphs and the 3D model, the raw sequence is stored in an object, where the main string processing
     occurs. When a new strand or new selection of a strand is made, the raw sequence is sent to the Sequence object, which parses the string for the permitted bases. The new sequence string is then sent to the immersion function to be rendered as a model, while the count is sent directly to the drawCharts function to build the bar graphs. This allows the parsing to happen at a single location, and the auxiliary functions help to render that data for the user to better read and interact with.
 
 <p align="center">
@@ -67,6 +68,7 @@ This app creates dynamic charts and 3D renderings of DNA sequences based on user
 </p>
 
 ## Coming soon
+* Mobile friendly
 * Detailed molecular structure
 * More DNA sequences available for viewing
 * Option to upload your own data
