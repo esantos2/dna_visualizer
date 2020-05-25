@@ -4,6 +4,7 @@ import { openModal } from './intro_modal';
 
 document.addEventListener("DOMContentLoaded", () => {
     openModal();
+    document.getElementById("tutorial").addEventListener("click", openModal);
     document.getElementById("content").style.display = "flex";
     drawDropdown();
     displaySeq();

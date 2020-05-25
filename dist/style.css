@@ -26,7 +26,8 @@ nav > div{
     align-items: center;
 }
 
-nav h1, nav > .dropdown-container{
+nav h1, 
+nav #tutorial{
     padding: 15px 30px;
 }
 
@@ -74,7 +75,13 @@ nav h1 i{
     background-color: white;
 }
 
-.toolbox-container button{
+#tutorial{
+    border-right: 1px solid lightgray;
+    box-sizing: border-box;
+}
+
+.toolbox-container button,
+.welcome-prompt button{
     display: inline;
     background-color: rgb(51, 51, 51);
     transition: 100ms ease-out;
@@ -87,13 +94,16 @@ nav h1 i{
 }
 
 .toolbox-container button:hover,
-#dropdown:hover{
+.welcome-prompt button:hover,
+#dropdown:hover,
+#tutorial:hover{
     cursor: pointer;
     background-color: rgb(255, 255, 255);
     color: black;
 }
 
-.toolbox-container button:focus{
+.toolbox-container button:focus,
+.welcome-prompt button:focus{
     outline: none;
 }
 
@@ -368,5 +378,22 @@ nav h1 i{
 }
 
 .welcome-prompt{
-    
+    max-height: 700px;
+    padding: 40px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.welcome-prompt p{
+    width: 100%;
+    text-align: left;
+}
+
+.welcome-prompt img{
+    max-width: 700px;
+    border-top: 2px solid rgb(51, 51, 51);
+    border-bottom: 2px solid rgb(51, 51, 51);
 }

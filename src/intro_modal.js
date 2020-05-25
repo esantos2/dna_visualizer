@@ -29,7 +29,7 @@ export const closeModal = (e) => {
 
 const nextButton = (nextModal, prompt) => {
     let nextBtn = document.createElement("button");
-    nextBtn.innerHTML = ">";
+    nextBtn.innerHTML = "Next >";
     nextBtn.addEventListener("click", (e) => {
         e.preventDefault();
         nextModal(prompt);
@@ -39,7 +39,7 @@ const nextButton = (nextModal, prompt) => {
 
 const prevButton = (prevModal, prompt) => {
     let prevBtn = document.createElement("button");
-    prevBtn.innerHTML = "<";
+    prevBtn.innerHTML = "< Prev";
     prevBtn.addEventListener("click", (e) => {
         e.preventDefault();
         prevModal(prompt);
@@ -80,10 +80,14 @@ export const modal3 = (welcomePrompt) => {
     welcomePrompt.innerHTML = "";
     let newLine = document.createElement("p");
     newLine.innerHTML = "Bar charts and the 3D model provide more to explore and update with new selections";
+    let images = document.createElement("div");
+    images.setAttribute("class", "last-modal-images");
     let newImg1 = document.createElement("img");
     newImg1.setAttribute("src", "dist/gifs/charts1.gif");
     let newImg2 = document.createElement("img");
     newImg2.setAttribute("src", "dist/gifs/strand2.gif");
+    images.appendChild(newImg1);
+    images.appendChild(newImg2);
     let startBtn = document.createElement("button");
     startBtn.innerHTML = "Get Started";
     startBtn.addEventListener("click", (e) => {
@@ -91,8 +95,7 @@ export const modal3 = (welcomePrompt) => {
         closeModal(e);
     })
     welcomePrompt.appendChild(newLine);
-    welcomePrompt.appendChild(newImg1);
-    welcomePrompt.appendChild(newImg2);
+    welcomePrompt.appendChild(images);
     prevButton(modal2, welcomePrompt);
     welcomePrompt.appendChild(startBtn);
 }
