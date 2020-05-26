@@ -4,6 +4,11 @@ This app allows users to closely examine the DNA sequence of various species and
 
 [Visit the site](https://arctive.github.io/dna_visualizer/)
 
+## Technologies
+* HTML/CSS/JS
+* D3.js for bar charts
+* Three.js for base 3D modelling
+
 ## Features
 * Select specific regions of a sequence to examine in more detail.
 <p align="center">
@@ -24,11 +29,6 @@ This app allows users to closely examine the DNA sequence of various species and
   <img max-width="600px" height="auto" src="dist/gifs/charts1.gif">
   <img max-width="600px" height="auto" src="dist/gifs/strand2.gif">
 </p>
-
-## Technologies
-* HTML/CSS/JS
-* D3.js for bar charts
-* Three.js for base 3D modelling
 
 ## Challenges
 
