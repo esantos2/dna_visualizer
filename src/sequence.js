@@ -125,8 +125,8 @@ class Sequence{
                 SeqUtil.clearBottomToolTips();
                 this.toggled = true;
                 this.enableToggleButtons();
-                this.deactivateButton(document.getElementById("new-seq-btn"));
-                this.deactivateButton(baseButton);
+                SeqUtil.disableBtn(document.getElementById("new-seq-btn"));
+                SeqUtil.disableBtn(baseButton);
                 this.drawSeq(this.prevStartIdx, this.prevEndIdx, `${base}`);
             })
             baseToggle.appendChild(baseButton);
@@ -141,7 +141,7 @@ class Sequence{
             SeqUtil.clearBottomToolTips();
             this.toggled = true;
             this.enableToggleButtons();
-            this.deactivateButton(document.getElementById("new-seq-btn"));
+            SeqUtil.disableBtn(document.getElementById("new-seq-btn"));
             this.drawSeq(this.prevStartIdx, this.prevEndIdx, bases);
         })
         baseToggle.appendChild(clearBases);
@@ -152,12 +152,7 @@ class Sequence{
         button.removeAttribute("disabled");
         button.classList.remove("disabled-btn");
     }
-
-    deactivateButton(button){
-        button.setAttribute("disabled", true);
-        button.classList.add("disabled-btn");
-    }
-
+    
     enableToggleButtons(){
         let baseButtons = document.querySelectorAll("#base-toggle .disabled-btn");
         baseButtons.forEach((base) => this.activateButton(base));
@@ -165,16 +160,20 @@ class Sequence{
 
     handleNewSelection() {
         if (this.newStartIdx >= this.newEndIdx) return;
+        let clearButton = document.getElementById("clear-selection");
         let submitButton = document.getElementById("new-seq-btn");
         submitButton.removeEventListener("click", this.getNewSelection);
         submitButton.addEventListener("click", this.getNewSelection);
         this.activateButton(submitButton);
+        this.activateButton(clearButton);
     }
 
     getNewSelection(e) {
         e.preventDefault();
+        let clearButton = document.getElementById("clear-selection");
         let submitButton = document.getElementById("new-seq-btn");
-        this.deactivateButton(submitButton);
+        SeqUtil.disableBtn(submitButton);
+        SeqUtil.disableBtn(clearButton);
         SeqUtil.clearBottomToolTips();
         this.enableToggleButtons();
         this.inSelection = true;

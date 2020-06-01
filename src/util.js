@@ -25,3 +25,8 @@ export const toggleToolTip = () => {
 export const clearBottomToolTips = () => {
     document.getElementById("tool-btm-container").innerHTML = "";
 }
+
+export const disableBtn = (btn) => {
+    btn.setAttribute("disabled", true);
+    btn.classList.add("disabled-btn");
+}

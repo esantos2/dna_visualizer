@@ -15,14 +15,16 @@ class ToolBox{
     createSelectionButtons(){
         //clear overlay
         let clearBtn = document.createElement("button");
+        clearBtn.setAttribute("id", "clear-selection")
         clearBtn.innerHTML = "Clear";
+        Util.disableBtn(clearBtn);
         clearBtn.addEventListener("click", (e) => {
             e.preventDefault();
             Util.clearCanvas(document.getElementById("overlay")); //clear overlay
             Util.clearBottomToolTips(); //clear tooltips
             let submitButton = document.getElementById("new-seq-btn");
-            submitButton.setAttribute("disabled", true); //disable selection button
-            submitButton.classList.add("disabled-btn");
+            Util.disableBtn(submitButton);
+            Util.disableBtn(clearBtn);
         });
         this.toolbox.appendChild(clearBtn);
 
@@ -30,8 +32,7 @@ class ToolBox{
         let reset = document.createElement("button");
         reset.innerHTML = "Reset";
         reset.setAttribute("id", "reset");
-        reset.setAttribute("disabled", true); //disabled by default
-        reset.setAttribute("class", "disabled-btn");
+        Util.disableBtn(reset);
         reset.addEventListener("click", (e) => {
             e.preventDefault();
             Util.clearBottomToolTips();
@@ -44,8 +45,8 @@ class ToolBox{
         let handleSelection = document.createElement("button");
         handleSelection.innerHTML = "Select Region";
         handleSelection.setAttribute("id", "new-seq-btn");
-        handleSelection.setAttribute("class", "new-seq-btn disabled-btn"); //disabled by default
-        handleSelection.setAttribute("disabled", true);
+        handleSelection.classList.add("new-seq-btn");
+        Util.disableBtn(handleSelection);
         this.toolbox.appendChild(handleSelection);
 
         //filters
@@ -94,7 +95,6 @@ class ToolBox{
         reset.removeAttribute("disabled");
         reset.classList.remove("disabled-btn");
     }
-
 
 }
 
