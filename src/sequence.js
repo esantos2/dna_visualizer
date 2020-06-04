@@ -32,6 +32,7 @@ class Sequence{
     }
 
     resizeCanvases(){
+        SeqUtil.closeDropdowns();
         SeqUtil.clearBottomToolTips();
         let canvases = [
             document.getElementById("canvas"),

@@ -8,11 +8,6 @@ export const getMouseCoord = (event) => {
     return event.clientX - seqBox.offsetLeft;
 }
 
-export const toggleDropdown = (e) => {
-    e.preventDefault();
-    document.getElementById("seq-selection").classList.toggle("show-list");
-}
-
 export const toggleFilters = (e) => {
     e.preventDefault();
     document.getElementById("base-toggle").classList.toggle("show-filters");
@@ -29,4 +24,9 @@ export const clearBottomToolTips = () => {
 export const disableBtn = (btn) => {
     btn.setAttribute("disabled", true);
     btn.classList.add("disabled-btn");
+}
+
+export const closeDropdowns = () => {
+    document.getElementById("seq-selection").classList.remove("show-list");
+    document.getElementById("seq-selection-mobile").classList.remove("show-list");
 }

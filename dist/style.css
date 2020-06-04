@@ -97,6 +97,7 @@ nav h1 i{
 .toolbox-container button:hover,
 .welcome-prompt button:hover,
 #dropdown:hover,
+#dropdown-mobile:hover,
 #tutorial:hover{
     cursor: pointer;
     background-color: rgb(255, 255, 255);
@@ -254,7 +255,8 @@ nav h1 i{
     width: 400px;
 }
 
-#dropdown{
+#dropdown,
+#dropdown-mobile{
     position: relative;
     padding: 15px;
     min-width: 350px;
@@ -264,7 +266,8 @@ nav h1 i{
     box-sizing: border-box;
 }
 
-#seq-selection{
+#seq-selection,
+#seq-selection-mobile{
     position: absolute;
     min-width: 350px;
     margin: 0;
@@ -275,13 +278,19 @@ nav h1 i{
     border: 1px solid lightgray;
 }
 
-#seq-selection li{
+#seq-selection-mobile{
+    left: 0;
+}
+
+#seq-selection li,
+#seq-selection-mobile li{
     list-style: none;
     padding: 10px;
     color: black;
 }
 
-#seq-selection li:hover{
+#seq-selection li:hover,
+#seq-selection-mobile li:hover{
     cursor: pointer;
     background-color: rgb(223, 223, 223);
 }
@@ -362,7 +371,9 @@ nav h1 i{
 }
 
 .mobile-icons #dropdown:hover,
+.mobile-icons #dropdown-mobile:hover,
 .mobile-icons #tutorial:hover,
+.mobile-icons #tutorial-mobile:hover,
 .contact-icons > a:hover{
     cursor: pointer;
 }
@@ -498,9 +509,13 @@ nav h1 i{
         display: none;
     }
 
-    .mobile-icons #dropdown{
+    .mobile-icons #dropdown-mobile{
         padding: 15px 30px;
         min-width: 0;
+    }
+
+    #seq-selection-mobile{
+        left: -177px;
     }
 
     #main-seq,
@@ -539,7 +554,7 @@ nav h1 i{
     }
 
     .mobile-icons h1,
-    .mobile-icons #dropdown,
+    .mobile-icons #dropdown-mobile,
     .mobile-icons #tutorial{
         padding: 15px;
     }
@@ -562,6 +577,10 @@ nav h1 i{
 @media screen and (max-width: 450px){
     .toolbox-container{
         margin-top: 112px;
+    }
+
+    #seq-selection-mobile{
+        left: -233px;
     }
 }
 
