@@ -247,12 +247,15 @@ nav h1 i{
     justify-content: center;
     align-items: center;
     margin-top: 40px;
+    margin-bottom: 20px;
+    width: 100%;
 }
 
 .current-seq-box,
 .total-seq-box{
-    height: 400px;
-    width: 400px;
+    height: 300px;
+    width: 300px;
+    margin: 10px;
 }
 
 #dropdown,
@@ -452,13 +455,6 @@ nav h1 i{
     }
 }
 
-/* move second bar chart  */
-@media (max-width: 1600px){ 
-    .chart-container{
-        flex-direction: column;
-    }
-}
-
 /* move filters, resize canvas  */
 @media (max-width: 1340px){
     #main-seq,
@@ -471,6 +467,9 @@ nav h1 i{
         bottom: 40px;
     }
 
+    .chart-container{
+        flex-direction: column;
+    }
 
 }
 
@@ -531,13 +530,6 @@ nav h1 i{
     }
 }
 
-/* toggle between bar charts */
-@media (max-width: 800px){
-    .chart-container{
-        flex-direction: column;
-    }
-}
-
 /* move filters  */
 @media (max-width: 750px){
     #tools .show-filters{
@@ -569,6 +561,10 @@ nav h1 i{
 
     #immersion canvas{
         width: 100%;
+    }
+
+    .chart-container{
+        flex-direction: column;
     }
 
 }
