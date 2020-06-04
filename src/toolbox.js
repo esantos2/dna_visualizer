@@ -71,7 +71,7 @@ class ToolBox{
             ctx.fillRect(xCoord - width, 0, width, tooltip.height);
             //display tool tip info
             let infoBox = document.getElementById("tool-top");
-            infoBox.style.left = `${xCoord - 2}px`;
+            infoBox.style.left = `${xCoord - 5}px`;
             infoBox.innerHTML = `base#: ${startIdx + Math.floor(xCoord / rectWidth) + 1}`;
         }
     }
@@ -83,8 +83,8 @@ class ToolBox{
             endInfoBox.setAttribute("class", "base-info");
             let xCoord = Util.getMouseCoord(e);
             endInfoBox.style.display = "block";
-            endInfoBox.style.left = `${xCoord - 2}px`;
-            endInfoBox.style.top = "3px";
+            endInfoBox.style.left = `${xCoord - 5}px`;
+            endInfoBox.style.top = "5px";
             endInfoBox.innerHTML = `base#: ${startIdx + Math.floor(xCoord / rectWidth) + 1}`;
             toolBoxBtm.appendChild(endInfoBox);
         }

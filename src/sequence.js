@@ -16,6 +16,7 @@ class Sequence{
         this.newEndIdx = 0;
         this.inSelection = false;
         this.toggled = false;
+        this.newRange = true;
         this.getNewSelection = this.getNewSelection.bind(this);
         this.resizeCanvases = this.resizeCanvases.bind(this);
         window.addEventListener("resize", this.resizeCanvases);
@@ -30,8 +31,8 @@ class Sequence{
         drawChart(this.baseTotals, ".total-seq-box");
     }
 
-
     resizeCanvases(){
+        SeqUtil.clearBottomToolTips();
         let canvases = [
             document.getElementById("canvas"),
             document.getElementById("tooltip"),
@@ -63,21 +64,9 @@ class Sequence{
     drawSeq(startIdx = this.prevStartIdx, endIdx = null, bases = "ATCG"){ //draws seq in specified range
         let canvas = document.getElementById("canvas");
         let ctx = canvas.getContext('2d');
-        // console.log("canvas width:", canvas.width)
-        // console.log("rect: ", this.rectWidth)
         let cWidth = ctx.canvas.clientWidth + 4;
         let cHeight = ctx.canvas.clientHeight + 4;
-        console.log("canvas: ", canvas);
-        console.log("ctx: ", ctx);
-        console.log("cw: ", cWidth);
-        console.log("ch: ", cHeight);
-        console.log("canv w: ", canvas.width);
-        console.log("canv h: ", canvas.height);
         if (!endIdx) endIdx = Math.floor(cWidth / this.rectWidth) + this.prevStartIdx;
-        console.log("startIdx: ", startIdx)
-        console.log("endIdx: ", endIdx)
-        console.log("RW: ", this.rectWidth)
-        // if (!endIdx) endIdx = Math.floor(canvas.width / this.rectWidth) + this.prevStartIdx;
         if (this.inSelection) this.toolbox.allowReset();
 
         let baseColor = {
@@ -90,6 +79,7 @@ class Sequence{
         if (startIdx !== this.prevStartIdx){ //check if selecting new seq or toggling bases
             startIdx += this.prevStartIdx; //adjust new range
             endIdx += this.prevStartIdx;
+            this.newRange = true;
         }
         this.prevStartIdx = startIdx;
         this.prevEndIdx = endIdx;
@@ -100,7 +90,6 @@ class Sequence{
             this.rectWidth = cWidth / (endIdx - startIdx + 1);
         } else {
             this.rectWidth = 5;
-            // this.rectWidth = cWidth / (endIdx - startIdx + 1);
         }
 
         //reset overlay
@@ -134,10 +123,13 @@ class Sequence{
         this.selectRegion(); //add listeners for region selection
 
         //update details, bar graph, immersion
-        this.strandDetails();
         let newSeq = this.mainSeq.slice(startIdx, endIdx + 1);
         drawChart(baseCounts, ".current-seq-box");
-        if (!this.toggled) immersion(newSeq);
+        if (this.newRange){
+            this.newRange = false;
+            this.strandDetails();
+            if (!this.toggled) immersion(newSeq);
+        }
     }
 
     strandDetails(){

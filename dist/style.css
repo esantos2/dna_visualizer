@@ -205,6 +205,10 @@ nav h1 i{
     height: 80px;
 }
 
+#main-seq canvas:last-child{
+    height: 100px;
+}
+
 #canvas{
     border: 2px solid black;
     box-sizing: border-box;
