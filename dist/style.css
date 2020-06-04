@@ -70,6 +70,7 @@ nav h1 i{
 }
 
 #toolbox{
+    min-width: 300px;
     width: fit-content;
     z-index: 20;
     background-color: white;
@@ -475,8 +476,6 @@ nav h1 i{
     .data-container{
         width: 100%;
     }
-
-
 }
 
 /* minimize canvas, navbar, toggle bar charts and immersion */
@@ -500,7 +499,7 @@ nav h1 i{
     }
 }
 
-
+/* mobile landscape  */
 @media (max-width: 820px){
     .data-container{
         padding: 0px 35px;
@@ -543,6 +542,10 @@ nav h1 i{
         margin: 0px 7px;
     }
 
+    #immersion canvas{
+        width: 100%;
+    }
+
 }
 
 /* move filters  */
@@ -553,6 +556,45 @@ nav h1 i{
 }
 
 /* more mobile adjustments  */
-@media screen and (max-width: 380){
 
+@media only screen and (orientation: portrait){
+
+    .welcome-prompt img{
+        max-width: 300px;
+    }
+
+    .toolbox-container button{
+        font-size: 10px;
+    }
+}
+
+@media only screen and (orientation: landscape) and (max-width: 850px){
+        
+    .welcome-prompt{
+        width: 470px;
+        max-height: 250px;
+        font-size: 10px;
+        margin-top: 20px;
+        padding: 20px;
+    }
+
+    .welcome-prompt p{
+        margin: 2px;
+    }
+
+    .welcome-prompt h1{
+        margin: 0px;
+    }
+
+    .welcome-prompt img{
+        max-width: 350px;
+    }
+
+    .last-modal-images{
+        flex-direction: row;
+    }
+
+    .last-modal-images img{
+        max-height: 100px;
+    }
 }
