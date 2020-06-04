@@ -268,6 +268,7 @@ class Sequence{
         }
 
         let tooltip = document.getElementById("tooltip");
+        //mouse events
         overlay.addEventListener('mousedown', startSelection);
         overlay.addEventListener('mouseup', stopSelection);
         overlay.addEventListener('mousemove', (e) => {
@@ -281,6 +282,14 @@ class Sequence{
             SeqUtil.clearCanvas(tooltip);
             SeqUtil.toggleToolTip();
         });
+
+        //touch events
+        overlay.addEventListener("touchstart", startSelection);
+        overlay.addEventListener("touchend", stopSelection);
+        overlay.addEventListener("touchmove", (e) => {
+            drawRect(e);
+            this.toolbox.showBaseInfo(this.prevStartIdx, this.rectWidth)(e);
+        })
     }
 
 }

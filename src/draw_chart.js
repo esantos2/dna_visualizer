@@ -59,7 +59,6 @@ const drawChart = (baseCounts, box) => {
         .call(d3.axisLeft(yScale).tickFormat((d) => {return d;})
             .ticks(10))
         .append("text")
-        // .attr("transform", "rotate(-90)")
         .attr("y", 40)
         .attr("dy", "-5.1em")
         .attr("text-anchor", "end")

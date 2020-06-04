@@ -1,5 +1,6 @@
 import * as DataSet from '../datasets/sequences';
 import {selectSeq} from './display_seq';
+import { closeDropdowns } from './util';
 
 const drawDropdown = () => {
     let seqList = [
@@ -16,17 +17,6 @@ const drawDropdown = () => {
         document.getElementById("dropdown"),
         document.getElementById("dropdown-mobile")
     ]
-    listBoxes.forEach( dropdown => {
-        let ele = "seq-selection";
-        if (dropdown.id.includes("mobile")){
-            ele += "-mobile";
-        }
-        dropdown.addEventListener("mouseover", () => {
-            document.getElementById(ele).classList.add("show-list");
-        });
-    })
-    
-    //build list
     let lists = [
         document.getElementById("seq-selection"),
         document.getElementById("seq-selection-mobile")
@@ -38,9 +28,15 @@ const drawDropdown = () => {
             listItem.addEventListener("click", selectSeq(seqList[i]));
             seqSelection.appendChild(listItem);
         }
-        seqSelection.addEventListener("mouseleave", () => {
-            seqSelection.classList.remove("show-list");
-        });
+    })
+
+    window.addEventListener("click", (e) => {
+        if (listBoxes.includes(e.target)){
+            document.getElementById("seq-selection").classList.toggle("show-list");
+            document.getElementById("seq-selection-mobile").classList.toggle("show-list");
+        } else if (!(listBoxes.includes(e.target)) && !(lists.includes(e.target))){
+            closeDropdowns();
+        }
     })
 }
 

@@ -234,6 +234,10 @@ nav h1 i{
     position: relative;
 }
 
+.dropdown-container i{
+    pointer-events: none;
+}
+
 .seq-container{
     display: flex;
     flex-direction: column;
@@ -583,7 +587,6 @@ nav h1 i{
 /* more mobile adjustments  */
 
 @media only screen and (orientation: portrait){
-
     .welcome-prompt img{
         max-width: 300px;
     }
@@ -594,7 +597,6 @@ nav h1 i{
 }
 
 @media only screen and (orientation: landscape) and (max-width: 850px){
-        
     .welcome-prompt{
         width: 470px;
         max-height: 250px;
