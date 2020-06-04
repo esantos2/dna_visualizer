@@ -10,30 +10,74 @@ class Sequence{
         this.baseTotals = selectedSeq.baseTotals;
         this.rectWidth = 5;
         this.prevStartIdx = 0;
-        this.prevEndIdx = 0;
+        this.prevEndIdx = null;
         this.toolbox = new ToolBox(selectedSeq);
         this.newStartIdx = 0;
         this.newEndIdx = 0;
         this.inSelection = false;
         this.toggled = false;
         this.getNewSelection = this.getNewSelection.bind(this);
+        this.resizeCanvases = this.resizeCanvases.bind(this);
+        window.addEventListener("resize", this.resizeCanvases);
     }
 
     newSeq(){//draws initial seq
         this.inSelection = false;
         this.toolbox.drawToolBox();
-        this.drawSeq();
+        this.resizeCanvases();
         this.createFilters();
         SeqUtil.clearBottomToolTips();
         drawChart(this.baseTotals, ".total-seq-box");
     }
 
+
+    resizeCanvases(){
+        let canvases = [
+            document.getElementById("canvas"),
+            document.getElementById("tooltip"),
+            document.getElementById("overlay"),
+        ];
+        //determine dimensions based on window size
+        let newWidth = 0;
+        let windowWidth = window.innerWidth;
+        if (windowWidth > 1740) {
+            newWidth = 800;
+        } else if (windowWidth > 1340) {
+            newWidth = 600;
+        } else if (windowWidth > 1100) {
+            newWidth = 400;
+        } else if (windowWidth > 930) {
+            newWidth = 800;
+        } else if (windowWidth > 730) {
+            newWidth = 600;
+        } else {
+            newWidth = 300;
+        }
+        //apply changes
+        canvases.forEach(c => {
+            c.width = newWidth;
+        });
+        this.drawSeq(this.prevStartIdx, this.prevEndIdx, "ATCG");
+    }
+
     drawSeq(startIdx = this.prevStartIdx, endIdx = null, bases = "ATCG"){ //draws seq in specified range
         let canvas = document.getElementById("canvas");
         let ctx = canvas.getContext('2d');
-        let cWidth = ctx.canvas.width;
-        let cHeight = ctx.canvas.height;
-        if (!endIdx) endIdx = Math.floor(canvas.width / this.rectWidth) + this.prevStartIdx;
+        // console.log("canvas width:", canvas.width)
+        // console.log("rect: ", this.rectWidth)
+        let cWidth = ctx.canvas.clientWidth + 4;
+        let cHeight = ctx.canvas.clientHeight + 4;
+        console.log("canvas: ", canvas);
+        console.log("ctx: ", ctx);
+        console.log("cw: ", cWidth);
+        console.log("ch: ", cHeight);
+        console.log("canv w: ", canvas.width);
+        console.log("canv h: ", canvas.height);
+        if (!endIdx) endIdx = Math.floor(cWidth / this.rectWidth) + this.prevStartIdx;
+        console.log("startIdx: ", startIdx)
+        console.log("endIdx: ", endIdx)
+        console.log("RW: ", this.rectWidth)
+        // if (!endIdx) endIdx = Math.floor(canvas.width / this.rectWidth) + this.prevStartIdx;
         if (this.inSelection) this.toolbox.allowReset();
 
         let baseColor = {
@@ -52,10 +96,11 @@ class Sequence{
 
         if (startIdx >= endIdx){
             return;
-        } else if (endIdx - startIdx < Math.floor(this.rectWidth * ctx.canvas.width)){ //use dynamic widths
-            this.rectWidth = canvas.width / (endIdx - startIdx + 1);
+        } else if (endIdx - startIdx < Math.floor(this.rectWidth * cWidth)){ //use dynamic widths
+            this.rectWidth = cWidth / (endIdx - startIdx + 1);
         } else {
             this.rectWidth = 5;
+            // this.rectWidth = cWidth / (endIdx - startIdx + 1);
         }
 
         //reset overlay
@@ -201,7 +246,7 @@ class Sequence{
             this.newStartIdx = getSeqIdx();
             SeqUtil.clearBottomToolTips();
             this.toolbox.selectionEndpoint(this.prevStartIdx, this.rectWidth)(event);
-            ctx.fillRect(xCoord - 5, 0, 5, overlay.height);
+            ctx.fillRect(xCoord - 5, 0, 5, overlay.height); //start bar
         }
 
         const stopSelection = () => {
@@ -212,7 +257,7 @@ class Sequence{
             }
             this.newEndIdx = getSeqIdx();
             this.toolbox.selectionEndpoint(this.prevStartIdx, this.rectWidth)(event);
-            ctx.fillRect(xCoord - 5, 0, 5, overlay.height);
+            ctx.fillRect(xCoord - 5, 0, 5, overlay.height); //end bar
             this.handleNewSelection();
         }
 

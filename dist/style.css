@@ -199,6 +199,12 @@ nav h1 i{
     height: 100px;
 }
 
+#main-seq canvas{
+    max-width: 800px;
+    max-height: 100px;
+    height: 80px;
+}
+
 #canvas{
     border: 2px solid black;
     box-sizing: border-box;
