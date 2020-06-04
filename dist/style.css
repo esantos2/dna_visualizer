@@ -329,14 +329,14 @@ nav h1 i{
     z-index: 10;
 }
 
-.icons{
+.contact-icons{
     display: flex;
     justify-content: flex-end;
     align-items: center;
     margin-right: 20px;
 }
 
-.icons > a{
+.contact-icons > a{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -349,12 +349,20 @@ nav h1 i{
     transition: color 100ms ease-in-out;
     transition: font-size 100ms ease-out;
 }
-    
-.icons > a:hover{
-    cursor: pointer;
-    font-size: 30px;
-    color: rgb(114, 229, 233);
 
+.mobile-icons #dropdown:hover,
+.mobile-icons #tutorial:hover,
+.contact-icons > a:hover{
+    cursor: pointer;
+}
+
+.contact-icons > a:hover{
+    color: rgb(114, 229, 233);
+    font-size: 30px;
+}
+
+.mobile-icons{
+    display: none;
 }
 
 .modal-back{
@@ -434,11 +442,6 @@ nav h1 i{
     #main-seq,
     #main-seq canvas{
         width: 400px;
-        height: 80px;
-    }
-
-    #main-seq canvas:last-child{
-        height: 100px;
     }
 
     #tools .show-filters{
@@ -450,15 +453,10 @@ nav h1 i{
 }
 
 /* scroll to see all 3 */
-@media (max-width: 1000px){
+@media (max-width: 1100px){
     #main-seq,
     #main-seq canvas{
         width: 800px;
-        height: 80px;
-    }
-
-    #main-seq canvas:last-child{
-        height: 100px;
     }
 
     #tools .show-filters{
@@ -478,16 +476,83 @@ nav h1 i{
         width: 100%;
     }
 
-    
+
 }
 
 /* minimize canvas, navbar, toggle bar charts and immersion */
-@media (max-width: 940px){
+@media (max-width: 930px){
+    .mobile-icons{
+        display: flex;
+    }
 
+    .desktop-icons{
+        display: none;
+    }
+
+    .mobile-icons #dropdown{
+        padding: 15px 30px;
+        min-width: 0;
+    }
+
+    #main-seq,
+    #main-seq canvas{
+        width: 600px;
+    }
 }
 
 
+@media (max-width: 820px){
+    .data-container{
+        padding: 0px 35px;
+    }
+}
+
+/* toggle between bar charts */
+@media (max-width: 800px){
+    .chart-container{
+        flex-direction: column;
+    }
+}
+
+/* move filters  */
+@media (max-width: 750px){
+    #tools .show-filters{
+        left: 0;
+        bottom: 40px;
+    }
+}
+
 /* toggle between three views */
-@media screen and (max-width: 600px){
+@media screen and (max-width: 730px){
+    #main-seq,
+    #main-seq canvas{
+        width: 300px;
+    }
+
+    .mobile-icons h1,
+    .mobile-icons #dropdown,
+    .mobile-icons #tutorial{
+        padding: 15px;
+    }
+
+    .contact-icons{
+        margin-right: 15px;
+    }
+
+    .contact-icons a{
+        margin: 0px 7px;
+    }
+
+}
+
+/* move filters  */
+@media screen and (max-width: 450px){
+    .toolbox-container{
+        margin-top: 112px;
+    }
+}
+
+/* more mobile adjustments  */
+@media screen and (max-width: 380){
 
 }

@@ -11,7 +11,7 @@ const immersion = (chosenSeq = DataSet.zika.seq) => {
 
     //setup canvas
     const onWindowResize = () => {
-        if (window.innerWidth < 1000){
+        if (window.innerWidth < 1100){
             camera.aspect = (window.innerWidth) / window.innerHeight;
             renderer.setSize(window.innerWidth, window.innerHeight);
         } else {

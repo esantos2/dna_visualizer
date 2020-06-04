@@ -14,7 +14,9 @@ const drawDropdown = () => {
 
     //setup dropdown
     let dropdown = document.getElementById("dropdown");
-    dropdown.textContent = "-- Choose a sequence to analyze --";
+    if (window.innerWidth > 930){
+        dropdown.textContent = "-- Choose a sequence to analyze --";
+    }
     dropdown.addEventListener("mouseover", SeqUtil.toggleDropdown);
     
     //build list
