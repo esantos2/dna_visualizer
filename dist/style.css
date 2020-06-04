@@ -27,7 +27,8 @@ nav > div{
 }
 
 nav h1, 
-nav #tutorial{
+nav #tutorial,
+nav #tutorial-mobile{
     padding: 15px 30px;
 }
 
@@ -76,7 +77,8 @@ nav h1 i{
     background-color: white;
 }
 
-#tutorial{
+#tutorial,
+#tutorial-mobile{
     border-right: 1px solid lightgray;
     box-sizing: border-box;
 }
@@ -98,7 +100,8 @@ nav h1 i{
 .welcome-prompt button:hover,
 #dropdown:hover,
 #dropdown-mobile:hover,
-#tutorial:hover{
+#tutorial:hover,
+#tutorial-mobile:hover{
     cursor: pointer;
     background-color: rgb(255, 255, 255);
     color: black;
@@ -551,7 +554,7 @@ nav h1 i{
 
     .mobile-icons h1,
     .mobile-icons #dropdown-mobile,
-    .mobile-icons #tutorial{
+    .mobile-icons #tutorial-mobile{
         padding: 15px;
     }
 
