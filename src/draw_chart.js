@@ -114,7 +114,7 @@ const drawChart = (baseCounts, box) => {
     //animate bar heights
     g.selectAll("rect")
         .transition()
-        .duration(800)
+        .duration(700)
         .attr("y", (d) => { return yScale(d.count); })
         .attr("height", (d) => { return height - yScale(d.count); })
         .delay((d, i) => { return i * 100; });
