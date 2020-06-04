@@ -27,6 +27,7 @@ const immersion = (chosenSeq = DataSet.zika.seq) => {
 
     //move molecule
     moveMolecule(scene, container);
+    // touchMolecule(scene, container);
 
     //colors
     const aColor = "#FF6358";   //red
@@ -144,6 +145,50 @@ const moveMolecule = (scene, container) => { //rotates scene based on change in 
     }
 
     addMouseHandler(container);
+}
+
+const touchMolecule = (scene, container) => {
+    let touchActive = false;
+    let touchX = 0;
+    let touchY = 0;
+
+    const onTouchMove = (e) => {
+        e.preventDefault();
+        if (!touchActive) {
+            return;
+        }
+        console.log("touch")
+        let deltaX = e.touches[0].pageX - touchX;
+        let deltaY = e.touches[0].pageY - touchY;
+        touchX = e.touches[0].pageX;
+        touchY = e.touches[0].pageY;
+        rotateScene(deltaX, deltaY);
+    }
+
+    const onTouchStart = (e) => {
+        e.preventDefault();
+        touchActive = true;
+        touchX = e.touches[0].pageX;
+        touchY = e.touches[0].pageY;
+    }
+
+    const onTouchEnd = (e) => {
+        e.preventDefault();
+        touchActive = false;
+    }
+
+    const addTouchHandler = (canvas) => {
+        canvas.addEventListener('touchmove', onTouchMove, false);
+        canvas.addEventListener('touchStart', onTouchStart, false);
+        canvas.addEventListener('touchEnd', onTouchEnd, false);
+    }
+
+    const rotateScene = (deltaX, deltaY) => {
+        scene.rotation.y += deltaX / 100;
+        scene.rotation.x += deltaY / 100;
+    }
+
+    addTouchHandler(container);
 }
 
 export default immersion;
