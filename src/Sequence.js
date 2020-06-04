@@ -238,7 +238,7 @@ class Sequence{
             start = xCoord = SeqUtil.getMouseCoord(event);
             this.newStartIdx = getSeqIdx();
             SeqUtil.clearBottomToolTips();
-            this.toolbox.selectionEndpoint(this.prevStartIdx, this.rectWidth)(event);
+            this.toolbox.selectionEndpoint(this.prevStartIdx, this.rectWidth, xCoord);
             ctx.fillRect(xCoord - 5, 0, 5, overlay.height); //start bar
         }
 
@@ -249,7 +249,7 @@ class Sequence{
                 return;
             }
             this.newEndIdx = getSeqIdx();
-            this.toolbox.selectionEndpoint(this.prevStartIdx, this.rectWidth)(event);
+            this.toolbox.selectionEndpoint(this.prevStartIdx, this.rectWidth, xCoord);
             ctx.fillRect(xCoord - 5, 0, 5, overlay.height); //end bar
             this.handleNewSelection();
         }
@@ -285,7 +285,10 @@ class Sequence{
 
         //touch events
         overlay.addEventListener("touchstart", startSelection);
-        overlay.addEventListener("touchend", stopSelection);
+        overlay.addEventListener("touchend", () => {
+            SeqUtil.clearCanvas(tooltip);
+            stopSelection();
+        });
         overlay.addEventListener("touchmove", (e) => {
             drawRect(e);
             this.toolbox.showBaseInfo(this.prevStartIdx, this.rectWidth)(e);

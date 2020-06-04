@@ -1,6 +1,6 @@
 import * as DataSet from '../datasets/sequences';
 import displayCitation from './citation_box';
-import Sequence from './sequence';
+import Sequence from './Sequence';
 
 export const selectSeq = (selected) => {
     return (e) => {

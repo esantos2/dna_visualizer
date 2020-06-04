@@ -76,18 +76,15 @@ class ToolBox{
         }
     }
 
-    selectionEndpoint(startIdx, rectWidth){
-        return (e) => {
-            let toolBoxBtm = document.getElementById("tool-btm-container");
-            let endInfoBox = document.createElement("div");
-            endInfoBox.setAttribute("class", "base-info");
-            let xCoord = Util.getMouseCoord(e);
-            endInfoBox.style.display = "block";
-            endInfoBox.style.left = `${xCoord - 5}px`;
-            endInfoBox.style.top = "5px";
-            endInfoBox.innerHTML = `base#: ${startIdx + Math.floor(xCoord / rectWidth) + 1}`;
-            toolBoxBtm.appendChild(endInfoBox);
-        }
+    selectionEndpoint(startIdx, rectWidth, xCoord){
+        let toolBoxBtm = document.getElementById("tool-btm-container");
+        let endInfoBox = document.createElement("div");
+        endInfoBox.setAttribute("class", "base-info");
+        endInfoBox.style.display = "block";
+        endInfoBox.style.left = `${xCoord - 5}px`;
+        endInfoBox.style.top = "5px";
+        endInfoBox.innerHTML = `base#: ${startIdx + Math.floor(xCoord / rectWidth) + 1}`;
+        toolBoxBtm.appendChild(endInfoBox);
     }
 
     allowReset(){

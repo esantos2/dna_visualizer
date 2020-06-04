@@ -5,6 +5,9 @@ export const clearCanvas = (canvas) => {
 
 export const getMouseCoord = (event) => {
     let seqBox = document.getElementById("main-seq");
+    if (event.touches){
+        return event.touches[0].clientX - seqBox.offsetLeft;
+    }
     return event.clientX - seqBox.offsetLeft;
 }
 
