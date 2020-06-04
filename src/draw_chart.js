@@ -16,8 +16,8 @@ const drawChart = (baseCounts, box) => {
     barChartBox.append("svg");
     
     const svg = d3.select(`${box} > svg`)
-        .attr("width", 400)
-        .attr("height", 400)
+        .attr("width", 320)
+        .attr("height", 320)
     
     const margin = 100;
     const width = svg.attr("width") - margin;
@@ -29,7 +29,7 @@ const drawChart = (baseCounts, box) => {
         .attr("transform", "translate(50,0)")
         .attr("x", 10)
         .attr("y", 15)
-        .attr("font-size", "20px")
+        .attr("font-size", "14px") //20px
         .text(chartName)
     
     //set graph location
@@ -49,8 +49,8 @@ const drawChart = (baseCounts, box) => {
         .attr("transform", "translate(0," + height + ")")
         .call(d3.axisBottom(xScale))
         .append("text")
-        .attr("y", height - 265)
-        .attr("x", width - 100)
+        .attr("y", height - 190) //- 265
+        .attr("x", width - 80)   //- 100
         .attr("text-anchor", "end")
         .attr("stroke", "black")
         .text("Nucleotide Base");
@@ -101,15 +101,23 @@ const drawChart = (baseCounts, box) => {
         .enter().append("rect")
         .attr("class", "bar")
         .attr("x", (d) => { return xScale(d.base); })
-        .attr("y", (d) => { return yScale(d.count); })
         .attr("width", xScale.bandwidth())
-        .attr("height", (d) => { return height - yScale(d.count); })
+        .attr("y", (d) => { return height; })
+        .attr("height", (d) => { return 0; })
         .on("mouseover", handleMouseOver)
         .on("mouseout", handleMouseOut)
         .transition()
         .ease(d3.easeLinear)
         .duration(400)
         .delay((d, i) => { return i * 50; });
+
+    //animate bar heights
+    g.selectAll("rect")
+        .transition()
+        .duration(800)
+        .attr("y", (d) => { return yScale(d.count); })
+        .attr("height", (d) => { return height - yScale(d.count); })
+        .delay((d, i) => { return i * 100; });
 
 }
 
