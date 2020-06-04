@@ -61,7 +61,7 @@ nav h1 i{
 }
 
 .toolbox-container{
-    margin-top: 52px;
+    margin-top: 100px;
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -70,7 +70,7 @@ nav h1 i{
 }
 
 #toolbox{
-    width: 400px;
+    width: fit-content;
     z-index: 20;
     background-color: white;
 }
@@ -143,11 +143,12 @@ nav h1 i{
     position: absolute;
     z-index: 10;
     left: 0;
+    bottom: 0;
     transition: 300ms ease-in-out;
 }
 
 #tools .show-filters{
-    left: 400px;
+    left: 330px;
 }
 
 #base-toggle > .AAA:hover,
@@ -191,7 +192,7 @@ nav h1 i{
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     position: relative;
     width: 800px;
     height: 100px;
@@ -199,6 +200,7 @@ nav h1 i{
 
 #canvas{
     border: 2px solid black;
+    box-sizing: border-box;
     position: absolute;
     z-index: 1;
     width: 100%;
@@ -398,7 +400,7 @@ nav h1 i{
     border-bottom: 2px solid rgb(51, 51, 51);
 }
 
-/* resize welcom modal */
+/* resize welcome modal */
 @media (max-width: 1850px){
     .last-modal-images{
         justify-content: center;
@@ -409,6 +411,7 @@ nav h1 i{
 
 /* resize canvas  */
 @media (max-width: 1740px){
+    #main-seq,
     #main-seq canvas{
         width: 600px;
         height: 80px;
@@ -424,4 +427,67 @@ nav h1 i{
     .chart-container{
         flex-direction: column;
     }
+}
+
+/* move filters, resize canvas  */
+@media (max-width: 1340px){
+    #main-seq,
+    #main-seq canvas{
+        width: 400px;
+        height: 80px;
+    }
+
+    #main-seq canvas:last-child{
+        height: 100px;
+    }
+
+    #tools .show-filters{
+        left: 0;
+        bottom: 40px;
+    }
+
+
+}
+
+/* scroll to see all 3 */
+@media (max-width: 1000px){
+    #main-seq,
+    #main-seq canvas{
+        width: 800px;
+        height: 80px;
+    }
+
+    #main-seq canvas:last-child{
+        height: 100px;
+    }
+
+    #tools .show-filters{
+        left: 330px;
+        bottom: 0px;
+    }
+
+    body{
+        flex-direction: column;
+    }
+
+    .chart-container{
+        flex-direction: row;
+    }
+
+    .data-container{
+        width: 100%;
+    }
+
+    
+}
+
+/* minimize canvas, navbar, toggle bar charts and immersion */
+@media (max-width: 940px){
+
+}
+
+
+/* toggle between three views */
+@media screen and (max-width: 600px){
+
 }

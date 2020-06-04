@@ -31,6 +31,8 @@ class Sequence{
     drawSeq(startIdx = this.prevStartIdx, endIdx = null, bases = "ATCG"){ //draws seq in specified range
         let canvas = document.getElementById("canvas");
         let ctx = canvas.getContext('2d');
+        let cWidth = ctx.canvas.width;
+        let cHeight = ctx.canvas.height;
         if (!endIdx) endIdx = Math.floor(canvas.width / this.rectWidth) + this.prevStartIdx;
         if (this.inSelection) this.toolbox.allowReset();
 
@@ -50,7 +52,7 @@ class Sequence{
 
         if (startIdx >= endIdx){
             return;
-        } else if (endIdx - startIdx < 160){ //use dynamic widths
+        } else if (endIdx - startIdx < Math.floor(this.rectWidth * ctx.canvas.width)){ //use dynamic widths
             this.rectWidth = canvas.width / (endIdx - startIdx + 1);
         } else {
             this.rectWidth = 5;
@@ -62,8 +64,8 @@ class Sequence{
         let mainSeq = document.getElementById("main-seq");
         mainSeq.removeChild(overlay);
         overlay = document.createElement("canvas");
-        overlay.setAttribute("width", "800");
-        overlay.setAttribute("height", "100");
+        overlay.setAttribute("width", cWidth);
+        overlay.setAttribute("height", cHeight);
         overlay.setAttribute("id", "overlay");
         mainSeq.appendChild(overlay);
 

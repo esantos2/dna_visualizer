@@ -11,8 +11,13 @@ const immersion = (chosenSeq = DataSet.zika.seq) => {
 
     //setup canvas
     const onWindowResize = () => {
-        camera.aspect = (window.innerWidth/2) / window.innerHeight;
-        renderer.setSize(window.innerWidth/2, window.innerHeight);
+        if (window.innerWidth < 1000){
+            camera.aspect = (window.innerWidth) / window.innerHeight;
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        } else {
+            camera.aspect = (window.innerWidth/2) / window.innerHeight;
+            renderer.setSize(window.innerWidth/2, window.innerHeight);
+        }
         camera.updateProjectionMatrix();
     };
     window.addEventListener('resize', onWindowResize, false);

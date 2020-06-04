@@ -43,7 +43,7 @@ class ToolBox{
 
         //submit selection
         let handleSelection = document.createElement("button");
-        handleSelection.innerHTML = "Select Region";
+        handleSelection.innerHTML = "Select";
         handleSelection.setAttribute("id", "new-seq-btn");
         handleSelection.classList.add("new-seq-btn");
         Util.disableBtn(handleSelection);
