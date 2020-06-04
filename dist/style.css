@@ -3,7 +3,7 @@ body{
     font-family: "Montserrat";
     display: none;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     position: relative;
 }
 
@@ -396,4 +396,32 @@ nav h1 i{
     max-width: 700px;
     border-top: 2px solid rgb(51, 51, 51);
     border-bottom: 2px solid rgb(51, 51, 51);
+}
+
+/* resize welcom modal */
+@media (max-width: 1850px){
+    .last-modal-images{
+        justify-content: center;
+        text-align: center;
+        overflow: scroll;
+    }
+}
+
+/* resize canvas  */
+@media (max-width: 1740px){
+    #main-seq canvas{
+        width: 600px;
+        height: 80px;
+    }
+
+    #main-seq canvas:last-child{
+        height: 100px;
+    }
+}
+
+/* move second bar chart  */
+@media (max-width: 1600px){ 
+    .chart-container{
+        flex-direction: column;
+    }
 }

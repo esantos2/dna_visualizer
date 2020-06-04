@@ -1,5 +1,4 @@
 import * as DataSet from '../datasets/sequences';
-import * as SeqUtil from './util';
 import displayCitation from './citation_box';
 import Sequence from './sequence';
 
