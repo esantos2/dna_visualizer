@@ -1,6 +1,6 @@
 # DNA Visualizer
 
-<img  align="right" max-width="auto" max-height="700px" src="/home/esant2/Documents/dna_visualizer/dist/gifs/dna_mobile_strand.gif">
+<img  align="right" max-width="auto" max-height="700px" src="dist/gifs/dna_mobile_strand.gif">
 
 Closely examine the DNA sequence of various species and diseases through dynamic charts and 3D renderings.
 
@@ -18,14 +18,14 @@ This app is compatible with devices of all sizes and all OS's, and consistent im
 ### Regional selections
 * Select specific regions of a sequence to examine in more detail.
 <p align="center">
-  <img max-width="400px" height="auto" src="dist/gifs/selected_seq4.gif">
+  <img width="500px" height="auto" src="dist/gifs/selected_seq4.gif">
 </p>
 
 ### Base filtering
 * Filter the current selection by specific nucleotide bases.
 
 <p align="center">
-  <img max-width="400px" height="auto" src="dist/gifs/filter3.gif">
+  <img width="500px" height="auto" src="dist/gifs/filter3.gif">
 </p>
 
 * When filtering, the selection sequence is redrawn to omit the unselected bases.
