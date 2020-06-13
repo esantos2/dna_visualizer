@@ -1,4 +1,4 @@
-<img  align="right" max-width="auto" max-height="600px" src="dist/gifs/dna_mobile_strand2.gif">
+<img  align="right" max-width="auto" max-height="600px" src="dist/gifs/dna_mobile_strand3.gif">
 
 # DNA Visualizer
 
