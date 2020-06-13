@@ -1,6 +1,6 @@
-<img  align="right" max-width="auto" max-height="600px" src="dist/gifs/dna_mobile_strand3.gif">
 
 # DNA Visualizer
+<img  align="right" max-width="auto" max-height="400px" src="dist/gifs/dna_mobile_strand3.gif">
 
 Closely examine the DNA sequence of various species and diseases through dynamic charts and 3D renderings.
 
