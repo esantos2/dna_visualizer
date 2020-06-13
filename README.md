@@ -1,6 +1,6 @@
-# DNA Visualizer
+<img  align="right" max-width="auto" max-height="600px" src="dist/gifs/dna_mobile_strand2.gif">
 
-<img  align="right" max-width="auto" max-height="700px" src="dist/gifs/dna_mobile_strand.gif">
+# DNA Visualizer
 
 Closely examine the DNA sequence of various species and diseases through dynamic charts and 3D renderings.
 
@@ -18,14 +18,14 @@ This app is compatible with devices of all sizes and all OS's, and consistent im
 ### Regional selections
 * Select specific regions of a sequence to examine in more detail.
 <p align="center">
-  <img width="500px" height="auto" src="dist/gifs/selected_seq4.gif">
+  <img width="550px" height="auto" src="dist/gifs/selected_seq4.gif">
 </p>
 
 ### Base filtering
 * Filter the current selection by specific nucleotide bases.
 
 <p align="center">
-  <img width="500px" height="auto" src="dist/gifs/filter3.gif">
+  <img width="550px" height="auto" src="dist/gifs/filter3.gif">
 </p>
 
 * When filtering, the selection sequence is redrawn to omit the unselected bases.
@@ -55,7 +55,7 @@ This app is compatible with devices of all sizes and all OS's, and consistent im
 * When a new selection is made, the raw sequence is sent to the ```Sequence``` object, which parses the string and counts the permitted bases. The string is sent to the ```immersion``` function to be rendered as a model, while the count is sent directly to the ```drawCharts``` function to build the bar graphs. This allows parsing to happen at a single location, and auxiliary functions render the data in real time.
 
 ### 3D modelling
-* The 3D model of the selected strand is generated using the Three.js library. To replicate the helical nature of DNA, each level of 
+* The 3D model is generated using the Three.js library. To replicate the helical nature of DNA, each level of 
     the model contains a row of shapes that are rotated at a fixed integer multiple of radians. This allows for consistent positioning 
     and spacing throughout the rendering, and by incrementing at an acute angle over time, the repetition creates a uniform helix 
     representative of a simplified DNA molecule.
