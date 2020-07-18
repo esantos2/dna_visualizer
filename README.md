@@ -48,8 +48,8 @@ This app is compatible with devices of all sizes and all OS's, and consistent im
 * Users can interact with a 3D model that is rendered based on the currently selected strand.
 
 <p align="center">
-  <img max-width="300px" height="auto" src="dist/gifs/charts1.gif">
-  <img max-width="300px" height="auto" src="dist/gifs/strand2.gif">
+  <img width="300px" height="auto" src="dist/gifs/charts1.gif">
+  <img width="300px" height="auto" src="dist/gifs/strand2.gif">
 </p>
 
 * When a new selection is made, the raw sequence is sent to the ```Sequence``` object, which parses the string and counts the permitted bases. The string is sent to the ```immersion``` function to be rendered as a model, while the count is sent directly to the ```drawCharts``` function to build the bar graphs. This allows parsing to happen at a single location, and auxiliary functions render the data in real time.
