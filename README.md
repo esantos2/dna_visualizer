@@ -4,7 +4,7 @@
 
 Closely examine the DNA sequence of various species and diseases through dynamic charts and 3D renderings.
 
-[Live Demo](https://arctive.github.io/dna_visualizer/)
+[Live Demo](https://esantos2.github.io/dna_visualizer/)
 
 ## Technologies
 * HTML/CSS/JS
