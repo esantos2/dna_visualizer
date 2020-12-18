@@ -9,15 +9,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Arctive/dna_visualizer.git"
+    "url": "git+https://github.com/esantos2/dna_visualizer.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Arctive/dna_visualizer/issues"
+    "url": "https://github.com/esantos2/dna_visualizer/issues"
   },
-  "homepage": "https://github.com/Arctive/dna_visualizer#readme",
+  "homepage": "https://github.com/esantos2/dna_visualizer#readme",
   "dependencies": {
     "d3": "^5.16.0",
     "dat.gui": "^0.7.7",
