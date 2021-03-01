@@ -21,7 +21,7 @@
   "dependencies": {
     "d3": "^5.16.0",
     "dat.gui": "^0.7.7",
-    "three": "^0.116.1",
+    "three": "^0.125.0",
     "webpack": "^4.44.2",
     "webpack-cli": "^3.3.12"
   }
