@@ -39,3 +39,9 @@ export const createElementWithClass = (elementType, className) => {
     newElement.setAttribute("class", className);
     return newElement;
 }
+
+export const createImageElement = (imgLink) => {
+    const newImg = document.createElement("img");
+    newImg.setAttribute("src", imgLink);
+    return newImg;
+}

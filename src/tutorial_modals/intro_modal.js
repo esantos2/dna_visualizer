@@ -1,4 +1,4 @@
-import { createElementWithClass } from '../util';
+import { createElementWithClass, createImageElement } from '../util';
 
 export {
     openTutorial
@@ -58,8 +58,7 @@ const modal1 = (welcomePrompt) => {
     desc.innerHTML = "Explore and analyze DNA sequences from a variety of species and diseases"
     let newLine = document.createElement("p");
     newLine.innerHTML = "Click + Drag to select a region, then click \"Select Region\" to zoom in on your selection";
-    let newImg = document.createElement("img");
-    newImg.setAttribute("src", "dist/gifs/selected_seq4.gif");
+    const newImg = createImageElement("dist/gifs/selected_seq4.gif");
     welcomePrompt.appendChild(title);
     welcomePrompt.appendChild(desc);
     welcomePrompt.appendChild(newLine);
@@ -71,8 +70,7 @@ const modal2 = (welcomePrompt) => {
     welcomePrompt.innerHTML = "";
     let newLine = document.createElement("p");
     newLine.innerHTML = "Highlight different bases using filters";
-    let newImg = document.createElement("img");
-    newImg.setAttribute("src", "dist/gifs/filter3.gif");
+    const newImg = createImageElement("dist/gifs/filter3.gif");
     welcomePrompt.appendChild(newLine);
     welcomePrompt.appendChild(newImg);
     prevButton(modal1, welcomePrompt);
@@ -84,10 +82,8 @@ const modal3 = (welcomePrompt) => {
     let newLine = document.createElement("p");
     newLine.innerHTML = "Bar charts and the 3D model provide more to explore and update with new selections";
     const images = createElementWithClass("div", "last-modal-images");
-    let newImg1 = document.createElement("img");
-    newImg1.setAttribute("src", "dist/gifs/charts1.gif");
-    let newImg2 = document.createElement("img");
-    newImg2.setAttribute("src", "dist/gifs/strand2.gif");
+    const newImg1 = createImageElement("dist/gifs/charts1.gif");
+    const newImg2 = createImageElement("dist/gifs/strand2.gif");
     images.appendChild(newImg1);
     images.appendChild(newImg2);
     let startBtn = document.createElement("button");
