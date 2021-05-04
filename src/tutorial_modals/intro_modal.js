@@ -1,25 +1,23 @@
+import { createElementWithClass } from '../util';
+
 export {
     openTutorial
 };
 
 const openTutorial = () => {
     const modal = _modalTemplate();
-    
-    const welcomePrompt = document.createElement("div");
-    welcomePrompt.setAttribute("class", "welcome-prompt");
-
+    const welcomePrompt = createElementWithClass("div", "welcome-prompt");
     modal1(welcomePrompt);
     modal.appendChild(welcomePrompt);
 }
 
 const _modalTemplate = () => {
     const modalContainer = document.getElementById("modal");
-    const modalBackground = document.createElement("div");
-    modalBackground.setAttribute("class", "modal-back");
+    
+    const modalBackground = createElementWithClass("div", "modal-back");
     modalBackground.addEventListener("click", closeModal);
     
-    const modalInterior = document.createElement("div");
-    modalInterior.setAttribute("class", "modal-box");
+    const modalInterior = createElementWithClass("div", "modal-box");
     modalInterior.addEventListener("click", e => e.stopPropagation());
 
     modalBackground.append(modalInterior);
@@ -85,8 +83,7 @@ const modal3 = (welcomePrompt) => {
     welcomePrompt.innerHTML = "";
     let newLine = document.createElement("p");
     newLine.innerHTML = "Bar charts and the 3D model provide more to explore and update with new selections";
-    let images = document.createElement("div");
-    images.setAttribute("class", "last-modal-images");
+    const images = createElementWithClass("div", "last-modal-images");
     let newImg1 = document.createElement("img");
     newImg1.setAttribute("src", "dist/gifs/charts1.gif");
     let newImg2 = document.createElement("img");

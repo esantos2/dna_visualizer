@@ -33,3 +33,9 @@ export const closeDropdowns = () => {
     document.getElementById("seq-selection").classList.remove("show-list");
     document.getElementById("seq-selection-mobile").classList.remove("show-list");
 }
+
+export const createElementWithClass = (elementType, className) => {
+    const newElement = document.createElement(elementType);
+    newElement.setAttribute("class", className);
+    return newElement;
+}
