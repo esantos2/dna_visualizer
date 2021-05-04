@@ -1,28 +1,33 @@
-export const openModal = () => {
-    //setup modal
-    let modal = document.getElementById("modal");
+export {
+    openTutorial
+};
 
-    let modalBack = document.createElement("div");
-    modalBack.setAttribute("class", "modal-back");
-    modalBack.addEventListener("click", closeModal);
+const openTutorial = () => {
+    const modal = _modalTemplate();
     
-    let modalBox = document.createElement("div");
-    modalBox.setAttribute("class", "modal-box");
-    modalBox.addEventListener("click", e => e.stopPropagation());
-    
-    let welcomePrompt = document.createElement("div");
+    const welcomePrompt = document.createElement("div");
     welcomePrompt.setAttribute("class", "welcome-prompt");
 
-    //contents
     modal1(welcomePrompt);
-
-    //add to html
-    modalBox.appendChild(welcomePrompt);
-    modalBack.appendChild(modalBox);
-    modal.appendChild(modalBack);
+    modal.appendChild(welcomePrompt);
 }
 
-export const closeModal = (e) => {
+const _modalTemplate = () => {
+    const modalContainer = document.getElementById("modal");
+    const modalBackground = document.createElement("div");
+    modalBackground.setAttribute("class", "modal-back");
+    modalBackground.addEventListener("click", closeModal);
+    
+    const modalInterior = document.createElement("div");
+    modalInterior.setAttribute("class", "modal-box");
+    modalInterior.addEventListener("click", e => e.stopPropagation());
+
+    modalBackground.append(modalInterior);
+    modalContainer.appendChild(modalBackground);
+    return modalInterior;
+}
+
+const closeModal = (e) => {
     e.preventDefault();
     document.getElementById("modal").innerHTML = "";
 }
@@ -47,7 +52,7 @@ const prevButton = (prevModal, prompt) => {
     prompt.appendChild(prevBtn);
 }
 
-export const modal1 = (welcomePrompt) => {
+const modal1 = (welcomePrompt) => {
     welcomePrompt.innerHTML = "";
     let title = document.createElement("h1");
     title.innerHTML = "Welcome to the DNA Visualizer"
@@ -64,7 +69,7 @@ export const modal1 = (welcomePrompt) => {
     nextButton(modal2, welcomePrompt);
 }
 
-export const modal2 = (welcomePrompt) => {
+const modal2 = (welcomePrompt) => {
     welcomePrompt.innerHTML = "";
     let newLine = document.createElement("p");
     newLine.innerHTML = "Highlight different bases using filters";
@@ -76,7 +81,7 @@ export const modal2 = (welcomePrompt) => {
     nextButton(modal3, welcomePrompt);
 }
 
-export const modal3 = (welcomePrompt) => {
+const modal3 = (welcomePrompt) => {
     welcomePrompt.innerHTML = "";
     let newLine = document.createElement("p");
     newLine.innerHTML = "Bar charts and the 3D model provide more to explore and update with new selections";

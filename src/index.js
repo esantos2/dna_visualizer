@@ -1,11 +1,11 @@
 import drawDropdown from './dropdown';
 import {displaySeq} from './display_seq';
-import { openModal } from './tutorial_modals/intro_modal';
+import { openTutorial } from './tutorial_modals/intro_modal';
 
 document.addEventListener("DOMContentLoaded", () => {
-    openModal();
-    document.getElementById("tutorial").addEventListener("click", openModal);
-    document.getElementById("tutorial-mobile").addEventListener("click", openModal);
+    openTutorial();
+    document.getElementById("tutorial").addEventListener("click", openTutorial);
+    document.getElementById("tutorial-mobile").addEventListener("click", openTutorial);
     document.getElementById("content").style.display = "flex";
     drawDropdown();
     displaySeq();
