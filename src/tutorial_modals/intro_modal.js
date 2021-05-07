@@ -4,7 +4,6 @@ export {
     openTutorial
 };
 
-
 const BUTTON_TEXT = {
     PREV_ARROW: "< Prev",
     NEXT_ARROW: "Next >",
@@ -22,7 +21,7 @@ const MODAL_TEXT = {
 const openTutorial = () => {
     const modal = _modalTemplate();
     const welcomePrompt = createElementWithClass("div", "welcome-prompt");
-    modal1(welcomePrompt);
+    modal_1_region_select(welcomePrompt);
     modal.appendChild(welcomePrompt);
 }
 
@@ -55,7 +54,7 @@ const addNavigationButton = (buildNextModal, modalContext, buttonTextDirection) 
     modalContext.appendChild(arrowBtn);
 }
 
-const modal1 = (welcomePrompt) => {
+const modal_1_region_select = (welcomePrompt) => {
     welcomePrompt.innerHTML = "";
     let title = document.createElement("h1");
     title.innerHTML = MODAL_TEXT.TITLE;
@@ -68,21 +67,21 @@ const modal1 = (welcomePrompt) => {
     welcomePrompt.appendChild(desc);
     welcomePrompt.appendChild(newLine);
     welcomePrompt.appendChild(newImg);
-    addNavigationButton(modal2, welcomePrompt, BUTTON_TEXT.NEXT_ARROW);
+    addNavigationButton(modal_2_filters, welcomePrompt, BUTTON_TEXT.NEXT_ARROW);
 }
 
-const modal2 = (welcomePrompt) => {
+const modal_2_filters = (welcomePrompt) => {
     welcomePrompt.innerHTML = "";
     let newLine = document.createElement("p");
     newLine.innerHTML = MODAL_TEXT.FILTERS;
     const newImg = createImageElement("dist/gifs/filter3.gif");
     welcomePrompt.appendChild(newLine);
     welcomePrompt.appendChild(newImg);
-    addNavigationButton(modal1, welcomePrompt, BUTTON_TEXT.PREV_ARROW);
-    addNavigationButton(modal3, welcomePrompt, BUTTON_TEXT.NEXT_ARROW);
+    addNavigationButton(modal_1_region_select, welcomePrompt, BUTTON_TEXT.PREV_ARROW);
+    addNavigationButton(modal_3_data_models, welcomePrompt, BUTTON_TEXT.NEXT_ARROW);
 }
 
-const modal3 = (welcomePrompt) => {
+const modal_3_data_models = (welcomePrompt) => {
     welcomePrompt.innerHTML = "";
     let newLine = document.createElement("p");
     newLine.innerHTML = MODAL_TEXT.DATA_MODELS;
@@ -99,6 +98,6 @@ const modal3 = (welcomePrompt) => {
     })
     welcomePrompt.appendChild(newLine);
     welcomePrompt.appendChild(images);
-    addNavigationButton(modal2, welcomePrompt, BUTTON_TEXT.PREV_ARROW);
+    addNavigationButton(modal_2_filters, welcomePrompt, BUTTON_TEXT.PREV_ARROW);
     welcomePrompt.appendChild(startBtn);
 }
