@@ -44,25 +44,24 @@ const closeModal = (e) => {
     document.getElementById("modal").innerHTML = "";
 }
 
-const addNavigationButton = (buildNextModal, modalContext, buttonTextDirection) => {
-    let arrowBtn = document.createElement("button");
+const getNavigationButton = (prompt, nextModal, buttonTextDirection) => {
+    const arrowBtn = document.createElement("button");
     arrowBtn.innerHTML = buttonTextDirection;
     arrowBtn.addEventListener("click", (e) => {
         e.preventDefault();
-        buildNextModal(modalContext);
+        nextModal(prompt);
     });
-    modalContext.appendChild(arrowBtn);
+    return arrowBtn;
 }
 
 const modal_1_region_select = (welcomePrompt) => {
     welcomePrompt.innerHTML = "";
     const fragment = document.createDocumentFragment();
-    _modal_1_elements().forEach(ele => fragment.appendChild(ele));
-    welcomePrompt.appendChild(fragment);    
-    addNavigationButton(modal_2_filters, welcomePrompt, BUTTON_TEXT.NEXT_ARROW);
+    _modal_1_elements(welcomePrompt).forEach(ele => fragment.appendChild(ele));
+    welcomePrompt.appendChild(fragment);
 }
 
-const _modal_1_elements = () => {
+const _modal_1_elements = (prompt) => {
     const title = document.createElement("h1");
     title.innerHTML = MODAL_TEXT.TITLE;
     const overview = document.createElement("p");
@@ -70,7 +69,8 @@ const _modal_1_elements = () => {
     const regionSelectText = document.createElement("p");
     regionSelectText.innerHTML = MODAL_TEXT.REGION_SELECT;
     const regionSelectImg = createImageElement("dist/gifs/selected_seq4.gif");
-    return [title, overview, regionSelectText, regionSelectImg];
+    const nextModalBtn = getNavigationButton(prompt, modal_2_filters, BUTTON_TEXT.NEXT_ARROW);
+    return [title, overview, regionSelectText, regionSelectImg, nextModalBtn];
 }
 
 const modal_2_filters = (welcomePrompt) => {
@@ -80,8 +80,10 @@ const modal_2_filters = (welcomePrompt) => {
     const newImg = createImageElement("dist/gifs/filter3.gif");
     welcomePrompt.appendChild(newLine);
     welcomePrompt.appendChild(newImg);
-    addNavigationButton(modal_1_region_select, welcomePrompt, BUTTON_TEXT.PREV_ARROW);
-    addNavigationButton(modal_3_data_models, welcomePrompt, BUTTON_TEXT.NEXT_ARROW);
+    const prevBtn = getNavigationButton(welcomePrompt, modal_1_region_select, BUTTON_TEXT.PREV_ARROW);
+    const nextBtn = getNavigationButton(welcomePrompt, modal_3_data_models, BUTTON_TEXT.NEXT_ARROW);
+    welcomePrompt.appendChild(prevBtn);
+    welcomePrompt.appendChild(nextBtn);
 }
 
 const modal_3_data_models = (welcomePrompt) => {
@@ -101,6 +103,7 @@ const modal_3_data_models = (welcomePrompt) => {
     })
     welcomePrompt.appendChild(newLine);
     welcomePrompt.appendChild(images);
-    addNavigationButton(modal_2_filters, welcomePrompt, BUTTON_TEXT.PREV_ARROW);
+    const prevBtn = getNavigationButton(welcomePrompt, modal_2_filters, BUTTON_TEXT.PREV_ARROW);
+    welcomePrompt.appendChild(prevBtn);
     welcomePrompt.appendChild(startBtn);
 }
