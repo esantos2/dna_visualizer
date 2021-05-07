@@ -56,18 +56,21 @@ const addNavigationButton = (buildNextModal, modalContext, buttonTextDirection) 
 
 const modal_1_region_select = (welcomePrompt) => {
     welcomePrompt.innerHTML = "";
-    let title = document.createElement("h1");
-    title.innerHTML = MODAL_TEXT.TITLE;
-    let desc = document.createElement("p");
-    desc.innerHTML = MODAL_TEXT.OVERVIEW;
-    let newLine = document.createElement("p");
-    newLine.innerHTML = MODAL_TEXT.REGION_SELECT;
-    const newImg = createImageElement("dist/gifs/selected_seq4.gif");
-    welcomePrompt.appendChild(title);
-    welcomePrompt.appendChild(desc);
-    welcomePrompt.appendChild(newLine);
-    welcomePrompt.appendChild(newImg);
+    const fragment = document.createDocumentFragment();
+    _modal_1_elements().forEach(ele => fragment.appendChild(ele));
+    welcomePrompt.appendChild(fragment);    
     addNavigationButton(modal_2_filters, welcomePrompt, BUTTON_TEXT.NEXT_ARROW);
+}
+
+const _modal_1_elements = () => {
+    const title = document.createElement("h1");
+    title.innerHTML = MODAL_TEXT.TITLE;
+    const overview = document.createElement("p");
+    overview.innerHTML = MODAL_TEXT.OVERVIEW;
+    const regionSelectText = document.createElement("p");
+    regionSelectText.innerHTML = MODAL_TEXT.REGION_SELECT;
+    const regionSelectImg = createImageElement("dist/gifs/selected_seq4.gif");
+    return [title, overview, regionSelectText, regionSelectImg];
 }
 
 const modal_2_filters = (welcomePrompt) => {
