@@ -75,15 +75,18 @@ const _modal_1_elements = (prompt) => {
 
 const modal_2_filters = (welcomePrompt) => {
     welcomePrompt.innerHTML = "";
-    let newLine = document.createElement("p");
-    newLine.innerHTML = MODAL_TEXT.FILTERS;
+    const fragment = document.createDocumentFragment();
+    _model_2_elements(welcomePrompt).forEach(ele => fragment.appendChild(ele));
+    welcomePrompt.appendChild(fragment);
+}
+
+const _model_2_elements = (prompt) => {
+    const filtersText = document.createElement("p");
+    filtersText.innerHTML = MODAL_TEXT.FILTERS;
     const newImg = createImageElement("dist/gifs/filter3.gif");
-    welcomePrompt.appendChild(newLine);
-    welcomePrompt.appendChild(newImg);
-    const prevBtn = getNavigationButton(welcomePrompt, modal_1_region_select, BUTTON_TEXT.PREV_ARROW);
-    const nextBtn = getNavigationButton(welcomePrompt, modal_3_data_models, BUTTON_TEXT.NEXT_ARROW);
-    welcomePrompt.appendChild(prevBtn);
-    welcomePrompt.appendChild(nextBtn);
+    const prevBtn = getNavigationButton(prompt, modal_1_region_select, BUTTON_TEXT.PREV_ARROW);
+    const nextBtn = getNavigationButton(prompt, modal_3_data_models, BUTTON_TEXT.NEXT_ARROW);
+    return [filtersText, newImg, prevBtn, nextBtn];
 }
 
 const modal_3_data_models = (welcomePrompt) => {
