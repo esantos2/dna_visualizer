@@ -91,22 +91,29 @@ const _model_2_elements = (prompt) => {
 
 const modal_3_data_models = (welcomePrompt) => {
     welcomePrompt.innerHTML = "";
-    let newLine = document.createElement("p");
-    newLine.innerHTML = MODAL_TEXT.DATA_MODELS;
+    const fragment = document.createDocumentFragment();
+    _modal_3_elements(welcomePrompt).forEach(ele => fragment.appendChild(ele));
+    welcomePrompt.appendChild(fragment);
+}
+
+const _modal_3_elements = (prompt) => {
+    const dataModelsText = document.createElement("p");
+    dataModelsText.innerHTML = MODAL_TEXT.DATA_MODELS;
+
     const images = createElementWithClass("div", "last-modal-images");
     const newImg1 = createImageElement("dist/gifs/charts1.gif");
     const newImg2 = createImageElement("dist/gifs/strand2.gif");
     images.appendChild(newImg1);
     images.appendChild(newImg2);
-    let startBtn = document.createElement("button");
+
+    const prevBtn = getNavigationButton(prompt, modal_2_filters, BUTTON_TEXT.PREV_ARROW);
+
+    const startBtn = document.createElement("button");
     startBtn.innerHTML = BUTTON_TEXT.START;
     startBtn.addEventListener("click", (e) => {
         e.preventDefault();
         closeModal(e);
-    })
-    welcomePrompt.appendChild(newLine);
-    welcomePrompt.appendChild(images);
-    const prevBtn = getNavigationButton(welcomePrompt, modal_2_filters, BUTTON_TEXT.PREV_ARROW);
-    welcomePrompt.appendChild(prevBtn);
-    welcomePrompt.appendChild(startBtn);
+    });
+
+    return [dataModelsText, images, prevBtn, startBtn];
 }
