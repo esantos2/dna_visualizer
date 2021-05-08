@@ -19,10 +19,10 @@ const MODAL_TEXT = {
 };
 
 const openTutorial = () => {
-    const modal = _modalTemplate();
-    const welcomePrompt = createElementWithClass("div", "welcome-prompt");
-    modal_1_region_select(welcomePrompt);
-    modal.appendChild(welcomePrompt);
+    const modalTemplate = _modalTemplate();
+    const modalContainer = createElementWithClass("div", "welcome-prompt");
+    createModal(modalContainer, get_modal_1_elements);
+    modalTemplate.appendChild(modalContainer);
 }
 
 const _modalTemplate = () => {
@@ -44,24 +44,24 @@ const closeModal = (e) => {
     document.getElementById("modal").innerHTML = "";
 }
 
-const getNavigationButton = (prompt, nextModal, buttonTextDirection) => {
+const getNavigationButton = (container, nextModalElements, buttonTextDirection) => {
     const arrowBtn = document.createElement("button");
     arrowBtn.innerHTML = buttonTextDirection;
     arrowBtn.addEventListener("click", (e) => {
         e.preventDefault();
-        nextModal(prompt);
+        createModal(container, nextModalElements);
     });
     return arrowBtn;
 }
 
-const modal_1_region_select = (welcomePrompt) => {
-    welcomePrompt.innerHTML = "";
+const createModal = (modalContainer, getModalElements) => {
+    modalContainer.innerHTML = "";
     const fragment = document.createDocumentFragment();
-    _modal_1_elements(welcomePrompt).forEach(ele => fragment.appendChild(ele));
-    welcomePrompt.appendChild(fragment);
+    getModalElements(modalContainer).forEach(ele => fragment.appendChild(ele));
+    modalContainer.appendChild(fragment);
 }
 
-const _modal_1_elements = (prompt) => {
+const get_modal_1_elements = (modalContainer) => {
     const title = document.createElement("h1");
     title.innerHTML = MODAL_TEXT.TITLE;
     const overview = document.createElement("p");
@@ -69,34 +69,20 @@ const _modal_1_elements = (prompt) => {
     const regionSelectText = document.createElement("p");
     regionSelectText.innerHTML = MODAL_TEXT.REGION_SELECT;
     const regionSelectImg = createImageElement("dist/gifs/selected_seq4.gif");
-    const nextModalBtn = getNavigationButton(prompt, modal_2_filters, BUTTON_TEXT.NEXT_ARROW);
+    const nextModalBtn = getNavigationButton(modalContainer, get_model_2_elements, BUTTON_TEXT.NEXT_ARROW);
     return [title, overview, regionSelectText, regionSelectImg, nextModalBtn];
 }
 
-const modal_2_filters = (welcomePrompt) => {
-    welcomePrompt.innerHTML = "";
-    const fragment = document.createDocumentFragment();
-    _model_2_elements(welcomePrompt).forEach(ele => fragment.appendChild(ele));
-    welcomePrompt.appendChild(fragment);
-}
-
-const _model_2_elements = (prompt) => {
+const get_model_2_elements = (modalContainer) => {
     const filtersText = document.createElement("p");
     filtersText.innerHTML = MODAL_TEXT.FILTERS;
     const newImg = createImageElement("dist/gifs/filter3.gif");
-    const prevBtn = getNavigationButton(prompt, modal_1_region_select, BUTTON_TEXT.PREV_ARROW);
-    const nextBtn = getNavigationButton(prompt, modal_3_data_models, BUTTON_TEXT.NEXT_ARROW);
+    const prevBtn = getNavigationButton(modalContainer, get_modal_1_elements, BUTTON_TEXT.PREV_ARROW);
+    const nextBtn = getNavigationButton(modalContainer, get_modal_3_elements, BUTTON_TEXT.NEXT_ARROW);
     return [filtersText, newImg, prevBtn, nextBtn];
 }
 
-const modal_3_data_models = (welcomePrompt) => {
-    welcomePrompt.innerHTML = "";
-    const fragment = document.createDocumentFragment();
-    _modal_3_elements(welcomePrompt).forEach(ele => fragment.appendChild(ele));
-    welcomePrompt.appendChild(fragment);
-}
-
-const _modal_3_elements = (prompt) => {
+const get_modal_3_elements = (modalContainer) => {
     const dataModelsText = document.createElement("p");
     dataModelsText.innerHTML = MODAL_TEXT.DATA_MODELS;
 
@@ -106,7 +92,7 @@ const _modal_3_elements = (prompt) => {
     images.appendChild(newImg1);
     images.appendChild(newImg2);
 
-    const prevBtn = getNavigationButton(prompt, modal_2_filters, BUTTON_TEXT.PREV_ARROW);
+    const prevBtn = getNavigationButton(modalContainer, get_model_2_elements, BUTTON_TEXT.PREV_ARROW);
 
     const startBtn = document.createElement("button");
     startBtn.innerHTML = BUTTON_TEXT.START;
