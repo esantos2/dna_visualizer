@@ -1,4 +1,5 @@
 import * as THREE from 'three';
+import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import * as DataSet from '../datasets/sequences';
 
 const immersion = (chosenSeq = DataSet.zika.seq) => {
@@ -8,6 +9,7 @@ const immersion = (chosenSeq = DataSet.zika.seq) => {
     let camera = new THREE.PerspectiveCamera(75, (window.innerWidth/2) / window.innerHeight, 0.1, 1000);
     let renderer = new THREE.WebGLRenderer();
     renderer.setSize(window.innerWidth/2, window.innerHeight);
+    const controls = new OrbitControls(camera, renderer.domElement);
 
     //setup canvas
     const onWindowResize = () => {
@@ -24,10 +26,6 @@ const immersion = (chosenSeq = DataSet.zika.seq) => {
     let container = document.getElementById("immersion");
     container.innerHTML = "";
     container.appendChild(renderer.domElement);
-
-    //move molecule
-    moveMolecule(scene, container);
-    // touchMolecule(scene, container);
 
     //colors
     const aColor = "#FF6358";   //red
@@ -94,101 +92,16 @@ const immersion = (chosenSeq = DataSet.zika.seq) => {
     scene.add(holder);
 
     camera.position.z = 60;
+    controls.update();
 
     const render = function () {
         requestAnimationFrame(render);
-        // holder.rotation.z += 0.01;
         holder.rotation.y += 0.01;
         renderer.render(scene, camera);
+        controls.update();
     }
+
     render();
-}
-
-const moveMolecule = (scene, container) => { //rotates scene based on change in mouse coordinates
-    let mouseDown = false;
-    let mouseX = 0;
-    let mouseY = 0;
-
-    const onMouseMove = (e) => {
-        if (!mouseDown) {
-            return;
-        }
-        e.preventDefault();
-        let deltaX = e.clientX - mouseX;
-        let deltaY = e.clientY - mouseY;
-        mouseX = e.clientX;
-        mouseY = e.clientY;
-        rotateScene(deltaX, deltaY);
-    }
-
-    const onMouseDown = (e) => {
-        e.preventDefault();
-        mouseDown = true;
-        mouseX = e.clientX;
-        mouseY = e.clientY;
-    }
-
-    const onMouseUp = (e) => {
-        e.preventDefault();
-        mouseDown = false;
-    }
-
-    const addMouseHandler = (canvas) => {
-        canvas.addEventListener('mousemove', onMouseMove, false);
-        canvas.addEventListener('mousedown', onMouseDown, false);
-        canvas.addEventListener('mouseup', onMouseUp, false);
-    }
-
-    const rotateScene = (deltaX, deltaY) => {
-        scene.rotation.y += deltaX / 100;
-        scene.rotation.x += deltaY / 100;
-    }
-
-    addMouseHandler(container);
-}
-
-const touchMolecule = (scene, container) => {
-    let touchActive = false;
-    let touchX = 0;
-    let touchY = 0;
-
-    const onTouchMove = (e) => {
-        e.preventDefault();
-        if (!touchActive) {
-            return;
-        }
-        console.log("touch")
-        let deltaX = e.touches[0].pageX - touchX;
-        let deltaY = e.touches[0].pageY - touchY;
-        touchX = e.touches[0].pageX;
-        touchY = e.touches[0].pageY;
-        rotateScene(deltaX, deltaY);
-    }
-
-    const onTouchStart = (e) => {
-        e.preventDefault();
-        touchActive = true;
-        touchX = e.touches[0].pageX;
-        touchY = e.touches[0].pageY;
-    }
-
-    const onTouchEnd = (e) => {
-        e.preventDefault();
-        touchActive = false;
-    }
-
-    const addTouchHandler = (canvas) => {
-        canvas.addEventListener('touchmove', onTouchMove, false);
-        canvas.addEventListener('touchStart', onTouchStart, false);
-        canvas.addEventListener('touchEnd', onTouchEnd, false);
-    }
-
-    const rotateScene = (deltaX, deltaY) => {
-        scene.rotation.y += deltaX / 100;
-        scene.rotation.x += deltaY / 100;
-    }
-
-    addTouchHandler(container);
 }
 
 export default immersion;
