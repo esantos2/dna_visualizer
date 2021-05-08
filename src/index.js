@@ -1,6 +1,6 @@
 import drawDropdown from './dropdown';
 import {displaySeq} from './display_seq';
-import { openTutorial } from './tutorial_modals/intro_modal';
+import { openTutorial } from './tutorial_modals/create_modals';
 
 document.addEventListener("DOMContentLoaded", () => {
     openTutorial();
