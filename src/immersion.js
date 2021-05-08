@@ -4,10 +4,10 @@ import * as DataSet from '../datasets/sequences';
 
 const immersion = (chosenSeq = DataSet.zika.seq) => {
     //initialize scene
-    let scene = new THREE.Scene();
+    const scene = new THREE.Scene();
     scene.background = new THREE.Color(0xffffff);
-    let camera = new THREE.PerspectiveCamera(75, (window.innerWidth/2) / window.innerHeight, 0.1, 1000);
-    let renderer = new THREE.WebGLRenderer();
+    const camera = new THREE.PerspectiveCamera(75, (window.innerWidth/2) / window.innerHeight, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer();
     renderer.setSize(window.innerWidth/2, window.innerHeight);
     const controls = new OrbitControls(camera, renderer.domElement);
 
@@ -23,7 +23,7 @@ const immersion = (chosenSeq = DataSet.zika.seq) => {
         camera.updateProjectionMatrix();
     };
     window.addEventListener('resize', onWindowResize, false);
-    let container = document.getElementById("immersion");
+    const container = document.getElementById("immersion");
     container.innerHTML = "";
     container.appendChild(renderer.domElement);
 
@@ -35,17 +35,17 @@ const immersion = (chosenSeq = DataSet.zika.seq) => {
     const bbColor = "#160036";  //dark purple
 
     //shapes
-    let tubeGeometry = new THREE.CylinderGeometry(0.3, 0.3, 6, 32);
-    let ballGeometry = new THREE.SphereGeometry(0.8, 32, 32);
+    const tubeGeometry = new THREE.CylinderGeometry(0.3, 0.3, 6, 32);
+    const ballGeometry = new THREE.SphereGeometry(0.8, 32, 32);
 
     //materials
-    let aMaterial = new THREE.MeshBasicMaterial({ color: aColor });
-    let tMaterial = new THREE.MeshBasicMaterial({ color: tColor });
-    let cMaterial = new THREE.MeshBasicMaterial({ color: cColor });
-    let gMaterial = new THREE.MeshBasicMaterial({ color: gColor });
-    let bbMaterial = new THREE.MeshBasicMaterial({ color: bbColor });
+    const aMaterial = new THREE.MeshBasicMaterial({ color: aColor });
+    const tMaterial = new THREE.MeshBasicMaterial({ color: tColor });
+    const cMaterial = new THREE.MeshBasicMaterial({ color: cColor });
+    const gMaterial = new THREE.MeshBasicMaterial({ color: gColor });
+    const bbMaterial = new THREE.MeshBasicMaterial({ color: bbColor });
 
-    let rodMaterial = {
+    const rodMaterial = {
         "A": { "mat": aMaterial, "pair": "T"},
         "T": { "mat": tMaterial, "pair": "A"},
         "C": { "mat": cMaterial, "pair": "G"},
@@ -53,8 +53,8 @@ const immersion = (chosenSeq = DataSet.zika.seq) => {
     }
 
     //main graphics
-    let dna = new THREE.Object3D();
-    let holder = new THREE.Object3D();
+    const dna = new THREE.Object3D();
+    const holder = new THREE.Object3D();
     
     //build rows
     let maxRows = chosenSeq.length;
