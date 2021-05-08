@@ -1,3 +1,5 @@
+// Modal 3: demo bar charts and 3D model
+
 import { createImageElement, createElementWithClass } from '../util';
 import { getNavigationButton, closeModal, BUTTON_TEXT } from './create_modals';
 import { get_modal_2_elements } from './modal_2_filters';

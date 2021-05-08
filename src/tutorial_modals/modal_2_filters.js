@@ -1,3 +1,5 @@
+// Modal 2: demo base filters
+
 import { createImageElement } from '../util';
 import { getNavigationButton, BUTTON_TEXT } from './create_modals';
 import { get_modal_1_elements } from './modal_1_region_select';

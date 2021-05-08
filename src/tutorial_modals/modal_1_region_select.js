@@ -1,3 +1,5 @@
+// Modal 1: project intro and demo DNA region selection
+
 import { createImageElement } from '../util';
 import { getNavigationButton, BUTTON_TEXT } from './create_modals';
 import { get_modal_2_elements } from './modal_2_filters';
