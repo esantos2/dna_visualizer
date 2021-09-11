@@ -1,5 +1,5 @@
 import drawDropdown from './dropdown';
-import {displaySeq} from './display_seq';
+import { displaySeq } from './display_seq';
 import { openTutorial } from './tutorial_modals/create_modals';
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -9,4 +9,4 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("content").style.display = "flex";
     drawDropdown();
     displaySeq();
-})
+});

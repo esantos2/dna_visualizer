@@ -13,6 +13,6 @@ export const selectSeq = (selected) => {
 
 export const displaySeq = (selected = DataSet.zika) => {
     displayCitation(selected.cite);
-    let seq = new Sequence(selected);
+    const seq = new Sequence(selected);
     seq.newSeq();
 }

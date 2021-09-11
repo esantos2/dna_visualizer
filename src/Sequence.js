@@ -3,8 +3,8 @@ import * as SeqUtil from './util';
 import ToolBox from './toolbox';
 import immersion from './immersion';
 
-class Sequence{
-    constructor(selectedSeq){
+class Sequence {
+    constructor(selectedSeq) {
         this.mainSeq = selectedSeq.seq;
         this.name = selectedSeq.name;
         this.baseTotals = selectedSeq.baseTotals;
@@ -22,7 +22,7 @@ class Sequence{
         window.addEventListener("resize", this.resizeCanvases);
     }
 
-    newSeq(){//draws initial seq
+    newSeq() {//draws initial seq
         this.inSelection = false;
         this.toolbox.drawToolBox();
         this.resizeCanvases();
@@ -31,17 +31,17 @@ class Sequence{
         drawChart(this.baseTotals, ".total-seq-box");
     }
 
-    resizeCanvases(){
+    resizeCanvases() {
         SeqUtil.closeDropdowns();
         SeqUtil.clearBottomToolTips();
-        let canvases = [
+        const canvases = [
             document.getElementById("canvas"),
             document.getElementById("tooltip"),
             document.getElementById("overlay"),
         ];
         //determine dimensions based on window size
         let newWidth = 0;
-        let windowWidth = window.innerWidth;
+        const windowWidth = window.innerWidth;
         if (windowWidth > 1740) {
             newWidth = 800;
         } else if (windowWidth > 1340) {
@@ -62,22 +62,22 @@ class Sequence{
         this.drawSeq(this.prevStartIdx, this.prevEndIdx, "ATCG");
     }
 
-    drawSeq(startIdx = this.prevStartIdx, endIdx = null, bases = "ATCG"){ //draws seq in specified range
-        let canvas = document.getElementById("canvas");
-        let ctx = canvas.getContext('2d');
-        let cWidth = ctx.canvas.clientWidth + 4;
-        let cHeight = ctx.canvas.clientHeight + 4;
+    drawSeq(startIdx = this.prevStartIdx, endIdx = null, bases = "ATCG") { //draws seq in specified range
+        const canvas = document.getElementById("canvas");
+        const ctx = canvas.getContext('2d');
+        const cWidth = ctx.canvas.clientWidth + 4;
+        const cHeight = ctx.canvas.clientHeight + 4;
         if (!endIdx) endIdx = Math.floor(cWidth / this.rectWidth) + this.prevStartIdx;
         if (this.inSelection) this.toolbox.allowReset();
 
-        let baseColor = {
+        const baseColor = {
             "A": "#FF6358", //red
             "T": "#FFD246", //yellow
             "C": "#78D237", //green
             "G": "#28B4C8"  //blue
-        }
+        };
 
-        if (startIdx !== this.prevStartIdx){ //check if selecting new seq or toggling bases
+        if (startIdx !== this.prevStartIdx) { //check if selecting new seq or toggling bases
             startIdx += this.prevStartIdx; //adjust new range
             endIdx += this.prevStartIdx;
             this.newRange = true;
@@ -85,9 +85,9 @@ class Sequence{
         this.prevStartIdx = startIdx;
         this.prevEndIdx = endIdx;
 
-        if (startIdx >= endIdx){
+        if (startIdx >= endIdx) {
             return;
-        } else if (endIdx - startIdx < Math.floor(this.rectWidth * cWidth)){ //use dynamic widths
+        } else if (endIdx - startIdx < Math.floor(this.rectWidth * cWidth)) { //use dynamic widths
             this.rectWidth = cWidth / (endIdx - startIdx + 1);
         } else {
             this.rectWidth = 5;
@@ -96,7 +96,7 @@ class Sequence{
         //reset overlay
         SeqUtil.clearCanvas(document.getElementById("canvas")); //clear seq
         let overlay = document.getElementById("overlay");
-        let mainSeq = document.getElementById("main-seq");
+        const mainSeq = document.getElementById("main-seq");
         mainSeq.removeChild(overlay);
         overlay = document.createElement("canvas");
         overlay.setAttribute("width", cWidth);
@@ -105,15 +105,15 @@ class Sequence{
         mainSeq.appendChild(overlay);
 
         //count bases
-        let baseCounts = {
+        const baseCounts = {
             "A": 0,
             "T": 0,
             "C": 0,
             "G": 0
-        }
+        };
 
         for (let i = startIdx; i <= endIdx; i++) {
-            if (bases.includes(this.mainSeq[i])){ //filter missing data points
+            if (bases.includes(this.mainSeq[i])) { //filter missing data points
                 baseCounts[this.mainSeq[i]]++;
                 ctx.fillStyle = baseColor[this.mainSeq[i]];
             } else {
@@ -124,40 +124,40 @@ class Sequence{
         this.selectRegion(); //add listeners for region selection
 
         //update details, bar graph, immersion
-        let newSeq = this.mainSeq.slice(startIdx, endIdx + 1);
+        const newSeq = this.mainSeq.slice(startIdx, endIdx + 1);
         drawChart(baseCounts, ".current-seq-box");
-        if (this.newRange){
+        if (this.newRange) {
             this.newRange = false;
             this.strandDetails();
             if (!this.toggled) immersion(newSeq);
         }
     }
 
-    strandDetails(){
-        let detailBox = document.getElementById("strand-details");
+    strandDetails() {
+        const detailBox = document.getElementById("strand-details");
         detailBox.innerHTML = "";
-        let name = document.createElement("h3");
+        const name = document.createElement("h3");
         name.innerHTML = this.name;
-        let baseRange = document.createElement("h5");
+        const baseRange = document.createElement("h5");
         baseRange.innerHTML = `Viewing ${this.prevStartIdx + 1} - ${this.prevEndIdx + 1} of ${this.baseTotalSum()} base pairs`
         detailBox.appendChild(name);
         detailBox.appendChild(baseRange);
     }
 
-    baseTotalSum(){
+    baseTotalSum() {
         let sum = 0;
         Object.values(this.baseTotals).forEach(num => sum += num)
         return sum;
     }
 
     createFilters() {
-        let baseToggle = document.getElementById("base-toggle");
+        const baseToggle = document.getElementById("base-toggle");
         baseToggle.innerHTML = "";
 
         //toggle specific base
-        let bases = "ATCG"
+        let bases = "ATCG";
         for (let base of bases){
-            let baseButton = document.createElement("button");
+            const baseButton = document.createElement("button");
             baseButton.setAttribute("class", `base ${base}${base}${base}`);
             baseButton.innerHTML = `${base}`;
             baseButton.addEventListener("click", (e) => {
@@ -168,12 +168,12 @@ class Sequence{
                 SeqUtil.disableBtn(document.getElementById("new-seq-btn"));
                 SeqUtil.disableBtn(baseButton);
                 this.drawSeq(this.prevStartIdx, this.prevEndIdx, `${base}`);
-            })
+            });
             baseToggle.appendChild(baseButton);
         }
 
         //clear toggles
-        let clearBases = document.createElement("button");
+        const clearBases = document.createElement("button");
         clearBases.setAttribute("class", "base");
         clearBases.innerHTML = "Clear filters";
         clearBases.addEventListener("click", (e) => {
@@ -183,25 +183,25 @@ class Sequence{
             this.enableToggleButtons();
             SeqUtil.disableBtn(document.getElementById("new-seq-btn"));
             this.drawSeq(this.prevStartIdx, this.prevEndIdx, bases);
-        })
+        });
         baseToggle.appendChild(clearBases);
 
     }
 
-    activateButton(button){
+    activateButton(button) {
         button.removeAttribute("disabled");
         button.classList.remove("disabled-btn");
     }
     
-    enableToggleButtons(){
-        let baseButtons = document.querySelectorAll("#base-toggle .disabled-btn");
+    enableToggleButtons() {
+        const baseButtons = document.querySelectorAll("#base-toggle .disabled-btn");
         baseButtons.forEach((base) => this.activateButton(base));
     }
 
     handleNewSelection() {
         if (this.newStartIdx >= this.newEndIdx) return;
-        let clearButton = document.getElementById("clear-selection");
-        let submitButton = document.getElementById("new-seq-btn");
+        const clearButton = document.getElementById("clear-selection");
+        const submitButton = document.getElementById("new-seq-btn");
         submitButton.removeEventListener("click", this.getNewSelection);
         submitButton.addEventListener("click", this.getNewSelection);
         this.activateButton(submitButton);
@@ -210,8 +210,8 @@ class Sequence{
 
     getNewSelection(e) {
         e.preventDefault();
-        let clearButton = document.getElementById("clear-selection");
-        let submitButton = document.getElementById("new-seq-btn");
+        const clearButton = document.getElementById("clear-selection");
+        const submitButton = document.getElementById("new-seq-btn");
         SeqUtil.disableBtn(submitButton);
         SeqUtil.disableBtn(clearButton);
         SeqUtil.clearBottomToolTips();
@@ -221,9 +221,9 @@ class Sequence{
         this.drawSeq(this.newStartIdx, this.newEndIdx);
     }
 
-    selectRegion(){
-        let overlay = document.getElementById("overlay");
-        let ctx = overlay.getContext('2d');
+    selectRegion() {
+        const overlay = document.getElementById("overlay");
+        const ctx = overlay.getContext('2d');
         let selection = false; //flag start of selection
         let start = 0;
         let xCoord = 0;
@@ -267,7 +267,7 @@ class Sequence{
             xCoord = SeqUtil.getMouseCoord(event);
         }
 
-        let tooltip = document.getElementById("tooltip");
+        const tooltip = document.getElementById("tooltip");
         //mouse events
         overlay.addEventListener('mousedown', startSelection);
         overlay.addEventListener('mouseup', stopSelection);
@@ -294,7 +294,6 @@ class Sequence{
             this.toolbox.showBaseInfo(this.prevStartIdx, this.rectWidth)(e);
         })
     }
-
 }
 
 export default Sequence;

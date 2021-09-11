@@ -50,7 +50,7 @@ const immersion = (chosenSeq = DataSet.zika.seq) => {
         "T": { "mat": tMaterial, "pair": "A"},
         "C": { "mat": cMaterial, "pair": "G"},
         "G": { "mat": gMaterial, "pair": "C"}
-    }
+    };
 
     //main graphics
     const dna = new THREE.Object3D();
@@ -60,18 +60,18 @@ const immersion = (chosenSeq = DataSet.zika.seq) => {
     let maxRows = chosenSeq.length;
     if (maxRows > 50) maxRows = 50;
     for (let i = 0; i < maxRows; i++) {
-        let row = new THREE.Object3D();
+        const row = new THREE.Object3D();
 
-        let ballRight = new THREE.Mesh(ballGeometry, bbMaterial);
+        const ballRight = new THREE.Mesh(ballGeometry, bbMaterial);
         ballRight.position.x = 6;
-        let ballLeft = new THREE.Mesh(ballGeometry, bbMaterial);
+        const ballLeft = new THREE.Mesh(ballGeometry, bbMaterial);
         ballLeft.position.x = -6;
     
-        let newRod = new THREE.Mesh(tubeGeometry, rodMaterial[chosenSeq[i]].mat);
+        const newRod = new THREE.Mesh(tubeGeometry, rodMaterial[chosenSeq[i]].mat);
         newRod.rotation.z = 90 * Math.PI / 180;
         newRod.position.x = 3;
         
-        let oppRod = new THREE.Mesh(tubeGeometry, rodMaterial[rodMaterial[chosenSeq[i]].pair].mat);
+        const oppRod = new THREE.Mesh(tubeGeometry, rodMaterial[rodMaterial[chosenSeq[i]].pair].mat);
         oppRod.rotation.z = 90 * Math.PI / 180;
         oppRod.position.x = -3;
         
@@ -88,7 +88,7 @@ const immersion = (chosenSeq = DataSet.zika.seq) => {
     dna.position.y = -40;
     scene.add(dna);
     dna.position.y = -40;
-    holder.add(dna)
+    holder.add(dna);
     scene.add(holder);
 
     camera.position.z = 60;

@@ -3,34 +3,34 @@ import * as d3 from "d3";
 const drawChart = (baseCounts, box) => {
 
     //setup chart data
-    let baseArr = [
+    const baseArr = [
         { "base": "A", "count": baseCounts["A"] },
         { "base": "T", "count": baseCounts["T"] },
         { "base": "C", "count": baseCounts["C"] },
         { "base": "G", "count": baseCounts["G"] },
-    ]
+    ];
     
     //display graph
-    let barChartBox = d3.select(box);
+    const barChartBox = d3.select(box);
     barChartBox.selectAll("*").remove();
     barChartBox.append("svg");
     
     const svg = d3.select(`${box} > svg`)
         .attr("width", 320)
-        .attr("height", 320)
+        .attr("height", 320);
     
     const margin = 100;
     const width = svg.attr("width") - margin;
     const height = svg.attr("height") - margin;
     
-    const chartName = (box === ".current-seq-box") ? "Current Selection Frequencies" : "Total Strand Frequencies"
+    const chartName = (box === ".current-seq-box") ? "Current Selection Frequencies" : "Total Strand Frequencies";
     //title
     svg.append("text")
         .attr("transform", "translate(50,0)")
         .attr("x", 10)
         .attr("y", 15)
         .attr("font-size", "14px") //20px
-        .text(chartName)
+        .text(chartName);
     
     //set graph location
     const g = svg.append("g")
@@ -91,7 +91,7 @@ const drawChart = (baseCounts, box) => {
             .attr("y", (d) => { return yScale(d.count); })
             .attr("height", (d) => { return height - yScale(d.count); });
         d3.selectAll('.mouse')
-            .remove()
+            .remove();
     }
     
     //draw bars
