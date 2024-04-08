@@ -50,6 +50,7 @@ Check out the [Live Demo](https://esantos2.github.io/dna_visualizer/).
 1. In bash, run `npm install`, the `npm run start`
 1. In VS code, ensure you have the "Open In Browser" extension installed
 1. In VS code, right click the `index.html` file and select `Open in default browser`
+1. In your default browser, use the inspector (`Ctrl` + `Shift` + `I`) to view additional logs
 
 ### Testing
 
