@@ -1,4 +1,4 @@
-const displayCitation = (seqCite) => {
+export default (seqCite) => {
     const box = document.getElementById('cite-details');
     box.innerHTML = '';
 
@@ -20,5 +20,3 @@ const displayCitation = (seqCite) => {
     box.appendChild(title);
     box.appendChild(moreInfo);
 };
-
-export default displayCitation;

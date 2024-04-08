@@ -3,7 +3,7 @@ import * as SeqUtil from './util';
 import ToolBox from './toolbox';
 import immersion from './immersion';
 
-class Sequence {
+export default class Sequence {
     constructor(selectedSeq) {
         this.mainSeq = selectedSeq.seq;
         this.name = selectedSeq.name;
@@ -35,11 +35,7 @@ class Sequence {
     resizeCanvases() {
         SeqUtil.closeDropdowns();
         SeqUtil.clearBottomToolTips();
-        const canvases = [
-            document.getElementById('canvas'),
-            document.getElementById('tooltip'),
-            document.getElementById('overlay'),
-        ];
+        const canvases = [document.getElementById('canvas'), document.getElementById('tooltip'), document.getElementById('overlay')];
         //determine dimensions based on window size
         let newWidth = 0;
         const windowWidth = window.innerWidth;
@@ -69,8 +65,7 @@ class Sequence {
         const ctx = canvas.getContext('2d');
         const cWidth = ctx.canvas.clientWidth + 4;
         const cHeight = ctx.canvas.clientHeight + 4;
-        if (!endIdx)
-            endIdx = Math.floor(cWidth / this.rectWidth) + this.prevStartIdx;
+        if (!endIdx) endIdx = Math.floor(cWidth / this.rectWidth) + this.prevStartIdx;
         if (this.inSelection) this.toolbox.allowReset();
 
         const baseColor = {
@@ -125,12 +120,7 @@ class Sequence {
             } else {
                 ctx.fillStyle = '#171717';
             }
-            ctx.fillRect(
-                this.rectWidth * (i - startIdx),
-                0,
-                this.rectWidth,
-                canvas.height,
-            );
+            ctx.fillRect(this.rectWidth * (i - startIdx), 0, this.rectWidth, canvas.height);
         }
         this.selectRegion(); //add listeners for region selection
 
@@ -166,8 +156,8 @@ class Sequence {
         baseToggle.innerHTML = '';
 
         //toggle specific base
-        let bases = 'ATCG';
-        for (let base of bases) {
+        const bases = 'ATCG';
+        for (const base of bases) {
             const baseButton = document.createElement('button');
             baseButton.setAttribute('class', `base ${base}${base}${base}`);
             baseButton.innerHTML = `${base}`;
@@ -204,9 +194,7 @@ class Sequence {
     }
 
     enableToggleButtons() {
-        const baseButtons = document.querySelectorAll(
-            '#base-toggle .disabled-btn',
-        );
+        const baseButtons = document.querySelectorAll('#base-toggle .disabled-btn');
         baseButtons.forEach((base) => this.activateButton(base));
     }
 
@@ -250,11 +238,7 @@ class Sequence {
             start = xCoord = SeqUtil.getMouseCoord(event);
             this.newStartIdx = getSeqIdx();
             SeqUtil.clearBottomToolTips();
-            this.toolbox.selectionEndpoint(
-                this.prevStartIdx,
-                this.rectWidth,
-                xCoord,
-            );
+            this.toolbox.selectionEndpoint(this.prevStartIdx, this.rectWidth, xCoord);
             ctx.fillRect(xCoord - 5, 0, 5, overlay.height); //start bar
         };
 
@@ -265,11 +249,7 @@ class Sequence {
                 return;
             }
             this.newEndIdx = getSeqIdx();
-            this.toolbox.selectionEndpoint(
-                this.prevStartIdx,
-                this.rectWidth,
-                xCoord,
-            );
+            this.toolbox.selectionEndpoint(this.prevStartIdx, this.rectWidth, xCoord);
             ctx.fillRect(xCoord - 5, 0, 5, overlay.height); //end bar
             this.handleNewSelection();
         };
@@ -316,5 +296,3 @@ class Sequence {
         });
     }
 }
-
-export default Sequence;

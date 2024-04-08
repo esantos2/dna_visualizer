@@ -1,7 +1,7 @@
 import * as Util from './util';
 import { displaySeq } from './display_seq';
 
-class ToolBox {
+export default class ToolBox {
     constructor(selected) {
         this.selected = selected;
         this.toolbox = document.getElementById('toolbox');
@@ -93,5 +93,3 @@ class ToolBox {
         reset.classList.remove('disabled-btn');
     }
 }
-
-export default ToolBox;

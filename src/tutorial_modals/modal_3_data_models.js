@@ -7,19 +7,14 @@ import { get_modal_2_elements } from './modal_2_filters';
 export const get_modal_3_elements = (modalContainer) => {
     const dataModelsText = getDesc();
     const dataModelsImages = getImages();
-    const prevBtn = getNavigationButton(
-        modalContainer,
-        get_modal_2_elements,
-        BUTTON_TEXT.PREV_ARROW,
-    );
+    const prevBtn = getNavigationButton(modalContainer, get_modal_2_elements, BUTTON_TEXT.PREV_ARROW);
     const startBtn = createStartButton();
     return [dataModelsText, dataModelsImages, prevBtn, startBtn];
 };
 
 const getDesc = () => {
     const desc = document.createElement('p');
-    desc.innerHTML =
-        'Bar charts and the 3D model provide more to explore and update with new selections';
+    desc.innerHTML = 'Bar charts and the 3D model provide more to explore and update with new selections';
     return desc;
 };
 

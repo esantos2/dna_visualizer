@@ -2,16 +2,11 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import * as DataSet from '../datasets/sequences';
 
-const immersion = (chosenSeq = DataSet.zika.seq) => {
+export default (chosenSeq = DataSet.zika.seq) => {
     //initialize scene
     const scene = new THREE.Scene();
     scene.background = new THREE.Color(0xffffff);
-    const camera = new THREE.PerspectiveCamera(
-        75,
-        window.innerWidth / 2 / window.innerHeight,
-        0.1,
-        1000,
-    );
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / 2 / window.innerHeight, 0.1, 1000);
     const renderer = new THREE.WebGLRenderer();
     renderer.setSize(window.innerWidth / 2, window.innerHeight);
     const controls = new OrbitControls(camera, renderer.domElement);
@@ -72,17 +67,11 @@ const immersion = (chosenSeq = DataSet.zika.seq) => {
         const ballLeft = new THREE.Mesh(ballGeometry, bbMaterial);
         ballLeft.position.x = -6;
 
-        const newRod = new THREE.Mesh(
-            tubeGeometry,
-            rodMaterial[chosenSeq[i]].mat,
-        );
+        const newRod = new THREE.Mesh(tubeGeometry, rodMaterial[chosenSeq[i]].mat);
         newRod.rotation.z = (90 * Math.PI) / 180;
         newRod.position.x = 3;
 
-        const oppRod = new THREE.Mesh(
-            tubeGeometry,
-            rodMaterial[rodMaterial[chosenSeq[i]].pair].mat,
-        );
+        const oppRod = new THREE.Mesh(tubeGeometry, rodMaterial[rodMaterial[chosenSeq[i]].pair].mat);
         oppRod.rotation.z = (90 * Math.PI) / 180;
         oppRod.position.x = -3;
 
@@ -114,5 +103,3 @@ const immersion = (chosenSeq = DataSet.zika.seq) => {
 
     render();
 };
-
-export default immersion;

@@ -25,11 +25,7 @@ const closeModal = (e) => {
     document.getElementById('modal').innerHTML = '';
 };
 
-const getNavigationButton = (
-    container,
-    nextModalElements,
-    buttonTextDirection,
-) => {
+const getNavigationButton = (container, nextModalElements, buttonTextDirection) => {
     //creates button that creates other modals on click
     const arrowBtn = document.createElement('button');
     arrowBtn.innerHTML = buttonTextDirection;
@@ -59,8 +55,6 @@ const _createModal = (modalContainer, getModalElements) => {
     //adds modal elements to the container for display
     modalContainer.innerHTML = '';
     const fragment = document.createDocumentFragment();
-    getModalElements(modalContainer).forEach((ele) =>
-        fragment.appendChild(ele),
-    );
+    getModalElements(modalContainer).forEach((ele) => fragment.appendChild(ele));
     modalContainer.appendChild(fragment);
 };

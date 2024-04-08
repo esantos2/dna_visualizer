@@ -1,6 +1,6 @@
 import * as d3 from 'd3';
 
-const drawChart = (baseCounts, box) => {
+export default (baseCounts, box) => {
     //setup chart data
     const baseArr = [
         { base: 'A', count: baseCounts['A'] },
@@ -14,19 +14,13 @@ const drawChart = (baseCounts, box) => {
     barChartBox.selectAll('*').remove();
     barChartBox.append('svg');
 
-    const svg = d3
-        .select(`${box} > svg`)
-        .attr('width', 320)
-        .attr('height', 320);
+    const svg = d3.select(`${box} > svg`).attr('width', 320).attr('height', 320);
 
     const margin = 100;
     const width = svg.attr('width') - margin;
     const height = svg.attr('height') - margin;
 
-    const chartName =
-        box === '.current-seq-box'
-            ? 'Current Selection Frequencies'
-            : 'Total Strand Frequencies';
+    const chartName = box === '.current-seq-box' ? 'Current Selection Frequencies' : 'Total Strand Frequencies';
     //title
     svg.append('text')
         .attr('transform', 'translate(50,0)')
@@ -36,9 +30,7 @@ const drawChart = (baseCounts, box) => {
         .text(chartName);
 
     //set graph location
-    const g = svg
-        .append('g')
-        .attr('transform', 'translate(' + 50 + ',' + 50 + ')');
+    const g = svg.append('g').attr('transform', 'translate(' + 50 + ',' + 50 + ')');
 
     //setup axes
     const xScale = d3
@@ -86,7 +78,7 @@ const drawChart = (baseCounts, box) => {
         .attr('stroke', 'black')
         .text('Count');
 
-    function handleMouseOver(d, i) {
+    function handleMouseOver(d) {
         d3.select(this).attr('class', 'highlight');
         d3.select(this)
             .transition()
@@ -113,7 +105,7 @@ const drawChart = (baseCounts, box) => {
             .attr('text-anchor', 'middle');
     }
 
-    function handleMouseOut(d, i) {
+    function handleMouseOut() {
         d3.select(this).attr('class', 'bar');
         d3.select(this)
             .transition()
@@ -138,10 +130,10 @@ const drawChart = (baseCounts, box) => {
             return xScale(d.base);
         })
         .attr('width', xScale.bandwidth())
-        .attr('y', (d) => {
+        .attr('y', () => {
             return height;
         })
-        .attr('height', (d) => {
+        .attr('height', () => {
             return 0;
         })
         .on('mouseover', handleMouseOver)
@@ -149,7 +141,7 @@ const drawChart = (baseCounts, box) => {
         .transition()
         .ease(d3.easeLinear)
         .duration(400)
-        .delay((d, i) => {
+        .delay((_, i) => {
             return i * 50;
         });
 
@@ -163,9 +155,7 @@ const drawChart = (baseCounts, box) => {
         .attr('height', (d) => {
             return height - yScale(d.count);
         })
-        .delay((d, i) => {
+        .delay((_, i) => {
             return i * 100;
         });
 };
-
-export default drawChart;
