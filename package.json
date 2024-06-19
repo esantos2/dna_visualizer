@@ -1,28 +1,43 @@
 {
-  "name": "dna_visualizer",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack --watch --mode=development"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/esantos2/dna_visualizer.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/esantos2/dna_visualizer/issues"
-  },
-  "homepage": "https://github.com/esantos2/dna_visualizer#readme",
-  "dependencies": {
-    "d3": "^5.16.0",
-    "dat.gui": "^0.7.7",
-    "three": "^0.126.0",
-    "webpack": "^4.46.0",
-    "webpack-cli": "^3.3.12"
-  }
+    "name": "dna_visualizer",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "webpack --watch --mode=development",
+        "format-check": "prettier . --check",
+        "format": "prettier . --write",
+        "lint": "eslint .",
+        "lint-fix": "eslint . --fix"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/esantos2/dna_visualizer.git"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/esantos2/dna_visualizer/issues"
+    },
+    "homepage": "https://github.com/esantos2/dna_visualizer#readme",
+    "dependencies": {
+        "d3": "^7.9.0",
+        "dat.gui": "^0.7.7",
+        "three": "^0.126.0",
+        "webpack": "^5.91.0",
+        "webpack-cli": "^3.3.12"
+    },
+    "devDependencies": {
+        "@eslint/eslintrc": "^3.0.2",
+        "@eslint/js": "^9.0.0",
+        "eslint": "^8.57.0",
+        "eslint-config-standard": "^17.1.0",
+        "eslint-plugin-import": "^2.29.1",
+        "eslint-plugin-n": "^16.6.2",
+        "eslint-plugin-promise": "^6.1.1",
+        "globals": "^15.0.0",
+        "prettier": "3.2.5"
+    }
 }
