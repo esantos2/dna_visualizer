@@ -15,21 +15,20 @@ concurrency:
     cancel-in-progress: true
 
 jobs:
-    test:
+    formatting-check:
         runs-on: ubuntu-latest
         timeout-minutes: 2
         steps:
-            - name: Checkout
+            - name: Checkout repo
               uses: actions/checkout@v4
 
             - name: Setup Node
               uses: actions/setup-node@v4
               with:
-                  node-version-file: '.node-version'
-                  cache: 'npm'
+                  cache: npm
 
             - name: Install dependencies
               run: npm ci
 
-            - name: Verify formatting
-              run: npm run format:check
+            - name: Check formatting
+              run: npm run format-check
