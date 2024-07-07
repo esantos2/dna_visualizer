@@ -26,8 +26,8 @@
         "d3": "^7.9.0",
         "dat.gui": "^0.7.7",
         "three": "^0.126.0",
-        "webpack": "^5.91.0",
-        "webpack-cli": "^3.3.12"
+        "webpack": "^5.x.x",
+        "webpack-cli": "^5.x.x"
     },
     "devDependencies": {
         "@eslint/eslintrc": "^3.0.2",
