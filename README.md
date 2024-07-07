@@ -2,8 +2,9 @@
 
 <!-- <img  align="right" max-width="auto" max-height="400px" src="dist/gifs/dna_mobile_strand3.gif"> -->
 
+[Live Demo](https://esantos2.github.io/dna_visualizer/)
+
 Closely examine the DNA sequence of various species and diseases through dynamic charts and 3D renderings. Available on desktop or mobile.
-Check out the [Live Demo](https://esantos2.github.io/dna_visualizer/).
 
 -   [Features](#features)
 -   [Technologies](#technologies)
@@ -29,13 +30,11 @@ Check out the [Live Demo](https://esantos2.github.io/dna_visualizer/).
 
 ## Technologies
 
--   D3.js for bar charts
--   Three.js for 3D modelling
+-   [D3.js](https://d3js.org/) for bar charts
+-   [Three.js](https://threejs.org/) for 3D modelling
 
-    -   To replicate the helical nature of DNA, each level of
-        the model contains rotating shapes at a fixed integer multiple of radians. This allows for consistent positioning
-        and spacing throughout the rendering. By incrementing at an acute angle over time, the repetition creates a uniform helix
-        representative of a simplified DNA molecule.
+    The DNA model consists of rotating shapes at a fixed angle and distance.
+    By incrementing layers at an acute angle over time, the repetition creates a uniform helix.
 
     ```javascript
     row.position.y = i * 2; //position of row height
@@ -47,11 +46,12 @@ Check out the [Live Demo](https://esantos2.github.io/dna_visualizer/).
 ### Local Development
 
 1. Clone this repo to your local machine
-1. In bash, run `npm install`, the `npm run start`
-1. In VS code, ensure you have the "Open In Browser" extension installed
-1. In VS code, right click the `index.html` file and select `Open in default browser`
+1. In bash, run `npm install`, then `npm run start`
+1. In VS code, install the "Open In Browser" extension
+1. In VS code, right click `index.html` and select `Open in default browser`
 1. In your default browser, use the inspector (`Ctrl` + `Shift` + `I`) to view additional logs
 
-### Testing
+### CI/CD
 
-1. Run `npm run test` to run unit tests
+-   Formatting: [Prettier](https://prettier.io/)
+-   Linting: [eslint](https://eslint.org/)
